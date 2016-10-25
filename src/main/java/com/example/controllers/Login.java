@@ -27,8 +27,9 @@ public class Login{
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/showyourskillz", "root", "nitin4192");
-            PreparedStatement pst = conn.prepareStatement("Select user_name from user where user_name=?");
+            PreparedStatement pst = conn.prepareStatement("Select user_name,password from user where user_name=? and password=?");
             pst.setString(1, user.getUsername());
+            pst.setString(2, user.getPassword());
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 access.setAllow("yes");
@@ -59,15 +60,15 @@ public class Login{
     public @ResponseBody User sendUser(HttpSession userSession, HttpServletRequest request) {
 
         User user = new User();
-        if(request.getSession(false)== null) {
+        //if(request.getSession(false)== null) {
             user.setUsername((String) userSession.getAttribute("username"));
             return user;
-        }
-        else
-        {
-            user.setUsername("no");
-            return user;
-        }
+        //}
+        //else
+        //{
+          //  user.setUsername("no");
+            //return user;
+        //}
         //return user;
     }
     @RequestMapping(path="/logout",method = RequestMethod.GET)

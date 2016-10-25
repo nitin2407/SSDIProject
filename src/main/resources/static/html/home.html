@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compartible" content="IE-edge">
+        <meta name="viewport" content="width-device-width, initial-scale=1">
+        <title>ShowYourSkillz</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/homestyle.css">
+        <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../css/color/color-1.css" id="color"/>
+        <script src="../js/jquery-2.1.4.min.js"></script>
+        <script src="../js/bootstrap.js"></script>
+        <script src="../js/angular.min.js"></script>
+        <!--<script src="js/script.js"></script>-->
+    </head>
+    <body ng-app="home" ng-controller="homeCntrl">
+    <!--<header>-->
+        <nav id="header-nav" class="navbar default navbar-light bg-faded">
+            <div class="container">
+                <div class="navbar-header">
+                        <!--<a href="index.html" class="pull-left visible-md visible-lg">
+                            <div id="logo-img"  alt="Logo image"></div>
+                        </a>
+                        <div class="navbar-brand" ng-controller="LoginCtrl">id="btnLogin"-->
+                    <a class="navbar-brand" href="index.html">ShowYourSkillz</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="btn-group" id="menuLogin">
+                            <button type="text" class="btn btn-primary">Welcome, {{name}}</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <!--<button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, {{name}}
+                            </button>-->
+                            <div class="dropdown-menu">
+                                <p>
+                                    <a class="tn btn-outline-success" href="#">Profile</a>
+                                </p>
+                                <div class="dropdown-divider">
+                                    <a href="#" type="submit" ng-click="logout()">Logout</a>
+                                </div>
+                            </div>
+                            <!--<a class="nav-link dropdown-toggle user-welcome" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">Welcome, </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="padding:17px;">
+                                <button class="btn btn-outline-success" type="submit" ng-click="logout()" >Logout</button>
+                            </div>-->
+                        </li>
+                    </ul>
+                        <!--<p>
+                            <label> username </label>
+                            <input type="text" id="username" ng-model="user">
+                            <button ng-click="check()" class = btn btn-click type="submit" id="login">login</button>
+                        </p>
+                        <p>
+                            <span>message is : {{message}}</span>
+                        </p>-->
+                </div>
+            </div>
+                <!--</div>-->
+        </nav>
+    </body>
+    <script>
+    var app = angular.module('home',[]);
+
+    app.controller('homeCntrl',function($scope,$http, $window) {
+        $scope.name = "";
+        var res = $http.get('/login');
+        res.success(function (data, status, headers, config) {
+            $scope.user = data;
+            //if($scope.user.username.equals("no")){
+                //var url = "http://" + $window.location.host + "/index.html";
+                //$window.location.href = url;
+            //}
+            //else {
+            $scope.name = $scope.user.username;
+        });
+        res.error(function (data,status) {
+            console.log(data);
+            alert(data);
+        });
+        $scope.logout = function () {
+            var log = $http.get('/logout');
+            log.success(function (data, status, headers, config) {
+                var url = "http://" + $window.location.host + "/index.html";
+                $window.location.href = url;
+            });
+        };
+    });
+
+</script>
+
+</body>
+</html>
