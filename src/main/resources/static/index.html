@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compartible" content="IE-edge">
+		<meta name="viewport" content="width-device-width, initial-scale=1">
+		<title>ShowYourSkillz</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/styles.css">
+		<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/angular.min.js"></script>
+		<!--<script src="js/script.js"></script>-->
+	</head>
+	<body ng-app="loginApp">
+	<header>
+		<nav id="header-nav" class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="index.html" class="pull-left visible-md visible-lg">
+							<div id="logo-img"  alt="Logo image"></div>
+						</a>
+						<div class="navbar-brand" ng-controller="LoginCtrl">
+							<a href="index.html"><h1>ShowYourSkillz</h1></a>
+							<p>
+								<label> username </label>
+								<input type="text" id="username" ng-model="user">
+								<button ng-click="check()" class = btn btn-click type="submit" id="login">login</button>
+							</p>
+							<p>
+								<span>message is : {{message}}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+	<script>
+	var app = angular.module('loginApp',[]);
+
+	app.controller('LoginCtrl',function($scope,$http, $window) {
+		$scope.message = "nitin";
+		//$scope.user.username=username;
+
+		$scope.check = function () {
+			var dataObj = {
+				username : $scope.user
+			};
+			//$scope.dataObj.username=$scope.user;
+			//var dataObj=$scope.user;
+			var res = $http.post('/hello', dataObj);
+			res.success(function (data, status, headers, config) {
+				$scope.access = data;
+				if ($scope.access.allow == "yes") {
+					//$scope.message = "allowed";
+					var url = "http://" + $window.location.host + "/html/loggedIn.html"
+					$window.location.href = url;
+				}
+				else {
+					$scope.message = "not allowed";
+				}
+			});
+			res.error(function (data,status) {
+				console.log(data);
+				alert(data);
+			});
+			//$http.post("/hello", $scope.username).success(function (data, status) {
+			//$scope.access = data;
+
+			//})
+			};
+	});
+
+	</script>
+	</body>
+</html>
+	<!--<!DOCTYPE html>
+	<html>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<body ng-app="myApp">
+
+	<p>The rootScope's favorite color:</p>
+	<h1>{{color}}</h1>
+
+	<div ng-controller="myCtrl">
+
+		<p>The scope of the controller's favorite color:</p>
+		<h1>{{color}}</h1>
+
+	</div>
+
+	<p>The rootScope's favorite color is still:</p>
+	<h1>{{color}}</h1>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.run(function($rootScope) {
+			$rootScope.color = 'black';
+		});
+		app.controller('myCtrl', function($scope) {
+			$scope.color = "red";
+		});
+	</script>
+
+	<p>Notice that controller's color variable does not overwrite the rootScope's color value.</p>
+
+	</body>
+	</html>-->
+
+
