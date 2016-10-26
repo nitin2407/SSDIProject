@@ -27,12 +27,12 @@
 						<div class="navbar-brand" ng-controller="LoginCtrl">id="btnLogin"-->
 					<a class="navbar-brand" href="index.html">ShowYourSkillz</a>
 				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="collapse navbar-collapse" id="myNavbar" ng-controller="LoginCtrl">
 	               	<ul class="nav navbar-nav pull-right">
                		    <li class="nav-item dropdown" id="menuLogin">
                           	<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">Login</a>
                           	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="padding:17px;">
-              					<form class="form-inline" id="formLogin" ng-controller="LoginCtrl">
+              					<form class="form-inline" id="formLogin">
               						<p> 
                 						<input class="form-control" name="username" id="username" type="text" placeholder="Username" ng-model="user">
                 					</p>
@@ -44,7 +44,7 @@
             				</div>
                        	</li>
                        	<li>
-                     		<a href="#SignUp">SignUp</a>
+                     		<a href="#" type="submit" ng-click="signup()">SignUp</a>
                        	</li>
                    	</ul>
 						<!--<p>
@@ -79,7 +79,7 @@
 				$scope.access = data;
 				if ($scope.access.allow == "yes") {
 					//$scope.message = "allowed";
-					var url = "http://" + $window.location.host + "/html/home.html"
+					var url = "http://" + $window.location.host + "/html/home.html";
 					$window.location.href = url;
 				}
 				else {
@@ -94,7 +94,11 @@
 			//$scope.access = data;
 
 			//})
-			};
+		};
+		$scope.signup = function () {
+			var url = "http://" + $window.location.host + "/html/signup_page.html";
+			$window.location.href = url;
+		}
 	});
 
 	</script>

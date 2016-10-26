@@ -84,7 +84,7 @@ public class Login{
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/showyourskillz", "root", "nitin4192");
-            PreparedStatement pst = conn.prepareStatement("Insert into user VALUES (?,?,?,?,?,?,?,?,?,?");
+            PreparedStatement pst = conn.prepareStatement("Insert into user VALUES (?,?,?,?,?,?,?,?,?,?)");
             pst.setString(1, user.getUsername());
             pst.setString(2, user.getPassword());
             pst.setString(3, user.getFname());
@@ -95,8 +95,8 @@ public class Login{
             pst.setString(8, (user.getAddress()).getZip_code());
             pst.setString(9, (user.getAddress()).getState());
             pst.setString(10, user.getPhoneNumber());
-            Statement stmt = conn.createStatement();
-            pst.executeQuery();
+            //Statement stmt = conn.createStatement();
+            pst.executeUpdate();
             /*ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 //userSession = request.getSession();
