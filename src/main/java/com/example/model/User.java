@@ -11,17 +11,17 @@ public class User {
     //private  long id;
     private String username;
     //private String email;
-    //private String password;
+    private String password;
 
 
     public User()
     {
         // default controller
     }
-    public User(String username) {
+    public User(String username, String password) {
         this.username = username;
        // this.email = email;
-        //this.password = password;
+        this.password = password;
     }
 
 /*    public long getId()
@@ -45,10 +45,11 @@ public class User {
         return email;
     }
 
+
     public void setEmail(String email) {
         this.email = email;
     }
-
+*/
     public String getPassword() {
         return password;
     }
@@ -56,5 +57,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-*/
+
 }
