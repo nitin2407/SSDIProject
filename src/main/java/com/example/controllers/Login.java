@@ -17,7 +17,6 @@ import java.sql.*;
 
 //@JsonSerialize
 @RestController
-// produces= MediaType.APPLICATION_JSON_VALUE
 public class Login{
 
     @RequestMapping(path="/hello",method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE,produces= MediaType.APPLICATION_JSON_VALUE)

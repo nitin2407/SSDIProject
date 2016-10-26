@@ -1,0 +1,220 @@
+
+html{
+    overflow-x:hidden;
+}
+body {
+    font-family: "Oxygen", sans-serif;
+
+    position: relative;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+
+p {
+    line-height: 1.6;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #222;
+    font-size: 15px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #fff;
+}
+h5 {
+    font-size: 20px;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+h3 {
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.panel-heading{
+    background: black !important;
+}
+.panel{
+    border: 1px solid black;
+}
+
+.form-group .btn-primary{
+    background: rgba(255, 255, 255, 0);
+    box-shadow: none !important;
+    border: 1px solid black;
+    color: black;
+    /*transition: all 0.1s linear;*/
+}
+
+.form-group .btn-danger{
+    background: rgba(255, 255, 255, 0);
+    box-shadow: none !important;
+    border: 1px solid black;
+    color: black;
+    /*transition: all 0.1s linear;*/
+}
+
+.form-group .btn-primary:hover,
+.form-group .btn-primary:focus
+{
+    background: rgba(0, 0, 0, 1);
+    color: white;
+    /*transition: all 0.3s linear;*/
+}
+
+.form-group .btn-danger:hover,
+.form-group .btn-danger:focus
+{
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    /*transition: all 0.3s linear;*/
+}
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: transperant;
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.bolder{
+	font-weight: 400;
+}
+
+.brand-logo img{
+    width: 130px;
+}
+nav {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    transition: all 0.3s linear;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
+    border-radius: 0px !important;
+}
+nav:hover {
+    background: rgba(0, 0, 0, 1);
+    transition: all 0.3s linear;
+}
+
+.navbar-brand{
+	color: #fff;
+	font-weight: 300;
+}
+.navbar-brand:focus,
+.navbar-brand:hover{
+	color: #fff;
+	font-weight: bold;
+}
+.navbar-nav li a {
+    color: black;
+    font-size: 15px;
+    font-weight: 300;
+    padding-left: 10px;
+}
+
+.nav>li>a:focus,
+.nav>li>a:hover {
+    background: transparent;
+    font-weight: 600;
+}
+
+.nav>li>a:active{
+    background: transparent;
+    font-weight: 600;
+}
+
+.dropdown-divider{
+    border-top: 1px solid black;
+    padding: 0px;
+}
+
+.dropdown-divider>a{
+    display: block; 
+}
+
+.dropdown-divider>a:focus,
+.dropdown-divider>a:hover
+{
+    border: 1px solid black;
+    background-color: black;
+    color: white; 
+    text-decoration: none;
+}
+.active {
+    border-bottom: 2px solid #fff;
+    transition-duration: 0.4s;
+}
+.default {
+    top: 0;
+}
+.navbar {
+    position: fixed;
+}
+nav {
+    left: 0;
+    top: -80px;
+    right: 0;
+    padding: 10px 0;
+    transition: all 0.3s linear;
+    height: auto;
+    z-index: 99;
+}
+nav.top-nav-collapse {
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
+    opacity: 0.96;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.form-inline>button{
+	background: transparent;
+	border: 1px solid black;
+}
+
+.form-inline>button:hover,
+.form-inline>button:focus
+{
+	background-color: black;
+	color: white;
+	border: 1px solid black;
+}
+
+.dropdown-toggle[aria-expanded="true"] {
+    background: transparent !important;
+    border-bottom: 2px solid #fff !important;
+    font-weight: 600 !important;
+}
+
+li.dropdown-toggle {
+    height: 34px !important;
+}
+
+.navbar-toggle span {
+    background: #fff;
+}
+#work h2 {
+    position: relative;
+}
+#work h2:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 200px;
+    background: #ff3366;
+    left: 41%;
+    bottom: -24px;
+}
