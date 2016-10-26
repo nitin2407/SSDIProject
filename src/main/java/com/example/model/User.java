@@ -10,29 +10,64 @@ public class User {
 
     //private  long id;
     private String username;
-    //private String email;
     private String password;
-
+    private Address address;
+    private String phoneNumber;
+    private String fname;
+    private String lname;
 
     public User()
     {
         // default controller
     }
-    public User(String username, String password) {
+    /*public User(String username, String password) {
         this.username = username;
        // this.email = email;
         this.password = password;
+    }*/
+
+    public Address getAddress() {
+        return address;
     }
 
-/*    public long getId()
- {
-        return id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-   public void setId(long id) {
-        this.id = id;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-*/
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    /*    public long getId()
+     {
+            return id;
+        }
+
+       public void setId(long id) {
+            this.id = id;
+
+        }
+    */
     public String getUsername() {
         return username;
     }
