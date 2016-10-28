@@ -32,7 +32,7 @@ html{
 body {
     font-family: "Oxygen", sans-serif;
 
-    position: relative;
+    /*position: relative;*/
     background: #fff;
     overflow-x: hidden;
 }
@@ -213,12 +213,6 @@ ul {
 .bolder{
 	font-weight: 400;
 }
-
-#menuLogin>button{
-    background-color: transparent !important;
-    border: none;
-    /*border-radius: 1px !important;*/
-}
 /*General CSS Ends*/
 /*Wave Button Css Starts*/
 /*
@@ -299,8 +293,79 @@ nav:hover {
     top: 0;
 }
 .navbar {
-    position: fixed;
+    position: relative;
 }
+
+#menuLogin>button{
+    background-color: transparent !important;
+    border: none;
+    /*border-radius: 1px !important;*/
+}
+
+#menuLogin>.dropdown-toggle{
+    border: none;
+}
+
+.wrapper{
+    margin: auto ;
+    /*position: relative;auto 0*/
+}
+
+.form-group .btn-primary{
+    background: rgba(255, 255, 255, 0);
+    box-shadow: none !important;
+    border: 1px solid black;
+    color: black;
+    /*transition: all 0.1s linear;*/
+}
+
+.form-group .btn-danger{
+    background: rgba(255, 255, 255, 0);
+    box-shadow: none !important;
+    border: 1px solid black;
+    color: black;
+    /*transition: all 0.1s linear;*/
+}
+
+.form-group .btn-primary:hover,
+.form-group .btn-primary:focus
+{
+    background: rgba(0, 0, 0, 1);
+    color: white;
+    /*transition: all 0.3s linear;*/
+}
+
+.form-group .btn-danger:hover,
+.form-group .btn-danger:focus
+{
+    background: rgba(200, 0, 0, 0.8);
+    color: white;
+    /*transition: all 0.3s linear;*/
+}
+.grid1elements{
+
+    border-right: 2px solid black;
+
+}
+
+.form-group>.control-label{
+    margin: 0px;
+    text-align: left;
+}
+
+button[type="submit"]:disabled{
+    border: 2px outset ButtonFace;
+    color: GrayText;
+    cursor: inherit;
+    background-color: #ddd;
+    background: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+
+}
+/*.dropdown-menu{
+    z-index: 0;
+}*/
 nav {
     left: 0;
     top: -80px;
@@ -329,12 +394,6 @@ nav.top-nav-collapse {
 	border: 1px solid black;
 }
 
-/*
-.dropdown-toggle[aria-expanded="true"] {
-    background: transparent !important;
-    border-bottom: 2px solid #fff !important;
-    font-weight: 600 !important;
-}*/
 
 li.dropdown-toggle {
     height: 34px !important;
