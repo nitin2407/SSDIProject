@@ -77,7 +77,7 @@ h3 {
 .form-group .btn-danger:hover,
 .form-group .btn-danger:focus
 {
-    background: rgba(255, 0, 0, 0.8);
+    background: rgba(200, 0, 0, 0.8);
     color: white;
     /*transition: all 0.3s linear;*/
 }
@@ -99,6 +99,18 @@ ul {
 .brand-logo img{
     width: 130px;
 }
+
+button[type="submit"]:disabled{
+    border: 2px outset ButtonFace;
+    color: GrayText;
+    cursor: inherit;
+    background-color: #ddd;
+    background: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+
+}
+
 nav {
     background: rgba(0, 0, 0, 0.8);
     padding: 10px 0;

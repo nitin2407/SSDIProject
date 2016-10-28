@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compartible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <title>ShowYourSkillz</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/profilestyle.css">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/color/color-1.css" id="color"/>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <!--<script src="js/script.js"></script>-->
+</head>
+<body ng-app="profile" ng-controller="profileCntrl">
+    <!--<div class="container">-->
+    <!--<header>-->
+    <!--<div class="containter-fluid">-->
+    <nav id="header-nav" class="navbar default navbar-light bg-faded">
+        <div class="container-fluid">
+            <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
+                <a class="navbar-brand" href="/html/home.html">ShowYourSkillz</a></li>
+	                	<!--<button type="button" class="navbar-toggle mob-menu" data-toggle="collapse" data-target="#myNavbar">
+                        	<span class="icon-bar"></span>
+                        	<span class="icon-bar"></span>
+                        	<span class="icon-bar"></span>
+
+                    	</button>
+                    	<div class="mobile-sidebar">                                                  
+                        	<span class="sidebar-btn btn fa-bar-hide" data-action="toggle" data-side="right">
+                            	<i class="fa fa-bars"></i>
+                        	</span>                  
+                    	</div> 
+	                        <!--<a href="index.html" class="pull-left visible-md visible-lg">
+	                            <div id="logo-img"  alt="Logo image"></div>
+	                        </a>
+	                        <div class="navbar-brand" ng-controller="LoginCtrl">id="btnLogin"--> 
+                            </div>
+                            <!--<div class="collapse navbar-collapse" id="myNavbar">-->
+                            <div class="nav col-sm-2 pull-right">
+                                <ul class="nav navbar-nav pull-right">
+                                 <li class="btn-group" id="menuLogin">
+                                     <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{f_name}}</button>
+                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                         <span class="caret"></span>
+                                         <span class="sr-only">Toggle Dropdown</span>
+                                     </button>
+	                            <!--<button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                            Welcome, {{name}}
+                         </button>-->
+                         <div class="dropdown-menu">
+                             <p>
+                                 <a class="btn btn-outline-success" href="#">Profile</a>
+                             </p>
+                             <div class="dropdown-divider">
+                                 <a href="#" type="submit" ng-click="logout()">Logout</a>
+                             </div>
+                         </div>
+	                            <!--<a class="nav-link dropdown-toggle user-welcome" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">Welcome, </a>
+	                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="padding:17px;">
+	                                <button class="btn btn-outline-success" type="submit" ng-click="logout()" >Logout</button>
+	                            </div>-->
+	                        </li>
+	                        <!--<li>
+                            <a href="#" data-toggle="modal" data-target="#signin-page" data-modal-form="sign-in" class="nav-link sidebar-login mob_connection">
+                                Login
+                            </a>                            
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#signin-page" data-modal-form="sign-up" class="text-smaller sidebar-signup mob_connection">
+                                Signup
+                            </a>
+                        </li>
+                        <li>
+                            <div class="mobile-sidebar-none">                                                  
+                                <span class="sidebar-btn btn fa-bar-hide" data-action="toggle" data-side="right">
+                                    <i class="fa fa-bars"></i>
+                                </span>                  
+                            </div>
+                        </li>-->
+                    </ul>
+	                        <!--<p>
+	                            <label> username </label>
+	                            <input type="text" id="username" ng-model="user">
+	                            <button ng-click="check()" class = btn btn-click type="submit" id="login">login</button>
+	                        </p>
+	                        <p>
+	                            <span>message is : {{message}}</span>
+	                        </p>-->
+                     </div>
+                 </div>
+                 <!--</div>-->
+             </nav>
+
+             <!--</header>-->
+             <div class="wrapper">
+               <div class="col-lg-2 col-sm-2 col-xs-3 col-md-2">
+                   <div class="grid1">
+                    <div class="grid1elements">
+                        <h3>Your Profile</h3>
+                        <br>
+                        <h4 style="text-transform: Capitalize;">{{f_name}} {{l_name}}</h4>
+                        <div class="flowers-wrap"> 
+                            <form>
+                             <label style="font-size:13px; margin-bottom:10px; letter-spacing: 0.05em; margin-top: 20px;font-family: 'Helvetica' "> <!-- <input type="checkbox" id="Management" /> -->Manage Profile</label><br>
+                             <label style="font-size:13px; margin-bottom:10px; letter-spacing: 0.05em; font-family: 'Helvetica'"> <!-- <input type="checkbox" id="Information" /> --> Manage Courses</label><br> 
+                         </form>                                 
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="col-lg-10 col-sm-8 col-xs-8 col-md-10">
+            <div class="grid2">
+                <div class="grid2elements">
+                    <div class='panel-body'>
+                        <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+                            <div class='form-group'>
+                                <label class='control-label col-md-2 col-lg-2' for='id_first_name'>Name</label>
+                                <div class='col-md-8'>
+                                    <div class='col-md-4 indent-small'>
+                                        <div class='form-group internal'>
+                                            <input class='form-control' id='id_first_name' placeholder='First Name' type='text' name="f_name" ng-model="f_name" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class='col-md-4 indent-small'>
+                                        <div class='form-group internal'>
+                                            <input class='form-control' id='id_last_name' placeholder='Last Name' type='text' name="l_name" ng-model="l_name" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Address Section Starts-->
+                            <div class='form-group'>
+                                <label class='control-label col-md-2 col-md-offset-2' for='AddressLine1'>Address</label>
+                                <div class='col-md-6'>
+                                  <div class='form-group'>
+                                    <div class='col-md-11'>
+                                      <input ng-model="addr1" class='form-control' id='AddressLine1' placeholder='Address Line1' type='text' name="addr1" ng-required="true">
+                                      <p ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine" class="help-block" style="color: red;">Address line1 is required.</p>
+                                  </div>
+                              </div>
+                              <div class='form-group internal'>
+                                <div class='col-md-11'>
+                                  <input class='form-control' id='AddressLine2' placeholder='Address Line2' type='text' name="addr2" ng-model="addr2">
+                              </div>
+                          </div>
+                          <div class='col-md-4 indent-small'>
+                            <div class='form-group internal'>
+                              <input class='form-control' id='City' placeholder='City' type='text' name="city" ng-model="city" ng-required="true">
+                              <p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block" style="color: red;">City is required.</p>
+                          </div>
+                      </div>
+                      <div class='col-md-4 indent-small'>
+                        <div class='form-group internal'>
+                          <input class='form-control' id='State' placeholder='State' type='text' name="state" ng-model="state" ng-required="true">
+                          <p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block" style="color: red;">State is required.</p>
+                      </div>
+                  </div>
+                  <div class='col-md-3 indent-small'>
+                    <div class='form-group internal'>
+                      <input class='form-control' id='Zip_code' placeholder='Zipcode' type='text' name="zipcode" ng-model="zipcode" ng-required="true">
+                      <p ng-show="userForm.zipcode.$invalid && !userForm.zipcode.$pristine" class="help-block" style="color: red;">Zipcode is required.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Address Section Ends-->
+      <div class='form-group'>
+        <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
+        <div class='col-md-6'>
+          <div class='form-group'>
+            <div class='col-md-11'>
+              <input class='form-control' id='id_email' placeholder='E-mail' type='email' name="email" ng-model="email" ng-disabled="true">
+            </div>
+        </div>
+      <div class='form-group internal'>
+        <div class='col-md-11'>
+          <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='text' name="ph_number" ng-model="ph_number">
+      </div>
+  </div>
+</div>
+</div>
+<div class='form-group'>
+    <label class='control-label col-md-2 col-md-offset-2' for='password'>Password</label>
+    <div class='col-md-6'>
+      <div class='form-group'>
+        <div class='col-md-11'>
+          <input class='form-control' id='password' placeholder='Password' type='password' name="pass" ng-model="pass" ng-minlength="3" ng-required="true">
+          <p ng-show="userForm.pass.$invalid && !userForm.pass.$pristine && userForm.pass.$touched" class="help-block" style="color: red;">Password is required.</p>
+          <p ng-show="!userForm.pass.$pristine && userForm.pass.$error.minlength && userForm.pass.$touched" class="help-block" style="color: red;">Password should be atleast 3 characters long.</p>
+      </div>
+  </div>
+</div>
+</div>
+<div class='form-group'>
+    <label class='control-label col-md-2 col-md-offset-2' for='confirm_password'>Confirm Password</label>
+    <div class='col-md-6'>
+      <div class='form-group'>
+        <div class='col-md-11'>
+          <input class='form-control' id='confirm_password' placeholder='Confirm Password' type='password' name="cnfPass" ng-model="cnfPass" compare-to="pass" ng-required="true">
+          <div class="msg-block">
+            <span class='msg-error' ng-show="userForm.cnfPass.$invalid && !userForm.cnfPass.$pristine && userForm.cnfPass.$error" class="help-block" style="color: red;">Password do not match.</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class='form-group'>
+    <div class='col-md-offset-2 col-md-4 col-sm-4 col-xs-4'>
+    <button class='btn-lg btn-primary' type="submit" ng-disabled="userForm.$invalid && !userForm.$pristine" ng-click="register()">Save</button>
+  </div>
+  <div class='col-md-2 col-sm-8 col-xs-8'>
+      <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</div>     
+</form>
+</div>
+</div>
+</div>
+</div>
+<!--</div>-->
+
+</body>
+<script>
+    var app = angular.module('profile',['profileApp.directives']);
+
+    app.controller('profileCntrl',function($scope,$http, $window) {
+
+     var res = $http.get('/profile');
+          res.success(function (data, status, headers, config) {
+            $scope.user=data;
+            $scope.f_name=$scope.user.fname;
+            $scope.l_name=$scope.user.lname;
+            $scope.email=$scope.user.username;
+            $scope.pass=$scope.user.password;
+            $scope.cnfPass=$scope.pass;
+            $scope.ph_number=$scope.user.phoneNumber;
+            $scope.addr1=$scope.user.address.addressLine1;
+            $scope.addr2=$scope.user.address.addressLine2;
+            $scope.city=$scope.user.address.city;
+            $scope.state=$scope.user.address.state;
+            $scope.zipcode=$scope.user.address.zip_code;  
+          });
+
+      $scope.cancel = function () {
+        var url = "http://" + $window.location.host + "/html/home.html";
+        $window.location.href = url;
+      };
+
+      $scope.submitForm = function(isValid) {
+        if(isValid) {
+            var dataObj = {
+                username: $scope.email,
+                password: $scope.pass,
+                address: {
+                    addressLine1: $scope.addr1, addressLine2: $scope.addr2,
+                    city: $scope.city, state: $scope.state, zip_code: $scope.zipcode
+                },
+                fname: $scope.f_name,
+                lname: $scope.l_name,
+                phoneNumber: $scope.ph_number
+            };
+          var res = $http.post('/profile', dataObj);
+          res.success(function (data, status, headers, config) {
+            alert("user details have been saved");
+          });
+          res.error(function (data, status) {
+            alert("user not created");
+          });
+        }
+      };
+    });
+
+    angular.module('profileApp.directives', [])
+            .directive('compareTo', function() {
+              return {
+                require: 'ngModel',
+                link: function (scope, elem, attrs, ngModel) {
+                  ngModel.$parsers.unshift(validate);
+
+                  // Force-trigger the parsing pipeline.
+                  scope.$watch(attrs.CompareTo, function () {
+                    ngModel.$setViewValue(ngModel.$viewValue);
+                  });
+
+                  function validate(value) {
+                    var isValid = scope.$eval(attrs.compareTo) == value;
+
+                    ngModel.$setValidity('compare-to', isValid);
+
+                    return isValid ? value : undefined;
+                  }
+                }
+              };
+            });
+
+</script>
+
+</body>
+</html>
