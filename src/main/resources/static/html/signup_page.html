@@ -1,233 +1,129 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link href='../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-  <!--<link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css' rel='stylesheet' type='text/css'>
-  <link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/css/bootstrap-switch.css' rel='stylesheet' type='text/css'>
-  <link href='http://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css' rel='stylesheet' type='text/css'>-->
-  <link href='../css/SignUpStyle.css' rel='stylesheet' type='text/css'>
-  <script src="../js/jquery-2.1.4.min.js"></script>
-  <script src="../js/bootstrap.js"></script>
-  <script src="../js/angular.min.js"></script>
-  <!--<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
-  <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/js/bootstrap-switch.min.js' type='text/javascript'></script>
-  <script src='http://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js' type='text/javascript'></script>-->
-</head>
-<body ng-app="signUpApp">
-  <div class='container'>
-    <div class='panel panel-primary dialog-panel'>
-      <div class='panel-heading'>
-        <h5>ShowYourSkillz - SignUp</h5>
-      </div>
-      <div class='panel-body' ng-controller="signUpCntrl">
-        <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
-          <!--ng-submit="submitForm(userForm.$valid)"-->
-          <div class='form-group'>
-            <label class='control-label col-md-2 col-md-offset-2' for='id_first_name'>Name</label>
-            <div class='col-md-8'>
-              <div class='col-md-4 indent-small'>
-                <div class='form-group internal'>
-                  <input class='form-control' id='id_first_name' placeholder='First Name' type='text' name="f_name" ng-model="f_name" ng-required="true">
-                  <p ng-show="userForm.f_name.$invalid && !userForm.f_name.$pristine" class="help-block" style="color: red;">Your first name is required.</p>
+  <head>
+    <link href='../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <!--<link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css' rel='stylesheet' type='text/css'>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/css/bootstrap-switch.css' rel='stylesheet' type='text/css'>
+    <link href='http://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css' rel='stylesheet' type='text/css'>-->
+    <link href='../css/SignUpStyle.css' rel='stylesheet' type='text/css'>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/script.js"></script>
+  </head>
+  <body ng-app="signUpApp">
+    <div class='container'>
+      <div class='panel panel-primary dialog-panel'>
+        <div class='panel-heading'>
+          <h5>ShowYourSkillz - SignUp</h5>
+        </div>
+        <div class='panel-body' ng-controller="signUpCntrl">
+          <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+            <div class='form-group'>
+              <label class='control-label col-md-2 col-md-offset-2' for='id_first_name'>Name</label>
+              <div class='col-md-8'>
+                <div class='col-md-4 indent-small'>
+                  <div class='form-group internal'>
+                    <input class='form-control' id='id_first_name' placeholder='First Name' type='text' name="f_name" ng-model="f_name" ng-required="true">
+                    <p ng-show="userForm.f_name.$invalid && !userForm.f_name.$pristine" class="help-block" style="color: red;">Your first name is required.</p>
+                  </div>
                 </div>
-              </div>
-              <div class='col-md-4 indent-small'>
-                <div class='form-group internal'>
-                  <input class='form-control' id='id_last_name' placeholder='Last Name' type='text' name="l_name" ng-model="l_name">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Address Section Starts-->
-          <div class='form-group'>
-            <label class='control-label col-md-2 col-md-offset-2' for='AddressLine1'>Address</label>
-            <div class='col-md-6'>
-              <div class='form-group'>
-                <div class='col-md-11'>
-                  <input ng-model="addr1" class='form-control' id='AddressLine1' placeholder='Address Line1' type='text' name="addr1" ng-required="true">
-                  <p ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine" class="help-block" style="color: red;">Address line1 is required.</p>
-                </div>
-              </div>
-              <div class='form-group internal'>
-                <div class='col-md-11'>
-                  <input class='form-control' id='AddressLine2' placeholder='Address Line2' type='text' name="addr2" ng-model="addr2">
-                </div>
-              </div>
-              <div class='col-md-4 indent-small'>
-                <div class='form-group internal'>
-                  <input class='form-control' id='City' placeholder='City' type='text' name="city" ng-model="city" ng-required="true">
-                  <p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block" style="color: red;">City is required.</p>
-                </div>
-              </div>
-              <div class='col-md-4 indent-small'>
-                <div class='form-group internal'>
-                  <input class='form-control' id='State' placeholder='State' type='text' name="state" ng-model="state" ng-required="true">
-                  <p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block" style="color: red;">State is required.</p>
-                </div>
-              </div>
-              <div class='col-md-3 indent-small'>
-                <div class='form-group internal'>
-                  <input class='form-control' id='Zip_code' placeholder='Zipcode' type='text' name="zipcode" ng-model="zipcode" ng-required="true">
-                  <p ng-show="userForm.zipcode.$invalid && !userForm.zipcode.$pristine" class="help-block" style="color: red;">Zipcode is required.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Address Section Ends-->
-          <div class='form-group'>
-            <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
-            <div class='col-md-6'>
-              <div class='form-group'>
-                <div class='col-md-11'>
-                  <input class='form-control' id='id_email' placeholder='E-mail' type='email' name="email" ng-model="email" ng-required="true">
-                  <p ng-show="userForm.email.$invalid && !userForm.email.$pristine && userForm.email.$touched" class="help-block" style="color: red;">Email is required/email is incorrect.</p>
-                  <!--<span ng-show="registerForm.email1.$error.email">Not valid email!</span>-->
-                </div>
-              </div>
-              <div class='form-group internal'>
-                <div class='col-md-11'>
-                  <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='text' name="ph_number" ng-model="ph_number">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label class='control-label col-md-2 col-md-offset-2' for='password'>Password</label>
-            <div class='col-md-6'>
-              <div class='form-group'>
-                <div class='col-md-11'>
-                  <input class='form-control' id='password' placeholder='Password' type='password' name="pass" ng-model="pass" ng-minlength="3" ng-required="true">
-                  <p ng-show="userForm.pass.$invalid && !userForm.pass.$pristine && userForm.pass.$touched" class="help-block" style="color: red;">Password is required.</p>
-                  <p ng-show="!userForm.pass.$pristine && userForm.pass.$error.minlength && userForm.pass.$touched" class="help-block" style="color: red;">Password should be atleast 3 characters long.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label class='control-label col-md-2 col-md-offset-2' for='confirm_password'>Confirm Password</label>
-            <div class='col-md-6'>
-              <div class='form-group'>
-                <div class='col-md-11'>
-                  <input class='form-control' id='confirm_password' placeholder='Confirm Password' type='password' name="cnfPass" ng-model="cnfPass" compare-to="pass" ng-required="true">
-                  <div class="msg-block">
-                    <span class='msg-error' ng-show="userForm.cnfPass.$invalid && !userForm.cnfPass.$pristine && userForm.cnfPass.$error" class="help-block" style="color: red;">Password do not match.</span>
+                <div class='col-md-4 indent-small'>
+                  <div class='form-group internal'>
+                    <input class='form-control' id='id_last_name' placeholder='Last Name' type='text' name="l_name" ng-model="l_name">
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class='form-group'>
-            <div class='col-md-offset-4 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
-              <button class='btn-lg btn-primary' type="submit" ng-disabled="userForm.$invalid" ng-click="register()">Register</button>
+            <!--Address Section Starts-->
+            <div class='form-group'>
+              <label class='control-label col-md-2 col-md-offset-2' for='AddressLine1'>Address</label>
+              <div class='col-md-6'>
+                <div class='form-group'>
+                  <div class='col-md-11'>
+                    <input ng-model="addr1" class='form-control' id='AddressLine1' placeholder='Address Line1' type='text' name="addr1" ng-required="true">
+                    <p ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine" class="help-block" style="color: red;">Address line1 is required.</p>
+                  </div>
+                </div>
+                <div class='form-group internal'>
+                  <div class='col-md-11'>
+                    <input class='form-control' id='AddressLine2' placeholder='Address Line2' type='text' name="addr2" ng-model="addr2">
+                  </div>
+                </div>
+                <div class='col-md-4 indent-small'>
+                  <div class='form-group internal'>
+                    <input class='form-control' id='City' placeholder='City' type='text' name="city" ng-model="city" ng-required="true">
+                    <p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block" style="color: red;">City is required.</p>
+                  </div>
+                </div>
+                <div class='col-md-4 indent-small'>
+                  <div class='form-group internal'>
+                    <input class='form-control' id='State' placeholder='State' type='text' name="state" ng-model="state" ng-required="true">
+                    <p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block" style="color: red;">State is required.</p>
+                  </div>
+                </div>
+                <div class='col-md-3 indent-small'>
+                  <div class='form-group internal'>
+                    <input class='form-control' id='Zip_code' placeholder='Zipcode' type='text' name="zipcode" ng-model="zipcode" ng-required="true">
+                    <p ng-show="userForm.zipcode.$invalid && !userForm.zipcode.$pristine" class="help-block" style="color: red;">Zipcode is required.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class='col-md-2 col-sm-2 col-xs-2'>
-              <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel</button>
+            <!--Address Section Ends-->
+            <div class='form-group'>
+              <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
+              <div class='col-md-6'>
+                <div class='form-group'>
+                  <div class='col-md-11'>
+                    <input class='form-control' id='id_email' placeholder='E-mail' type='email' name="email" ng-model="email" ng-required="true">
+                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine && userForm.email.$touched" class="help-block" style="color: red;">Email is required/email is incorrect.</p>
+                  </div>
+                </div>
+                <div class='form-group internal'>
+                  <div class='col-md-11'>
+                    <input class='form-control' id='id_phone' placeholder='Phone: (xxx) - xxx xxxx' type='text' name="ph_number" ng-model="ph_number">
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>     
-        </form>
+            <div class='form-group'>
+              <label class='control-label col-md-2 col-md-offset-2' for='password'>Password</label>
+              <div class='col-md-6'>
+                <div class='form-group'>
+                  <div class='col-md-11'>
+                    <input class='form-control' id='password' placeholder='Password' type='password' name="pass" ng-model="pass" ng-minlength="3" ng-required="true">
+                    <p ng-show="userForm.pass.$invalid && !userForm.pass.$pristine && userForm.pass.$touched" class="help-block" style="color: red;">Password is required.</p>
+                    <p ng-show="!userForm.pass.$pristine && userForm.pass.$error.minlength && userForm.pass.$touched" class="help-block" style="color: red;">Password should be atleast 3 characters long.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label class='control-label col-md-2 col-md-offset-2' for='confirm_password'>Confirm Password</label>
+              <div class='col-md-6'>
+                <div class='form-group'>
+                  <div class='col-md-11'>
+                    <input class='form-control' id='confirm_password' placeholder='Confirm Password' type='password' name="cnfPass" ng-model="cnfPass" compare-to="pass" ng-required="true">
+                    <div class="msg-block">
+                      <span class='msg-error' ng-show="userForm.cnfPass.$invalid && !userForm.cnfPass.$pristine && userForm.cnfPass.$error" class="help-block" style="color: red;">Password do not match.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class='col-md-offset-4 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
+                <button class='btn-lg btn-primary' type="submit" ng-disabled="userForm.$invalid" ng-click="register()">Register</button>
+              </div>
+              <div class='col-md-2 col-sm-2 col-xs-2'>
+                <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    var app = angular.module('signUpApp',['signUpApp.directives']);
-
-
-    app.controller('signUpCntrl',function($scope,$http, $window) {
-
-      $scope.cancel = function () {
-        var url = "http://" + $window.location.host + "/index.html";
-        $window.location.href = url;
-      };
-
-      $scope.submitForm = function(isValid) {
-      //$scope.register = function () {
-        if(isValid) {
-          var dataObj = {
-            username: $scope.email,
-            password: $scope.pass,
-            address: {
-              addressLine1: $scope.addr1, addressLine2: $scope.addr2,
-              city: $scope.city, state: $scope.state, zip_code: $scope.zipcode
-            },
-            fname: $scope.f_name,
-            lname: $scope.l_name,
-            phoneNumber: $scope.ph_number
-          };
-          var res = $http.post('/signup', dataObj);
-          res.success(function (data, status, headers, config) {
-            alert("user created");
-            var url = "http://" + $window.location.host + "/index.html";
-            $window.location.href = url;
-          });
-          res.error(function (data, status) {
-            alert("user not created");
-          });
-        }
-      };
-    });
-
-    angular.module('signUpApp.directives', [])
-            .directive('compareTo', function() {
-              return {
-                require: 'ngModel',
-                link: function (scope, elem, attrs, ngModel) {
-                  ngModel.$parsers.unshift(validate);
-
-                  // Force-trigger the parsing pipeline.
-                  scope.$watch(attrs.CompareTo, function () {
-                    ngModel.$setViewValue(ngModel.$viewValue);
-                  });
-
-                  function validate(value) {
-                    var isValid = scope.$eval(attrs.compareTo) == value;
-
-                    ngModel.$setValidity('compare-to', isValid);
-
-                    return isValid ? value : undefined;
-                  }
-                }
-              };
-            });
-
-    /*angular.module('myApp.directives', [])
-            .directive('pwCheck', [function () {
-              return {
-                require: 'ngModel',
-                link: function (scope, elem, attrs, ctrl) {
-                  var firstPassword = '#' + attrs.pwCheck;
-                  elem.add(firstPassword).on('keyup', function () {
-                    scope.$apply(function () {
-                      // console.info(elem.val() === $(firstPassword).val());
-                      ctrl.$setValidity('pwmatch', elem.val() === $(firstPassword).val());
-                    });
-                  });
-                }
-              }
-            }]);
-    var compareTo = function() {
-      return {
-        require: "ngModel",
-        scope: {
-          otherModelValue: "=compareTo"
-        },
-        link: function(scope, element, attributes, ngModel) {
-
-          ngModel.$validators.compareTo = function(modelValue) {
-            return modelValue == scope.otherModelValue;
-          };
-
-          scope.$watch("otherModelValue", function() {
-            ngModel.$validate();
-          });
-        }
-      };
-    };
-
-    module.directive("compareTo", compareTo);*/
-
-
-
-  </script>
-</body>
+  </body>
 </html>
 <!--style='float:right'>-->

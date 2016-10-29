@@ -1,11 +1,13 @@
-package com.example.model;
+package com.showurskillz.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by nitin on 10/21/2016.
  */
 @JsonSerialize
+@Component
 public class User {
 
     //private  long id;
