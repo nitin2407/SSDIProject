@@ -10,18 +10,21 @@
 		<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/color/color-1.css" id="color"/>
+		<link rel="stylesheet" type="text/css" href="assets/css/color/color-1.css" id="color"/>
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/angular.min.js"></script>
-		<script src="js/script.js"></script>
-		<!--<script src="js/app.js"></script>
-		<script src="js/controller.js"></script>-->
+		<!--<script src="js/script.js"></script>-->
 	</head>
-	<body ng-app="loginApp">
+<body ng-app="loginApp">
+	<!--<header>-->
 		<nav id="header-nav" class="navbar default navbar-light bg-faded">
 			<div class="container">
 				<div class="navbar-header">
+						<!--<a href="index.html" class="pull-left visible-md visible-lg">
+							<div id="logo-img"  alt="Logo image"></div>
+						</a>
+						<div class="navbar-brand" ng-controller="LoginCtrl">id="btnLogin"-->
 					<a class="navbar-brand" href="index.html">ShowYourSkillz</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar" ng-controller="LoginCtrl">
@@ -44,10 +47,94 @@
                      		<a href="#" type="submit" ng-click="signup()">SignUp</a>
                        	</li>
                    	</ul>
+						<!--<p>
+							<label> username </label>
+							<input type="text" id="username" ng-model="user">
+							<button ng-click="check()" class = btn btn-click type="submit" id="login">login</button>
+						</p>
+						<p>
+							<span>message is : {{message}}</span>
+						</p>-->
 				</div>
 			</div>
+				<!--</div>-->
 		</nav>
+	<!--</header>-->
+	<script>
+	var app = angular.module('loginApp',[]);
+
+	app.controller('LoginCtrl',function($scope,$http, $window) {
+		$scope.message = "nitin";
+		//$scope.user.username=username
+
+		$scope.check = function () {
+			var dataObj = {
+				username : $scope.user,
+				password : $scope.pass
+			};
+			//$scope.dataObj.username=$scope.user;
+			//var dataObj=$scope.user;
+			var res = $http.post('/hello', dataObj);
+			res.success(function (data, status, headers, config) {
+				$scope.access = data;
+				if ($scope.access.allow == "yes") {
+					//$scope.message = "allowed";
+					var url = "http://" + $window.location.host + "/html/home.html";
+					$window.location.href = url;
+				}
+				else {
+					$scope.message = "not allowed";
+				}
+			});
+			res.error(function (data,status) {
+				console.log(data);
+				alert(data);
+			});
+			//$http.post("/hello", $scope.username).success(function (data, status) {
+			//$scope.access = data;
+
+			//})
+		};
+		$scope.signup = function () {
+			var url = "http://" + $window.location.host + "/html/signup_page.html";
+			$window.location.href = url;
+		}
+	});
+
+	</script>
 	</body>
 </html>
-	
+	<!--<!DOCTYPE html>
+	<html>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<body ng-app="myApp">
+
+	<p>The rootScope's favorite color:</p>
+	<h1>{{color}}</h1>
+
+	<div ng-controller="myCtrl">
+
+		<p>The scope of the controller's favorite color:</p>
+		<h1>{{color}}</h1>
+
+	</div>
+
+	<p>The rootScope's favorite color is still:</p>
+	<h1>{{color}}</h1>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.run(function($rootScope) {
+			$rootScope.color = 'black';
+		});
+		app.controller('myCtrl', function($scope) {
+			$scope.color = "red";
+		});
+	</script>
+
+	<p>Notice that controller's color variable does not overwrite the rootScope's color value.</p>
+
+	</body>
+	</html>-->
+
 

@@ -1,14 +1,8 @@
-package com.showurskillz.model;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.springframework.stereotype.Component;
+package com.example.model;
 
 /**
  * Created by nitin on 10/25/2016.
  */
-
-@JsonSerialize
-@Component
 public class Address {
 
     private String addressLine1;
