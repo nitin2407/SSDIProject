@@ -51,7 +51,7 @@ app.controller('homeCntrl',function($scope,$http, $window) {
                 $window.location.href = url;
             }
             else{
-                $scope.name = $scope.user.username;
+                $scope.name = $scope.user.fname;
             }
         });
         res.error(function (data,status) {

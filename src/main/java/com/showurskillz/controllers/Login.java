@@ -102,8 +102,7 @@ public class Login{
     @RequestMapping(path="/home",method = RequestMethod.GET,produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody User sendUser(HttpSession userSession) throws IOException {
 
-        user.setUsername((String) userSession.getAttribute("username"));
-        return user;
+        return executeQuery.retrieveUser(dao.establishConnection(),(String) userSession.getAttribute("username"));
     }
 
     @RequestMapping(path="/logout",method = RequestMethod.GET)
