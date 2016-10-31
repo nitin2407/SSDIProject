@@ -1,29 +1,31 @@
 package com.showurskillz.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by nitin on 10/22/2016.
  */
 @JsonSerialize
-public class Access {
+@Component
+public class UserAuthorize {
 
-    private String allow;
+    private boolean allow;
 
-    public Access()
+    public UserAuthorize()
     {
         // default controller
     }
-    public Access(String allow) {
+    public UserAuthorize(boolean allow) {
         this.allow = allow;
     }
 
 
-    public String getAllow() {
+    public boolean getAllow() {
         return allow;
     }
 
-    public void setAllow(String allow) {
+    public void setAllow(boolean allow) {
         this.allow = allow;
     }
 

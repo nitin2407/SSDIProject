@@ -1,4 +1,4 @@
-package com.example.login;
+package com.showurskillz.login;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,11 +1,11 @@
-package com.example;
+package com.showurskillz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-@ComponentScan(basePackages={"com.example.controllers"})
+@SpringBootApplication(scanBasePackages={"com.showurskillz.controllers","com.showurskillz.services","com.showurskillz.repository","com.showurskillz.model"})
+@ComponentScan
 public class SsdIdemoApplication {
 
 	public static void main(String[] args) {
