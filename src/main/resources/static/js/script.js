@@ -17,19 +17,25 @@ app.controller('LoginCtrl',function($scope,$http, $window) {
       };
 
       var res = $http.post('/login', dataObj);
-      res.success(function (data, status, headers, config) {
+      res.success(function (data) {
         $scope.access = data;
         if ($scope.access.allow == true) {
           var url = "http://" + $window.location.host + "/html/home.html";
           $window.location.href = url;
         }
         else {
-          alert("Username/password invalid.");
+          swal({
+                title: 'Username/password invalid.',
+                type: 'error'
+          });
+          //alert("Username/password invalid.");
         }
       });
-      res.error(function (data,status) {
-        console.log(data);
-        alert(data);
+      res.error(function (data) {
+        swal({
+            title: 'Unable to login.',
+            type: 'error'
+          });
       });
     };
     $scope.signup = function () {
@@ -40,26 +46,43 @@ app.controller('LoginCtrl',function($scope,$http, $window) {
 
 var app = angular.module('home',[]);
 
-app.controller('homeCntrl',function($scope,$http, $window) {
+
+app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
         $scope.name = "";
         var res = $http.get('/home');
-        res.success(function (data, status, headers, config) {
+        res.success(function (data) {
             $scope.user = data;
             if($scope.user.username==null){
-                alert("please login");
-                var url = "http://" + $window.location.host + "/index.html";
-                $window.location.href = url;
+                swal({
+                    title: 'Please login',
+                    type :'warning'
+                });
+                $timeout(function(){
+                    var url = "http://" + $window.location.host + "/index.html";
+                    $window.location.href = url;
+                },2000);
             }
+                //alert("please login");
             else{
                 $scope.name = $scope.user.fname;
             }
         });
         res.error(function (data,status) {
-            alert("please login");
+            swal({
+                    title: 'Please login',
+                    type :'warning',
+                    showCloseButton: true
+                });
+            $timeout(function(){
+                var url = "http://" + $window.location.host + "/index.html";
+                $window.location.href = url;
+            },2000);
+            //alert("please login");
+
         });
         $scope.logout = function () {
             var log = $http.get('/logout');
-            log.success(function (data, status, headers, config) {
+            log.success(function (data) {
                 var url = "http://" + $window.location.host + "/index.html";
                 $window.location.href = url;
             });
@@ -71,7 +94,7 @@ app.controller('homeCntrl',function($scope,$http, $window) {
 var app = angular.module('signUpApp',['signUpApp.directives']);
 
 
-app.controller('signUpCntrl',function($scope,$http, $window) {
+app.controller('signUpCntrl',function($scope,$http, $window,$timeout) {
 
     $scope.cancel = function () {
         var url = "http://" + $window.location.host + "/index.html";
@@ -93,17 +116,31 @@ app.controller('signUpCntrl',function($scope,$http, $window) {
                 phoneNumber: $scope.ph_number
             };
             var res = $http.post('/signup', dataObj);
-            res.success(function (data, status, headers, config) {
-                alert("user created");
-                var url = "http://" + $window.location.host + "/index.html";
-                $window.location.href = url;
+            res.success(function (data, status) {
+                swal({
+                    title: 'User created',
+                    type: 'success'
+                });
+                //alert("user created");
+                $timeout(function() {
+                    var url = "http://" + $window.location.host + "/index.html";
+                    $window.location.href = url;
+                },2000)
             });
             res.error(function (data, status) {
                 if(status==409){
-                    alert("username already exists");
+                    swal({
+                        title: "Username already exists",
+                        type: "info"
+                    });
+                    //alert("username already exists");
                 }
                 else{
-                    alert("user not created");
+                    swal({
+                        title: "User not created",
+                        type: "error"
+                    });
+                    //alert("user not created");
                 }
             });
         }
@@ -137,15 +174,21 @@ angular.module('signUpApp.directives', [])
 
 var app = angular.module('profile',['profileApp.directives']);
 
-app.controller('profileCntrl',function($scope,$http, $window) {
+app.controller('profileCntrl',function($scope,$http, $window,$timeout) {
 
     var res = $http.get('/profile');
-    res.success(function (data, status, headers, config) {
+    res.success(function (data) {
         $scope.user=data;
         if($scope.user.username==null){
-            alert("please login");
-            var url = "http://" + $window.location.host + "/index.html";
-            $window.location.href = url;
+            //alert("please login");
+            swal({
+                title: 'Please login',
+                type :'warning'
+            });
+            $timeout(function() {
+                var url = "http://" + $window.location.host + "/index.html";
+                $window.location.href = url;
+            },2000)
         }
         else{
             $scope.f_name=$scope.user.fname;
@@ -161,6 +204,19 @@ app.controller('profileCntrl',function($scope,$http, $window) {
             $scope.zipcode=$scope.user.address.zip_code;
         }
     });
+    res.error(function (data,status) {
+        swal({
+            title: 'Please login',
+            type :'warning',
+            showCloseButton: true
+        });
+        $timeout(function(){
+            var url = "http://" + $window.location.host + "/index.html";
+            $window.location.href = url;
+        },2000)
+        //alert("please login");
+
+    });
 
     $scope.cancel = function () {
         var url = "http://" + $window.location.host + "/html/home.html";
@@ -169,7 +225,7 @@ app.controller('profileCntrl',function($scope,$http, $window) {
 
     $scope.logout = function () {
         var log = $http.get('/logout');
-        log.success(function (data, status, headers, config) {
+        log.success(function (data) {
             var url = "http://" + $window.location.host + "/index.html";
             $window.location.href = url;
         });
@@ -190,10 +246,19 @@ app.controller('profileCntrl',function($scope,$http, $window) {
             };
             var res = $http.post('/profile', dataObj);
             res.success(function (data, status, headers, config) {
-                alert("user details have been saved");
+                swal({
+                    title: "User details saved",
+                    type: "success"
+                });
+                    //alert("user details have been saved");
             });
             res.error(function (data, status) {
-                alert("user not created");
+                swal({
+                    title: "Unable to save user details",
+                    type: "error"
+                    //alert("user details have been saved");
+                });
+                //alert("user not created");
             });
         }
     };

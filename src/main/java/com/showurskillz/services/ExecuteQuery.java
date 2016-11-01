@@ -31,9 +31,49 @@ public class ExecuteQuery implements IExecuteQuery  {
         this.address=address;
     }
 
+    public UserAuthorize getAuthorize() {
+        return authorize;
+    }
+
+    public void setAuthorize(UserAuthorize authorize) {
+        this.authorize = authorize;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void clearAll(){
+        user.setUsername(null);
+        user.setAddress(null);
+        user.setFname(null);
+        user.setPassword(null);
+        user.setPhoneNumber(null);
+        user.setLname(null);
+        address.setAddressLine1(null);
+        address.setAddressLine2(null);
+        address.setCity(null);
+        address.setZip_code(null);
+        address.setState(null);
+        authorize.setAllow(false);
+    }
+
     @Override
     public UserAuthorize loginQuery(String qry, Connection conn, User user) {
 
+        clearAll();
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(qry);
@@ -57,6 +97,7 @@ public class ExecuteQuery implements IExecuteQuery  {
     @Override
     public int insertUser(Connection conn, User user) {
 
+        clearAll();
         int result;
         qry="Insert into user VALUES (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pst = null;
@@ -84,6 +125,7 @@ public class ExecuteQuery implements IExecuteQuery  {
     @Override
     public User retrieveUser(Connection conn, String username) {
 
+        clearAll();
         qry="Select * from user where user_name=?";
         PreparedStatement pst = null;
 
@@ -104,6 +146,7 @@ public class ExecuteQuery implements IExecuteQuery  {
                 address.setZip_code(rs.getString("zip_code"));
                 user.setAddress(address);
                 rs.close();
+                conn.close();
             }
         }
         catch(SQLException e) {
@@ -115,6 +158,7 @@ public class ExecuteQuery implements IExecuteQuery  {
     @Override
     public void updateUser(Connection conn, User user) {
 
+        clearAll();
         qry="Update user set fname=?,lname=?,password=?,addr1=?,addr2=?,city=?,state=?,zip_code=?,phone_no=? where user_name=?";
         PreparedStatement pst = null;
         try {

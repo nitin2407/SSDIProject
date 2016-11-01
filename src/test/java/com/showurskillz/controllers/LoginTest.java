@@ -59,6 +59,7 @@ public class LoginTest {
         login = new Login(access, validUser, jdbcConnection, address, executeQuery, checkAuthorization);
     }
 
+
     @Test
     public void checkValidUser() throws Exception {
         UserAuthorize userAuthorize = login.checkUser(validUser, mockHttpServletRequest);
@@ -75,7 +76,7 @@ public class LoginTest {
     public void sendUser() throws Exception {
         mockHttpSession.setAttribute("username", "validUsername");
         mockHttpServletRequest.setSession(mockHttpSession);
-        User response = login.sendUser(mockHttpSession);
+        User response = login.sendUser(mockHttpSession,mockHttpServletRequest,mockHttpServletResponse);
         assertEquals("validUsername", response.getUsername());
     }
 
@@ -83,7 +84,7 @@ public class LoginTest {
     public void sendUserDetails() throws Exception {
         mockHttpSession.setAttribute("username", "validUsername");
         mockHttpServletRequest.setSession(mockHttpSession);
-        User response = login.sendUserDetails(mockHttpSession, mockHttpServletRequest);
+        User response = login.sendUserDetails(mockHttpSession);
         assertEquals("validUsername", response.getUsername());
     }
 

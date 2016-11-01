@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.showurskillz.repository.*;
 import javax.servlet.http.HttpServletRequest;
+//import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -91,7 +92,7 @@ public class Login{
 
         HttpSession userSession;
         access=checkUser.loginCheck(user);
-        if(access.getAllow()==true){
+        if(access.getAllow()){
             userSession = request.getSession();
             userSession.setAttribute("username",user.getUsername());
         }
@@ -100,17 +101,34 @@ public class Login{
 
 
     @RequestMapping(path="/home",method = RequestMethod.GET,produces= MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody User sendUser(HttpSession userSession) throws IOException {
+    public @ResponseBody User sendUser(HttpSession userSession,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
-        return executeQuery.retrieveUser(dao.establishConnection(),(String) userSession.getAttribute("username"));
+
+
+        user = executeQuery.retrieveUser(dao.establishConnection(), (String) userSession.getAttribute("username"));
+        //user.setUsername((String) userSession.getAttribute("username"));
+        return user;
+        //return executeQuery.retrieveUser(dao.establishConnection(),(String) userSession.getAttribute("username"));
     }
 
     @RequestMapping(path="/logout",method = RequestMethod.GET)
-    public void logOut(HttpSession userSession) {
+    public void logOut(HttpSession userSession,HttpServletRequest request) {
 
+
+        //if(userSession != null){
+        userSession.removeAttribute("username");
+        userSession.invalidate();
+        user=null;
+        address=null;
+        //}
+       /*userSession=request.getSession(false);
         if(userSession != null){
-            userSession.invalidate();
-        }
+            synchronized(userSession) {
+
+                userSession.invalidate();
+            }
+        }*/
+
     }
 
     @RequestMapping(path="/signup",method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
@@ -128,14 +146,14 @@ public class Login{
     }
 
     @RequestMapping(path="/profile",method = RequestMethod.GET,produces= MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody User sendUserDetails(HttpSession userSession, HttpServletRequest request) {
+    public @ResponseBody User sendUserDetails(HttpSession userSession) {
 
         return executeQuery.retrieveUser(dao.establishConnection(),(String) userSession.getAttribute("username"));
 
     }
 
     @RequestMapping(path="/profile",method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
-    public void editUser(@RequestBody User user,HttpSession userSession, HttpServletRequest request) {
+    public void editUser(@RequestBody User user) {
 
         executeQuery.updateUser(dao.establishConnection(),user);
 

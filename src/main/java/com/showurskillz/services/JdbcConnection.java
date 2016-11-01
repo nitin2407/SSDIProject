@@ -21,8 +21,7 @@ public class JdbcConnection implements IConnection {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(connectionString, sqlUser, sqlPass);
-            return conn;
+            return DriverManager.getConnection(connectionString, sqlUser, sqlPass);
         }
         catch(ClassNotFoundException|SQLException e) {
             e.printStackTrace();

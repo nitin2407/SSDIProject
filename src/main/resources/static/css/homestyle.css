@@ -141,3 +141,10 @@ li.dropdown-toggle {
 .btn{
     padding-left: 0px;
 }
+
+
+@media screen and (min-width: 0px) and (max-width: 400px) {
+  .navbar-brand {font-size: 12px;}  /* show it on small screens */
+}
+
+
