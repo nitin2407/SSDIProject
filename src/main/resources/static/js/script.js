@@ -44,6 +44,35 @@ app.controller('LoginCtrl',function($scope,$http, $window) {
     };
 });
 
+var app = angular.module('loginApp');
+app.controller('skillsController', function($scope, $http){
+    var result=$http.get('/skills');
+    result.success(function (data) {
+        $scope.skills = data;
+    });
+
+    $scope.viewSkill = function(id){
+        var result=$http.get('/skills/'+id);
+        result.success(function (data) {
+            $scope.skillDetails = data;
+            alert(data.skillName);
+        });
+    }
+
+});
+
+var app = angular.module('loginApp');
+app.controller('sidebarController', function($scope){
+    $scope.category = null;
+
+    $scope.setCategory = function(category){
+        alert(category);
+        $scope.category = category;
+    }
+});
+
+
+
 var app = angular.module('home',[]);
 
 

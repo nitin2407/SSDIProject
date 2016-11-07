@@ -1,55 +1,231 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compartible" content="IE-edge">
-		<meta name="viewport" content="width-device-width, initial-scale=1">
-		<title>ShowYourSkillz</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/styles.css">
-		<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/color/color-1.css" id="color"/>
-		<link rel="stylesheet" href="css/sweetalert2.min.css">
-        <script src="js/sweetalert2.min.js"></script>
-		<script src="js/jquery-2.1.4.min.js"></script>
-		<script src="js/bootstrap.js"></script>
-		<script src="js/angular.min.js"></script>
-		<script src="js/script.js"></script>
-		<!--<script src="js/app.js"></script>
-		<script src="js/controller.js"></script>-->
-	</head>
-	<body ng-app="loginApp">
-		<nav id="header-nav" class="navbar default navbar-light bg-faded">
-			<div class="container">
-				<div class="navbar-header col-sm-2 col-xs-1 col-md-2">
-					<a class="navbar-brand" href="index.html">ShowYourSkillz</a>
-				</div>
-				<div class="nav pull-right" id="myNavbar" ng-controller="LoginCtrl">
-	               	<ul class="nav navbar-nav pull-right">
-               		    <li class="nav-item dropdown" id="menuLogin">
-                          	<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">Login</a>
-                          	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="padding:17px;">
-              					<form class="form-inline" id="formLogin">
-              						<p> 
-                						<input class="form-control" name="username" id="username" type="text" placeholder="Username" ng-model="user">
-                					</p>
-                					<p>
-                						<input class="form-control" name="password" id="password" type="password" placeholder="Password" ng-model="pass">
-                					</p>
-                					<button class="btn btn-outline-success" type="submit" ng-click="check()">Login</button>
-              					</form>
-            				</div>
-                       	</li>
-                       	<li>
-                     		<a href="#" type="submit" ng-click="signup()">SignUp</a>
-                       	</li>
-                   	</ul>
-				</div>
-			</div>
-		</nav>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compartible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <title>ShowYourSkillz</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/color/color-1.css" id="color"/>
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/script.js"></script>
+    <!--<script src="js/app.js"></script>
+    <script src="js/controller.js"></script>-->
+    <style>
+        .container {
+            position: relative;
+            top: 100px;
+            left: 80px;
+            right: 50px;
+        }
+
+        .glyphicon {
+            margin-right: 5px;
+        }
+
+        .thumbnail {
+            margin-bottom: 20px;
+            padding: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+        }
+
+        .item.list-group-item {
+            float: none;
+            width: 100%;
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .item.list-group-item:nth-of-type(odd):hover, .item.list-group-item:hover {
+            background: #428bca;
+        }
+
+        .item.list-group-item .list-group-image {
+            margin-right: 10px;
+        }
+
+        .item.list-group-item .thumbnail {
+            margin-bottom: 0px;
+        }
+
+        .item.list-group-item .caption {
+            padding: 9px 9px 0px 9px;
+        }
+
+        .item.list-group-item:nth-of-type(odd) {
+            background: #eeeeee;
+        }
+
+        .item.list-group-item:before, .item.list-group-item:after {
+            display: table;
+            content: " ";
+        }
+
+        .item.list-group-item img {
+            float: left;
+        }
+
+        .item.list-group-item:after {
+            clear: both;
+        }
+
+        .list-group-item-text {
+            margin: 0 0 11px;
+        }
+
+        p {
+            margin: 1em auto;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('#list').click(function (event) {
+                event.preventDefault();
+                $('#products .item').addClass('list-group-item');
+            });
+            $('#grid').click(function (event) {
+                event.preventDefault();
+                $('#products .item').removeClass('list-group-item');
+                $('#products .item').addClass('grid-group-item');
+            });
+        })
+
+    </script>
+
+</head>
+<body ng-app="loginApp">
+<nav id="header-nav" class="navbar default navbar-light bg-faded">
+    <div class="navbar-header col-sm-2 col-xs-1 col-md-2">
+        <a class="navbar-brand" href="index.html">ShowYourSkillz</a>
+    </div>
+    <div class="nav pull-right" id="myNavbar" ng-controller="LoginCtrl">
+        <ul class="nav navbar-nav pull-right">
+            <li class="nav-item dropdown" id="menuLogin">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink"
+                   aria-haspopup="true" aria-expanded="false">Login</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="padding:17px;">
+                    <form class="form-inline" id="formLogin">
+                        <p>
+                            <input class="form-control" name="username" id="username" type="text" placeholder="Username"
+                                   ng-model="user">
+                        </p>
+                        <p>
+                            <input class="form-control" name="password" id="password" type="password"
+                                   placeholder="Password" ng-model="pass">
+                        </p>
+                        <button class="btn btn-outline-success" type="submit" ng-click="check()">Login</button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <a href="#" type="submit" ng-click="signup()">SignUp</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" ng-controller="sidebarController">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Categories
+                </a>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Study" ng-click="setCategory('Study')">Study</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Culinary" ng-click="setCategory('Culinary')">Culinary</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Sports" ng-click="setCategory('Sports')">Sports</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Art" ng-click="setCategory('Art')">Art</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Drama" ng-click="setCategory('Drama')">Drama</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Softskills" ng-click="setCategory('Softskills')">Softskills</label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label style="color:white;"><input type="checkbox" value="Singing" ng-click="setCategory('Singing')">Singing</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+
+<div class="container">
+    <div class="well well-sm">
+        <strong>Browse Skills</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+
+        <div id="products" class="row list-group" ng-controller="skillsController">
+
+            <div ng-repeat="skill in skills">
+                <div class="item  col-xs-4 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
+                            <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
+                            <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
+                            <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="lead">Tutor: {{ skill.tutor }}</p>
+                                </div>
+                            </div>
+
+                                <a class="btn btn-success btn-block" ng-click="viewSkill(skill.skillId)">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
 </html>
 	
 

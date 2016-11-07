@@ -29,6 +29,13 @@ app.controller('LoginCtrl',function($scope,$http, $window) {
 });
 
 
+app.controller('skillController', function($scope){
+
+    alert(12345);
+
+});
+
+
 app.controller('homeCntrl',function($scope,$http, $window) {
         $scope.name = "";
         var res = $http.get('/home');
