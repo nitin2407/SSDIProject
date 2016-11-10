@@ -10,9 +10,9 @@
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/color/color-1.css" id="color"/>
     <link rel="stylesheet" href="css/sweetalert2.min.css">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
     <script src="js/sweetalert2.min.js"></script>
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -90,21 +90,6 @@
 
     </style>
 
-    <script>
-        $(document).ready(function () {
-            $('#list').click(function (event) {
-                event.preventDefault();
-                $('#products .item').addClass('list-group-item');
-            });
-            $('#grid').click(function (event) {
-                event.preventDefault();
-                $('#products .item').removeClass('list-group-item');
-                $('#products .item').addClass('grid-group-item');
-            });
-        })
-
-    </script>
-
 </head>
 <body ng-app="loginApp">
 <nav id="header-nav" class="navbar default navbar-light bg-faded">
@@ -137,93 +122,11 @@
     </div>
 
 </nav>
-
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper" ng-controller="sidebarController">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Categories
-                </a>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Study" ng-click="setCategory('Study')">Study</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Culinary" ng-click="setCategory('Culinary')">Culinary</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Sports" ng-click="setCategory('Sports')">Sports</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Art" ng-click="setCategory('Art')">Art</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Drama" ng-click="setCategory('Drama')">Drama</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Softskills" ng-click="setCategory('Softskills')">Softskills</label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label style="color:white;"><input type="checkbox" value="Singing" ng-click="setCategory('Singing')">Singing</label>
-                </div>
-            </li>
-        </ul>
-    </div>
-    </div>
+<div ng-include="'html/categorySidebar.html'"></div>
 
 
-<div class="container">
-    <div class="well well-sm">
-        <strong>Browse Skills</strong>
-        <div class="btn-group">
-            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                class="glyphicon glyphicon-th"></span>Grid</a>
-        </div>
-
-        <div id="products" class="row list-group" ng-controller="skillsController">
-
-            <div ng-repeat="skill in skills">
-                <div class="item  col-xs-4 col-lg-4">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
-                            <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
-                            <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
-                            <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <p class="lead">Tutor: {{ skill.tutor }}</p>
-                                </div>
-                            </div>
-
-                                <a class="btn btn-success btn-block" ng-click="viewSkill(skill.skillId)">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
+    <!--SkillsHolder.html contains all the code for showing the -->
+    <div ng-include="'html/skillsHolder.html'"></div>
 
 </body>
 </html>

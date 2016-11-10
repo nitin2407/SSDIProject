@@ -1,0 +1,48 @@
+<script>
+    $(document).ready(function () {
+        $('#list').click(function (event) {
+            event.preventDefault();
+            $('#products .item').addClass('list-group-item');
+        });
+        $('#grid').click(function (event) {
+            event.preventDefault();
+            $('#products .item').removeClass('list-group-item');
+            $('#products .item').addClass('grid-group-item');
+        });
+    })
+</script>
+<div class="container">
+    <div class="well well-sm">
+        <strong>Browse Skills</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+
+        <div id="products" class="row list-group" ng-controller="skillsController">
+
+            <div ng-repeat="skill in skills">
+                <div class="item  col-xs-4 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
+                            <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
+                            <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
+                            <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="lead">Tutor: {{ skill.tutor }}</p>
+                                </div>
+                            </div>
+
+                           <!-- <a class="btn btn-success btn-block" ng-click="viewSkill(skill.skillId)">View</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

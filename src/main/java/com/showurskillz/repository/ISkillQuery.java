@@ -12,4 +12,6 @@ public interface ISkillQuery {
     List<Skill> retrieveAllSkills(Connection conn);
 
     Skill getSkillById(Connection conn, int id);
+
+    List<Skill> filterSkillsByCategory(Connection conn, String category);
 }
