@@ -4,8 +4,7 @@ package com.showurskillz.controllers;
  * Created by nitin on 10/21/2016.
  */
 import com.showurskillz.model.*;
-import com.showurskillz.services.ExecuteQuery;
-import com.showurskillz.services.JdbcConnection;
+import com.showurskillz.repository.ExecuteQuery;
 import com.showurskillz.services.CheckAuthorization;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.*;
 
 @RestController
 public class Login{

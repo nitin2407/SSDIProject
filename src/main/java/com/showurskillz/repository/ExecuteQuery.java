@@ -1,4 +1,4 @@
-package com.showurskillz.services;
+package com.showurskillz.repository;
 
 /**
  * Created by nitin on 10/28/2016.
@@ -13,9 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.showurskillz.model.UserAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-@Service
+@Repository
 public class ExecuteQuery implements IExecuteQuery  {
 
     private UserAuthorize authorize;

@@ -1,9 +1,12 @@
 package com.showurskillz.services;
 
 import com.showurskillz.model.Address;
+import com.showurskillz.model.SkillDemo;
 import com.showurskillz.model.User;
 import com.showurskillz.model.UserAuthorize;
+import com.showurskillz.repository.ExecuteQuery;
 import com.showurskillz.repository.IConnection;
+import com.showurskillz.repository.JdbcConnection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +25,7 @@ public class ExecuteQueryTest {
     String qry;
     ExecuteQuery executeQuery;
     IConnection dao;
+    SkillDemo skillDemo;
 
     @Before
     public void prepareForTestCases() {
@@ -35,8 +39,9 @@ public class ExecuteQueryTest {
 
         authorize = new UserAuthorize();
         address = new Address();
+        skillDemo = new SkillDemo();
 
-        executeQuery = new ExecuteQuery(authorize, validUser, address);
+        executeQuery = new ExecuteQuery(authorize, validUser, address,skillDemo);
         dao = new JdbcConnection();
     }
 

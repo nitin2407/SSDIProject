@@ -1,10 +1,13 @@
 package com.showurskillz.services;
 
 import com.showurskillz.model.Address;
+import com.showurskillz.model.SkillDemo;
 import com.showurskillz.model.User;
 import com.showurskillz.model.UserAuthorize;
+import com.showurskillz.repository.ExecuteQuery;
 import com.showurskillz.repository.IConnection;
 import com.showurskillz.repository.IExecuteQuery;
+import com.showurskillz.repository.JdbcConnection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +23,7 @@ public class CheckAuthorizationTest {
     User invalidUser;
     Address address;
     IConnection dao;
+    SkillDemo skillDemo;
 
     @Before
     public void prepare(){
@@ -33,8 +37,9 @@ public class CheckAuthorizationTest {
 
         authorize = new UserAuthorize();
         address = new Address();
+        skillDemo = new SkillDemo();
 
-        executeService= new ExecuteQuery(authorize, validUser, address);
+        executeService= new ExecuteQuery(authorize, validUser, address,skillDemo);
 
         dao = new JdbcConnection();
 

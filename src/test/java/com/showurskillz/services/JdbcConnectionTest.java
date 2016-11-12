@@ -1,5 +1,6 @@
 package com.showurskillz.services;
 
+import com.showurskillz.repository.JdbcConnection;
 import org.junit.Test;
 
 import java.sql.Connection;

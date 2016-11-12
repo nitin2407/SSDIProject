@@ -1,13 +1,12 @@
 package com.showurskillz.controllers;
 
 import com.showurskillz.model.Address;
+import com.showurskillz.model.SkillDemo;
 import com.showurskillz.model.User;
 import com.showurskillz.model.UserAuthorize;
-import com.showurskillz.repository.IConnection;
-import com.showurskillz.repository.IExecuteQuery;
 import com.showurskillz.services.CheckAuthorization;
-import com.showurskillz.services.ExecuteQuery;
-import com.showurskillz.services.JdbcConnection;
+import com.showurskillz.repository.ExecuteQuery;
+import com.showurskillz.repository.JdbcConnection;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -32,6 +31,7 @@ public class LoginTest {
     ExecuteQuery executeQuery;
     CheckAuthorization checkAuthorization;
     Login login;
+    SkillDemo skillDemo;
 
     @Before
     public void prepareForTestcases() {
@@ -47,8 +47,9 @@ public class LoginTest {
 
         access = new UserAuthorize();
         jdbcConnection = new JdbcConnection();
+        skillDemo = new SkillDemo();
 
-        executeQuery = new ExecuteQuery(access, validUser, address);
+        executeQuery = new ExecuteQuery(access, validUser, address,skillDemo);
 
         checkAuthorization = new CheckAuthorization(executeQuery, jdbcConnection);
 

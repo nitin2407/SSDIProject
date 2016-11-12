@@ -125,7 +125,7 @@ var app = angular.module('home',['ngMaterial']);
 
 app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
         $scope.name = "";
-        /*var res = $http.get('/home');
+        var res = $http.get('/home');
         res.success(function (data) {
             $scope.user = data;
             if($scope.user.username==null){
@@ -155,7 +155,7 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
             },2000);
             //alert("please login");
 
-        });*/
+        });
         $scope.openDialog = function(){
             $mdDialog.show({
                 controller: function($scope, $mdDialog){
@@ -171,13 +171,6 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
             });
         };
         function DialogController($scope, $mdDialog) {
-
-            /*$scope.hour = {
-               value: new Date(1970, 0, 1, 14, 57, 0)
-             };*/
-
-             
-            
 
             $scope.categories = [{name:'Computer Science'},{name:'Cookery'},{name:'Electronics'},{name:'Maths'}];
             $scope.skill = [{name:'nitin',category:'Computer Science'}];
@@ -220,11 +213,11 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
                     console.log(dataObj);
                     var res = $http.post('/addskill', dataObj);
                     res.success(function (data, status) {
+                        $mdDialog.cancel();
                         swal({
                             title: "skill added",
                             type: "success"
                         });
-                            //alert("user details have been saved");
                     });
                     res.error(function (data, status) {
                         swal({

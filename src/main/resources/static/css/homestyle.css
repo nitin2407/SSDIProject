@@ -192,7 +192,7 @@ md-toolbar>.md-toolbar-tools:hover{
 }
 
 .day{
-    margin-top: auto;
+    margin-bottom: 39px !important;
 }
 
 md-input-container:not(.md-input-has-value) input:not(:focus),
@@ -207,5 +207,9 @@ md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-
 md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field,
 md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text {
 color: black !important; } 
+
+.Skill-timings{
+    margin-bottom: 10px !important;
+}
 
 

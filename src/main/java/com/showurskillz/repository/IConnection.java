@@ -5,6 +5,7 @@ package com.showurskillz.repository;
  */
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 
