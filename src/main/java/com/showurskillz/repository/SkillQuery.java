@@ -42,6 +42,7 @@ public class SkillQuery implements ISkillQuery{
             pst = conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
+                skill = new Skill();
                 skill.setSkillId(rs.getInt("skillId"));
                 skill.setSkillName(rs.getString("skillName"));
                 skill.setSkillDescription(rs.getString("skillDescription"));
@@ -94,6 +95,7 @@ public class SkillQuery implements ISkillQuery{
             pst=conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
+                skill = new Skill();
                 skill.setSkillId(rs.getInt("skillId"));
                 skill.setSkillName(rs.getString("skillName"));
                 skill.setSkillDescription(rs.getString("skillDescription"));

@@ -17,9 +17,10 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="js/script.js"></script>
-    <!--<script src="js/app.js"></script>
-    <script src="js/controller.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
     <style>
         .container {
             position: relative;
@@ -91,7 +92,7 @@
     </style>
 
 </head>
-<body ng-app="loginApp">
+<body ng-app="MyApp">
 <nav id="header-nav" class="navbar default navbar-light bg-faded">
     <div class="navbar-header col-sm-2 col-xs-1 col-md-2">
         <a class="navbar-brand" href="index.html">ShowYourSkillz</a>
@@ -122,12 +123,12 @@
     </div>
 
 </nav>
-<div ng-include="'html/categorySidebar.html'"></div>
-
-
+    <div ng-include="'html/categorySidebar.html'"></div>
     <!--SkillsHolder.html contains all the code for showing the -->
     <div ng-include="'html/skillsHolder.html'"></div>
-
+    <script src="js/app.js"></script>
+    <script src="js/directive.js"></script>
+    <script src="js/controller.js"></script>
 </body>
 </html>
 	
