@@ -130,8 +130,8 @@ li.dropdown-toggle {
 }
 
 .dropdown-menu>p{
-    padding-bottom: 0px !important;
-    margin-bottom: 0px !important;
+    padding: auto !important;
+    margin: auto !important;
 }
 .dropdown-menu>div{
     padding-bottom: 0px !important;

@@ -73,7 +73,7 @@ app.controller('MainController', function($scope) {
 
 
 app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
-        $scope.name = "";
+        /*$scope.name = "";
         var res = $http.get('/home');
         res.success(function (data) {
             $scope.user = data;
@@ -102,13 +102,11 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
                 var url = "http://" + $window.location.host + "/index.html";
                 $window.location.href = url;
             },2000);
-            //alert("please login");
 
-        });
+        });*/
         $scope.openDialog = function(){
             $mdDialog.show({
-                controller: function($scope, $mdDialog){
-        // do something with dialog scope      
+                controller: function($scope, $mdDialog){     
                 },
                 controller: DialogController,
                 templateUrl: '/tpl.html',
