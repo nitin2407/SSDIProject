@@ -15,8 +15,37 @@ public class SkillDemo {
     private String skillName;
     private String category;
     private List<Time> time;
-    private String phoneNumber;
-    private String fname;
-    private String lname;
+    private String description;
 
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<Time> getTime() {
+        return time;
+    }
+
+    public void setTime(List<Time> time) {
+        this.time = time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

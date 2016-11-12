@@ -1,9 +1,10 @@
 package com.showurskillz.controllers;
 
-import com.showurskillz.model.Skill;
+import com.showurskillz.model.*;
 import com.showurskillz.repository.IConnection;
 import com.showurskillz.repository.ISkillQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,4 +39,12 @@ public class SkillController {
     public @ResponseBody List<Skill> filterCategoryBySkills(@PathVariable("category") String category) {
         return skillQuery.filterSkillsByCategory(dao.establishConnection(), category);
     }
+
+    @RequestMapping(path="/addskill",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addSkill(@RequestBody SkillDemo skill) {
+        //return skillQuery.addSkill(dao.establishConnection());
+        SkillDemo skillnew=skill;
+    }
+
+
 }

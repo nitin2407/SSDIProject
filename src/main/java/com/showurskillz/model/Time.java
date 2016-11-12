@@ -14,11 +14,10 @@ import java.util.Date;
 @Component
 public class Time {
 
-
-    private String Day;
+    private String day;
     private Date toTime;
     private Date fromTime;
-    SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm a");
+    //SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm a");
 
     /*Date dNow = new Date( );
       SimpleDateFormat ft =
@@ -26,9 +25,29 @@ public class Time {
 
       System.out.println("Current Date: " + ft.format(dNow));*/
 
+    public String getDay() {
+        return day;
+    }
 
+    public void setDay(String day) {
+        this.day = day;
+    }
 
+    public Date getToTime() {
+        return toTime;
+    }
 
+    public void setToTime(Date toTime) {
+        this.toTime = toTime;
+    }
+
+    public Date getFromTime() {
+        return fromTime;
+    }
+
+    public void setFromTime(Date fromTime) {
+        this.fromTime = fromTime;
+    }
 }
 
 

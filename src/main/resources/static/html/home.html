@@ -6,6 +6,7 @@
         <meta name="viewport" content="width-device-width, initial-scale=1">
         <title>ShowYourSkillz</title>
         <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" > 
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
         <link rel="stylesheet" href="../css/homestyle.css">
         <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="../css/color/color-1.css" id="color">
@@ -14,6 +15,11 @@
         <script src="../js/jquery-2.1.4.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/angular.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
     </head>
     <body ng-app="home" ng-controller="homeCntrl">
         <nav id="header-nav" class="navbar default navbar-light bg-faded">
@@ -33,6 +39,9 @@
                             <p>
                                 <a class="btn btn-outline-success" href="profilePage.html">Profile</a>
                             </p>
+                            <p>
+                                <md-button ng-click="openDialog()">Add Skill</md-button>
+                            </p>
                             <div class="dropdown-divider">
                                 <a href="#" type="submit" ng-click="logout()">Logout</a>
                             </div>
@@ -41,6 +50,84 @@
                 </ul>
             </div>
         </nav>
+        <script type="text/ng-template" id="/tpl.html">
+            <md-dialog aria-label="Add skill">
+                <div layout="column" ng-cloak class="md-inline-form">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>Post a new skill</h2>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="cancel()">Cancel</md-button>
+                        </div>  
+                    </md-toolbar>
+                    <md-dialog-content layout-padding>
+                        <div>
+                            <form name="userForm" ng-submit="submitForm(userForm.$valid)" ng-cloak novalidate>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex-gt-xs id="skill_name"> 
+                                        <label>Skill Name</label>
+                                        <input ng-model="skill_name" class='form-control' id='Skill Name' placeholder='Skill Name' type='text' name="skill_name" ng-required="true">
+                                        <div ng-messages="userForm.skill_name.$error" ng-show="userForm.skill_name.$invalid && userForm.skill_name.$touched">
+                                            <div ng-message-exp="['required']" ng-hide="userForm.skill_name.$valid">
+                                                <span translate>rule.skill_name.errors.required</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div>
+                                    <md-input-container class="md-block" flex>
+                                        <label>Category</label>
+                                        <md-select ng-model="categoryChoice" name="skill_category" ng-required="true">
+                                            <md-option ng-value="category.name" ng-repeat="category in categories">{{ category.name }}</md-option>
+                                        </md-select>
+                                        <div class="errors" ng-messages="userForm.skill_category.$error" ng-show="userForm.$invalid && userForm.skill_category.$touched">
+                                            <div ng-message="required"  ng-hide="userForm.skill_name.$valid">Required</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex>
+                                        <label>Timings</label><br/>
+                                        <fieldset data-ng-repeat="choice in choices" class="md-block">
+                                        <md-input-container class="day">
+                                            <md-select ng-model="choice.day">
+                                                <!--<md-optgroup label="Day">-->
+                                                    <md-option ng-value="weekDay.name" ng-repeat="weekDay in days">
+                                                    {{weekDay.name}}
+                                                    <!--</md-option>-->
+                                                </md-optgroup>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>To</label>
+                                            <input type="time" id="exampleInput" name="input" ng-model="choice.toTime"
+                                            placeholder="To" required/>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>From</label>
+                                            <input type="time" id="exampleInput" name="input" ng-model="choice.fromTime"
+                                            placeholder="From" required/>
+                                        </md-input-container>                
+                                        <md-button class="remove md-raised md-warn" ng-show="$last" ng-click="removeChoice()">-</md-button>
+                                    </fieldset>
+                                    <md-button class="addfields md-raised md-primary" ng-click="addNewChoice()">+</md-button>
+                                </md-input-container>
+                            </div></br>
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                    <div>
+                                        <textarea ng-model="description" class='form-control' id='id_description' placeholder='Description' rows='3'></textarea>
+                                    </div>
+                            </md-input-container>
+                            <md-dialog-actions layout="row" layout-align="space-around center" layout-wrap>
+                                <md-button class='md-raised md-primary' type="submit" ng-disabled="userForm.$invalid" ng-click="register()">Add Skill</md-button>
+                                <md-button class='md-raised md-warn' type="button" ng-click="cancel()">Cancel</md-button>
+                            </md-dialog-actions>          
+                        </form>
+                        </div>
+                    </md-dialog-content>
+                </div>  
+            </md-dialog>
+        </script>
         <script src="../js/script.js"></script>
+        <script src="../js/app.js"></script>
     </body>
 </html>

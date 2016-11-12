@@ -120,12 +120,12 @@ app.controller('MainController', function($scope) {
 
 
 
-var app = angular.module('home',[]);
+var app = angular.module('home',['ngMaterial']);
 
 
-app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
+app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
         $scope.name = "";
-        var res = $http.get('/home');
+        /*var res = $http.get('/home');
         res.success(function (data) {
             $scope.user = data;
             if($scope.user.username==null){
@@ -155,7 +155,88 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
             },2000);
             //alert("please login");
 
-        });
+        });*/
+        $scope.openDialog = function(){
+            $mdDialog.show({
+                controller: function($scope, $mdDialog){
+        // do something with dialog scope      
+                },
+                controller: DialogController,
+                templateUrl: '/tpl.html',
+                windowClass: 'large-Modal',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose:true,
+      //fullscreen: $scope.customFullscreen     
+            });
+        };
+        function DialogController($scope, $mdDialog) {
+
+            /*$scope.hour = {
+               value: new Date(1970, 0, 1, 14, 57, 0)
+             };*/
+
+             
+            
+
+            $scope.categories = [{name:'Computer Science'},{name:'Cookery'},{name:'Electronics'},{name:'Maths'}];
+            $scope.skill = [{name:'nitin',category:'Computer Science'}];
+            $scope.categoryChoice = 'Computer Science';
+            $scope.choices = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
+            $scope.days = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thurday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
+            $scope.description="";
+                $scope.addNewChoice = function() {
+                  var newItemNo = $scope.choices.length+1;
+                  $scope.choices.push({day: 'Monday',toTime:'+new Date(1970, 0, 1, 14, 57, 0)+',fromTime:'+new Date(1970, 0, 1, 14, 57, 0)'});
+                };
+            
+                $scope.removeChoice = function() {
+                  var lastItem = $scope.choices.length-1;
+                  $scope.choices.splice(lastItem);
+                };
+
+
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+
+
+            $scope.submitForm = function(isValid) {
+                if(isValid) {
+                    var dataObj = {
+                        skillName: $scope.skill_name,
+                        category: $scope.categoryChoice,
+                        time: $scope.choices,
+                        description: $scope.description
+                    };
+                    console.log(dataObj);
+                    var res = $http.post('/addskill', dataObj);
+                    res.success(function (data, status) {
+                        swal({
+                            title: "skill added",
+                            type: "success"
+                        });
+                            //alert("user details have been saved");
+                    });
+                    res.error(function (data, status) {
+                        swal({
+                            title: "Unable to add skill details",
+                            type: "error"
+                            //alert("user details have been saved");
+                        });
+                        //alert("user not created");
+                    });
+                }
+            };
+        }
         $scope.logout = function () {
             var log = $http.get('/logout');
             log.success(function (data) {
