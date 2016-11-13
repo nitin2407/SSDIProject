@@ -33,11 +33,6 @@ public class SkillController {
         return skillQuery.retrieveAllSkills(dao.establishConnection());
     }
 
-    @RequestMapping(path="/skills/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Skill getSkillById(@PathVariable("id") int id) {
-        return skillQuery.getSkillById(dao.establishConnection(), id);
-    }
-
     @RequestMapping(path="/skills/category/{category}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Skill> filterCategoryBySkills(@PathVariable("category") String category) {
         return skillQuery.filterSkillsByCategory(dao.establishConnection(), category);

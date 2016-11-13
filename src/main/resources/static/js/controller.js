@@ -48,25 +48,16 @@ app.controller('skillsController', function($rootScope, $http, $scope){
     result.success(function (data) {
         $rootScope.skills = data;
     });
-
-    $scope.viewSkill = function(id){
-        var result=$http.get('/skills/'+id);
-        result.success(function (data) {
-            $scope.skillDetails = data;
-            alert(data.skillName);
-        });
-    }
-
 });
 
 
 
 app.controller('MainController', function($scope) {
-    $scope.fruits = ['study', 'dance', 'singing', 'arts', 'sports'];
-    $scope.checked_fruits = [];
-    $scope.addFruit = function(fruit) {
-        if ($scope.checked_fruits.indexOf(fruit) != -1) return;
-        $scope.checked_fruits.push(fruit);
+    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking'];
+    $scope.checked_category = [];
+    $scope.addFruit = function(category) {
+        if ($scope.checked_category.indexOf(category) != -1) return;
+        $scope.checked_category.push(category);
     };
 });
 
