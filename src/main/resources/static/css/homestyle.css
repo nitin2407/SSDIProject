@@ -155,7 +155,9 @@ li.dropdown-toggle {
 md-dialog.md-transition-in{
     min-width: 200px !important;
     width: 500px !important;
-    max-height: 500px !important; 
+    max-height: 600px !important;
+    top: 35px !important;
+    height: 100% !important; 
 }
 
 md-dialog-actions>.md-primary:not([disabled]):hover {
@@ -219,5 +221,10 @@ body.md-dialog-is-showing {
 
 .caption{
     min-height: 210px !important;
+    word-wrap: break-word;
+}
+
+.caption>p{
+    min-height: 12px !important;
 }
 
