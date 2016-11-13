@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" > 
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
         <link rel="stylesheet" href="../css/homestyle.css">
+        <link rel="stylesheet" href="../css/simple-sidebar.css" >
         <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="../css/color/color-1.css" id="color">
         <link rel="stylesheet" href="../css/sweetalert2.min.css">
@@ -19,6 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+        <!--<script src="../js/script.js"></script>-->
     </head>
     <body ng-app="MyApp" ng-controller="homeCntrl" ng-cloak>
         <nav id="header-nav" class="navbar default navbar-light bg-faded">
@@ -26,30 +28,32 @@
                 <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
                     <a class="navbar-brand" href="/html/home.html">ShowYourSkillz</a></li>
                 </div>
-            <div class="nav pull-right col-sm-4 col-xs-5 col-md-3">
-                <ul class="nav navbar-nav pull-right">
-                    <li class="btn-group" id="menuLogin">
-                        <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{name}}</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <p>
-                                <a class="btn btn-outline-success" href="profilePage.html">Profile</a>
-                            </p>
-                            <p>
-                                <a href="#" type="button" ng-click="openDialog()">Add Skill</a>
-                            </p>
-                            <div class="dropdown-divider">
-                                <a href="#" type="submit" ng-click="logout()">Logout</a>
+                <div class="nav pull-right col-sm-4 col-xs-5 col-md-3">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="btn-group" id="menuLogin">
+                            <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{name}}</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <p>
+                                    <a class="btn btn-outline-success" href="profilePage.html">Profile</a>
+                                </p>
+                                <p>
+                                    <a href="#" type="button" ng-click="openDialog()">Add Skill</a>
+                                </p>
+                                <div class="dropdown-divider">
+                                    <a href="#" type="submit" ng-click="logout()">Logout</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            </div>
-        </nav>
+        </nav>   
+        <div  ng-include="'categorySidebar.html'"></div>
+        <div style="z-index: -1;" ng-include="'skillsHolder.html'"></div>
         <script type="text/ng-template" id="/tpl.html">
             <md-dialog aria-label="Add skill">
                 <div layout="column" ng-cloak class="md-inline-form">

@@ -40,6 +40,7 @@ nav {
     top: -80px;
     right: 0;
     height: auto;
+    z-index: 99;
 }
 nav:hover {
     background: rgba(0, 0, 0, 1);
@@ -154,7 +155,7 @@ li.dropdown-toggle {
 md-dialog.md-transition-in{
     min-width: 200px !important;
     width: 500px !important;
-    max-height: 90% !important; 
+    max-height: 500px !important; 
 }
 
 md-dialog-actions>.md-primary:not([disabled]):hover {
@@ -212,4 +213,7 @@ color: black !important; }
     margin-bottom: 10px !important;
 }
 
+body.md-dialog-is-showing {
+    overflow: hidden !important;
+}
 
