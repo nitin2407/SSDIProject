@@ -137,3 +137,13 @@ nav:hover {
 /*.dropdown-menu{
     position: relative;
 }*/
+
+.caption{
+    min-height: 210px !important;
+    word-wrap: break-word;
+}
+
+.caption>p{
+    min-height: 15px !important;
+}
+

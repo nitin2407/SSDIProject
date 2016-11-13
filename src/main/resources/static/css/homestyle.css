@@ -217,3 +217,7 @@ body.md-dialog-is-showing {
     overflow: hidden !important;
 }
 
+.caption{
+    min-height: 210px !important;
+}
+
