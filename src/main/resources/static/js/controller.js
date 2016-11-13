@@ -110,9 +110,9 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
         };
         function DialogController($scope, $mdDialog) {
 
-            $scope.categories = [{name:'Computer Science'},{name:'Cookery'},{name:'Electronics'},{name:'Maths'}];
-            $scope.skill = [{name:'nitin',category:'Computer Science'}];
-            $scope.categoryChoice = 'Computer Science';
+            $scope.categories = [{name:'study'},{name:'dance'},{name:'singing'},{name:'arts'},{name:'sports'},{name:'cooking'}];
+            $scope.skill = [{name:'nitin',category:'study'}];
+            $scope.categoryChoice = 'study';
             $scope.choices = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
             $scope.days = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thurday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
             $scope.description="";
