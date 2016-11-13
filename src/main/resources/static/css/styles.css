@@ -68,6 +68,7 @@ nav:hover {
     color: #fff;
     font-size: 15px;
     font-weight: 300;
+    left:400px;
 }
 
 .nav>li>a:focus,
@@ -106,6 +107,18 @@ nav:hover {
 	background-color: black;
 	color: white;
 	border: 1px solid black;
+}
+
+.dropdown{
+    left: 500px;
+}
+
+.dropdown-menu{
+    left: 350px;
+}
+
+.signupclass{
+    left:540px;
 }
 
 .dropdown-toggle[aria-expanded="true"] {
