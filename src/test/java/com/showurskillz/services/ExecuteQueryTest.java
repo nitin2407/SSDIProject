@@ -25,7 +25,6 @@ public class ExecuteQueryTest {
     String qry;
     ExecuteQuery executeQuery;
     IConnection dao;
-    SkillDemo skillDemo;
 
     @Before
     public void prepareForTestCases() {
@@ -39,9 +38,8 @@ public class ExecuteQueryTest {
 
         authorize = new UserAuthorize();
         address = new Address();
-        skillDemo = new SkillDemo();
 
-        executeQuery = new ExecuteQuery(authorize, validUser, address,skillDemo);
+        executeQuery = new ExecuteQuery(authorize, validUser, address);
         dao = new JdbcConnection();
     }
 

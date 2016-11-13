@@ -3,6 +3,8 @@ package com.showurskillz.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by vipul on 11/3/2016.
  */
@@ -13,6 +15,7 @@ public class Skill {
     private String skillName;
     private String skillDescription;
     private String category;
+    private List<Time> time;
     private String tutor;
     private int numberOfInterestedPeople;
 
@@ -46,6 +49,10 @@ public class Skill {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public List<Time> getTime() {
+        return time;
     }
 
     public String getTutor() {

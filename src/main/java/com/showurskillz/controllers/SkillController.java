@@ -44,7 +44,7 @@ public class SkillController {
     }
 
     @RequestMapping(path="/addskill",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addSkill(@RequestBody SkillDemo skill,HttpServletResponse response,HttpSession userSession) {
+    public void addSkill(@RequestBody Skill skill,HttpServletResponse response,HttpSession userSession) {
 
         int skillResult;
         int timeResult=0;

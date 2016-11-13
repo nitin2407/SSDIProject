@@ -23,7 +23,7 @@ public class SkillQueryTest {
 
     @Test
     public void retrieveAllSkills() throws Exception {
-        SkillQuery skillQuery = new SkillQuery(skill);
+        SkillQuery skillQuery = new SkillQuery();
         List<Skill> listOfSkills = skillQuery.retrieveAllSkills(dao.establishConnection());
     }
 

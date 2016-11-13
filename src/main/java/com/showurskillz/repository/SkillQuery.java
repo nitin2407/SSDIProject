@@ -24,13 +24,6 @@ public class SkillQuery implements ISkillQuery{
     //private Time time;
     private Skill skill;
 
-    @Autowired
-    public SkillQuery(Skill skill)
-    {
-        //this.skillDemo = skillDemo;
-        //this.time=time;
-        this.skill=skill;
-    }
 
     @Override
     public List<Skill> retrieveAllSkills(Connection conn) {
@@ -124,7 +117,7 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public int insertSkill(Connection conn, SkillDemo skill, String tutor) {
+    public int insertSkill(Connection conn, Skill skill, String tutor) {
 
         int result;
         query="Insert into skills VALUES (?,?,?,?,?,?)";
@@ -133,7 +126,7 @@ public class SkillQuery implements ISkillQuery{
             pst = conn.prepareStatement(query);
             pst.setString(1, null);
             pst.setString(2, skill.getSkillName());
-            pst.setString(3, skill.getDescription());
+            pst.setString(3, skill.getSkillDescription());
             pst.setString(4, skill.getCategory());
             pst.setString(5, tutor);
             pst.setInt(6, 0);

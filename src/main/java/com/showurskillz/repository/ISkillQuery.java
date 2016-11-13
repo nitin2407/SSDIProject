@@ -16,6 +16,6 @@ public interface ISkillQuery {
     List<Skill> retrieveAllSkills(Connection conn);
     Skill getSkillById(Connection conn, int id);
     List<Skill> filterSkillsByCategory(Connection conn, String category);
-    int insertSkill(Connection conn, SkillDemo skill, String tutor);
+    int insertSkill(Connection conn, Skill skill, String tutor);
     int insertSkillTime(Connection conn,Time time,String tutor);
 }

@@ -31,7 +31,6 @@ public class LoginTest {
     ExecuteQuery executeQuery;
     CheckAuthorization checkAuthorization;
     Login login;
-    SkillDemo skillDemo;
 
     @Before
     public void prepareForTestcases() {
@@ -47,9 +46,8 @@ public class LoginTest {
 
         access = new UserAuthorize();
         jdbcConnection = new JdbcConnection();
-        skillDemo = new SkillDemo();
 
-        executeQuery = new ExecuteQuery(access, validUser, address,skillDemo);
+        executeQuery = new ExecuteQuery(access, validUser, address);
 
         checkAuthorization = new CheckAuthorization(executeQuery, jdbcConnection);
 

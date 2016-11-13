@@ -23,7 +23,6 @@ public class CheckAuthorizationTest {
     User invalidUser;
     Address address;
     IConnection dao;
-    SkillDemo skillDemo;
 
     @Before
     public void prepare(){
@@ -37,9 +36,8 @@ public class CheckAuthorizationTest {
 
         authorize = new UserAuthorize();
         address = new Address();
-        skillDemo = new SkillDemo();
 
-        executeService= new ExecuteQuery(authorize, validUser, address,skillDemo);
+        executeService= new ExecuteQuery(authorize, validUser, address);
 
         dao = new JdbcConnection();
 

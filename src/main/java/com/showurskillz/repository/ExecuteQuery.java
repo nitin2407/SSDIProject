@@ -25,7 +25,7 @@ public class ExecuteQuery implements IExecuteQuery  {
     private String qry;
 
     @Autowired
-    public ExecuteQuery(UserAuthorize authorize,User user,Address address,SkillDemo skill)
+    public ExecuteQuery(UserAuthorize authorize,User user,Address address)
     {
         this.authorize = authorize;
         this.user=user;
