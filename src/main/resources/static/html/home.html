@@ -7,6 +7,7 @@
         <title>ShowYourSkillz</title>
         <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" > 
         <link rel="stylesheet" href="../css/homestyle.css">
+        <link rel="stylesheet" href="../css/simple-sidebar.css" >
         <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="../css/color/color-1.css" id="color">
         <link rel="stylesheet" href="../css/sweetalert2.min.css">
@@ -14,6 +15,7 @@
         <script src="../js/jquery-2.1.4.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/angular.min.js"></script>
+        <script src="../js/script.js"></script>
     </head>
     <body ng-app="home" ng-controller="homeCntrl">
         <nav id="header-nav" class="navbar default navbar-light bg-faded">
@@ -40,7 +42,11 @@
                     </li>
                 </ul>
             </div>
+                </div>
         </nav>
-        <script src="../js/script.js"></script>
+
+        <div ng-include="'categorySidebar.html'"></div>
+        <div ng-include="'skillsHolder.html'"></div>
+
     </body>
 </html>

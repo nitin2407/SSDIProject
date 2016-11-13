@@ -1,5 +1,4 @@
 var app = angular.module('loginApp',[]);
-
 app.controller('LoginCtrl',function($scope,$http, $window) {
 
     var load = $http.get('/home');
@@ -121,8 +120,6 @@ app.controller('MainController', function($scope) {
 
 
 var app = angular.module('home',[]);
-
-
 app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
         $scope.name = "";
         var res = $http.get('/home');
@@ -163,6 +160,78 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
                 $window.location.href = url;
             });
         };
+});
+
+var app = angular.module('home');
+app.controller('skillsController', function($rootScope, $http, $scope){
+    var result=$http.get('/skills');
+    result.success(function (data) {
+        $rootScope.skills = data;
+    });
+
+    $scope.viewSkill = function(id){
+        var result=$http.get('/skills/'+id);
+        result.success(function (data) {
+            $scope.skillDetails = data;
+            alert(data.skillName);
+        });
+    }
+
+});
+
+var app = angular.module('home');
+app.directive('checkList', function($http,$rootScope) {
+    return {
+        scope: {
+            list: '=checkList',
+            value: '@'
+        },
+        link: function(scope, elem, attrs) {
+            var handler = function(setup) {
+                var checked = elem.prop('checked');
+                var index = scope.list.indexOf(scope.value);
+
+                if (checked && index == -1) {
+                    if (setup) elem.prop('checked', false);
+                    else scope.list.push(scope.value);
+                } else if (!checked && index != -1) {
+                    if (setup) elem.prop('checked', true);
+                    else scope.list.splice(index, 1);
+                }
+            };
+
+            var setupHandler = handler.bind(null, true);
+            var changeHandler = handler.bind(null, false);
+
+            elem.bind('change', function() {
+                scope.$apply(changeHandler);
+                if(scope.list.length==0){
+                    var result=$http.get('/skills');
+                    result.success(function (data) {
+                        $rootScope.skills = data;
+                    });
+                }
+                else{
+                    var result=$http.get('/skills/category/'+scope.list);
+                    result.success(function (data) {
+                        $rootScope.skills = data;
+                    });
+                }
+
+            });
+            scope.$watch('list', setupHandler, true);
+        }
+    };
+});
+
+var app = angular.module('home');
+app.controller('MainController', function($scope) {
+    $scope.fruits = ['study', 'dance', 'singing', 'arts', 'sports'];
+    $scope.checked_fruits = [];
+    $scope.addFruit = function(fruit) {
+        if ($scope.checked_fruits.indexOf(fruit) != -1) return;
+        $scope.checked_fruits.push(fruit);
+    };
 });
 
 //for signup page
