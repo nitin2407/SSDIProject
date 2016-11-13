@@ -40,6 +40,7 @@ nav {
     top: -80px;
     right: 0;
     height: auto;
+    z-index: 99;
 }
 nav:hover {
     background: rgba(0, 0, 0, 1);

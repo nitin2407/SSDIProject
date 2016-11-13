@@ -2,10 +2,10 @@
     <div id="sidebar-wrapper">
         <!-- Sidebar -->
         <div class="categorybar">
-            <label style="font-size:16px; letter-spacing: 0.08em; font-family: 'Helvetica'; color:white">Categories</label>
+            <label style="font-size:16px; letter-spacing: 0.08em; color:white">Categories</label>
         </div>
 
-        <div ng-controller='MainController' style="font-size:12px; letter-spacing: 0.08em; font-family: 'Helvetica'; color:white">
+        <div ng-controller='MainController' style="font-size:12px; letter-spacing: 0.08em; color:white">
   <span ng-repeat="fruit in fruits">
     <input type='checkbox' value="{{fruit}}" check-list='checked_fruits'> {{fruit}}<br/>
   </span>
