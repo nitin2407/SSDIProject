@@ -27,7 +27,6 @@ html,body{
     width: 35%;
     height:250px;
     margin: auto;
-
     margin-top:5%;
 
 }
@@ -40,8 +39,10 @@ html,body{
 /* Add some padding inside the card container */
 .container {
     padding: 2px 16px;
+    top: 0px !important;
+    left: 0px !important;
+    right: 0px !important;
 }
-.row .col-form-label>
 
 
 .navbar-fixed-left .navbar-nav > li {
@@ -57,4 +58,17 @@ html,body{
 .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
     margin-top: -50px;
     margin-left: 140px;
+}
+
+.caption{
+    min-height: 210px !important;
+    word-wrap: break-word;
+}
+
+.caption>p{
+    min-height: 17px !important;
+}
+
+.item{
+    float: left !important;
 }

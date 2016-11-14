@@ -611,12 +611,12 @@ app.controller('manageSkillsCntrl', function($scope, $http,$window) {
     }
 
 
-    $scope.deleteSkill = function (id) {
+    $scope.deleteSkill = function (id,index) {
         var result = $http.get('/deleteSkill/'+id);
         result.success(function (data) {
             //$scope.skillDetails = data;
             //alert(data.skillName);
-
+            $scope.skills.splice(index,1);
             swal({
                 title: "Skill Deleted",
                 type: "success"

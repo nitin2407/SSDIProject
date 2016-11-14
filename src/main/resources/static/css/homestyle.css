@@ -189,9 +189,9 @@ md-toolbar>.md-toolbar-tools:hover{
 
 .addfields{
     line-height: 4rem !important;
-  min-width: 0 !important;
-  width: 4rem !important;
-  height: 4rem !important;  
+    min-width: 0 !important;
+    width: 4rem !important;
+    height: 4rem !important;  
 }
 
 .day{

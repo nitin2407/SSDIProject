@@ -19,95 +19,82 @@
     <script src="../js/script.js"></script>
 </head>
 <body ng-app="MyApp" ng-controller="CourseControl">
-<nav id="header-nav" class="navbar default navbar-light bg-faded">
-    <div class="container-fluid">
-        <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
-            <a class="navbar-brand" href="/html/home.html">ShowYourSkillz</a></li>
-        </div>
-        <div class="nav pull-right col-sm-4 col-xs-5 col-md-3">
-            <ul class="nav navbar-nav pull-right">
-                <li class="btn-group" id="menuLogin">
-                    <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome,
-                        {{f_name}}
-                    </button>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <p>
-                            <a class="btn btn-outline-success" href="#">Profile</a>
-                        </p>
-                        <div class="dropdown-divider">
-                            <a href="#" type="submit" ng-click="logout()">Logout</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="wrapper">
-    <div class="col-lg-2 col-sm-3 col-xs-3 col-md-2" id="sideList">
-        <div class="grid1">
-            <div class="grid1elements">
-                <h3>Your COurse</h3>
-                <br>
-                <h4 style="text-transform: Capitalize;">{{skill_Name}}</h4>
+    <nav id="header-nav" class="navbar default navbar-light bg-faded">
+        <div class="container-fluid">
+            <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
+                <a class="navbar-brand" href="/html/home.html">ShowYourSkillz</a></li>
             </div>
-        </div>
-    </div>
-
-    <div class="col-lg-10 col-sm-8 col-xs-8 col-md-10">
-        <div class="grid2">
-
-            <div class='panel-body'>
-                <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)"
-                      novalidate>
-                    <!--<div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2'>Skill ID</label>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <div class='col-md-4'>
-                                    <input class='form-control' id='Skill ID' placeholder='Skill ID' type='text'
-                                           name="skill_ID" ng-required="true" ng-model="skill_ID">
-                                </div>
+            <div class="nav pull-right col-sm-4 col-xs-5 col-md-3">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="btn-group" id="menuLogin">
+                        <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome,
+                            {{f_name}}
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <p>
+                                <a class="btn btn-outline-success" href="#">Profile</a>
+                            </p>
+                            <div class="dropdown-divider">
+                                <a href="#" type="submit" ng-click="logout()">Logout</a>
                             </div>
                         </div>
-                    </div>-->
-                    <div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Skill Name</label>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <div class='col-md-11'>
-                                    <input ng-model="skill_Name" class='form-control' id='Skill Name'
-                                           placeholder='Skill Name' type='text' name="skill_Name" ng-required="true">
-                                    <div class="msg-block" style="padding-bottom: 0px;margin-bottom: 0px">
-                                        <span ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine"
-                                              class="help-block" style="color: red;">Skill name is required.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="col-lg-2 col-sm-3 col-xs-3 col-md-2" id="sideList">
+            <div class="grid1">
+                <div class="grid1elements">
+                    <h3>Your COurse</h3>
+                    <br>
+                    <h4 style="text-transform: Capitalize;">{{skill_Name}}</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-sm-8 col-xs-8 col-md-10">
+            <div class="grid2">
+                <div class='panel-body'>
+                    <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)"
+                          novalidate>
+                        <div class='form-group'>
+                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Skill Name</label>
+                            <div class='col-md-6'>
+                                <div class='form-group'>
+                                    <div class='col-md-11'>
+                                        <input ng-model="skill_Name" class='form-control' id='Skill Name'
+                                               placeholder='Skill Name' type='text' name="skill_Name" ng-required="true">
+                                        <div class="msg-block" style="padding-bottom: 0px;margin-bottom: 0px">
+                                            <span ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine"
+                                                  class="help-block" style="color: red;">Skill name is required.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <div class='col-md-11'>
-                                    <input ng-model="skill_Description" class='form-control' placeholder='Description' type='text' name="skill_Name" ng-required="true">
+                        <div class='form-group'>
+                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
+                            <div class='col-md-6'>
+                                <div class='form-group'>
+                                    <div class='col-md-11'>
+                                        <input ng-model="skill_Description" class='form-control' placeholder='Description' type='text' name="skill_Name" ng-required="true">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2'>Category</label>
-                        <div class='col-md-6'>
-                            <!--<div class='col-md-3'>-->
+                        <div class='form-group'>
+                            <label class='control-label col-md-2 col-md-offset-2'>Category</label>
+                            <div class='col-md-6'>
                                 <div class='form-group'>
                                     <div class='col-md-11'>
                                         <select class='form-control' ng-model="cate_gory">
@@ -125,89 +112,49 @@
                         <div class='form-group'>
                             <label class='control-label col-md-2 col-md-offset-2'>Timings</label>
                             <div class='time-choice col-md-6'>
-                                    <!--<div class='time-choice col-md-8' id='id_time'>-->
-                                        <fieldset data-ng-repeat="time in timings">
-                                            <div class="col-md-8">
-                                                <!--<input class='form-control' type="text" ng-model="choice.name" name="" placeholder="Enter day and time">-->
-                                                <div class='form-group internal'>
-                                                    <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                        <!--<div class='form-group internal'>-->
-                                                        <select class='form-control' ng-model = "time.day">
-                                                            <option>Monday</option>
-                                                            <option>Tuesday</option>
-                                                            <option>Wednesday</option>
-                                                            <option>Thursday</option>
-                                                            <option>Friday</option>
-                                                            <option>Saturday</option>
-                                                            <option>Sunday</option>
-                                                        </select>
-                                                        <!--</div>-->
-                                                    </div>
-                                                    <div class='col-md-4' style="padding: 0px 0px 0px 0px;margin: 0px;">
-                                                        <!--<div class='form-group internal'>-->
-                                                        <input type="time" name="toTime" class="form-control" ng-model = "time.toTime | date : 'shortTime'">
-                                                        <!--<select class='form-control'
-                                                                style="padding: 2px 0px 0px 0px;margin: 0px;">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-                                                            <option>6</option>
-                                                            <option>7</option>
-                                                            <option>8</option>
-                                                            <option>9</option>
-                                                            <option>10</option>
-                                                            <option>11</option>
-                                                            <option>12</option>
-
-                                                        </select>-->
-                                                        <!--</div>-->
-                                                    </div>
-                                                    <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                        <!--<div class='form-group internal'>-->
-                                                        <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime | date : 'shortTime'">
-                                                        <!--<select class='form-control'
-                                                                style="padding: 2px 0px 0px 0px;margin: 0px;">
-                                                            <option>am</option>
-                                                            <option>pm</option>
-
-                                                        </select>-->
-                                                        <!--</div>-->
-                                                    </div>
+                                <fieldset data-ng-repeat="time in timings">
+                                    <div class="col-md-10">
+                                        <div class='form-group internal'>
+                                            <div class='col-md-6' style="padding: 0px 5px 5px 0px;margin: 0px;">
+                                                <select class='form-control' ng-model = "time.day">
+                                                    <option>Monday</option>
+                                                    <option>Tuesday</option>
+                                                    <option>Wednesday</option>
+                                                    <option>Thursday</option>
+                                                    <option>Friday</option>
+                                                    <option>Saturday</option>
+                                                    <option>Sunday</option>
+                                                </select>           
+                                            </div>
+                                            <div class='col-md-3' style="padding: 0px 0px 0px 0px;margin: 0px;">
+                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime | date : 'shortTime'">
+                                            </div>
+                                                <div class='col-md-3' style="padding: 0px 5px 5px 0px;margin: 0px;">
+                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime | date : 'shortTime'">
                                                 </div>
                                             </div>
-                                            <button class="remove" ng-show="$last" ng-click="removeChoice()">Remove
-                                                timing
-                                            </button>
-                                        </fieldset>
-                                        <button class="addfields btn-primary" ng-click="addNewChoice()">Add more
-                                            timings
-                                        </button>
-                                    </div>
-
-
+                                        </div>
+                                        <button class="remove btn-danger" style="max-width: 30px;" ng-show="$last" ng-click="removeChoice()">-</button>
+                                    </fieldset>
+                                    <button class="addfields btn-primary"  style="max-width: 30px;" ng-click="addNewChoice()">+
+                                    </button>
                                 </div>
-
-                                </div>
-                                <div class='form-group'>
-                                    <div class='col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
-                                        <button class='btn-lg btn-primary' type="button" ng-disabled="userForm.$invalid"
-                                                ng-click="updateskill()">Save
-                                        </button>
-                                    </div>
-                                    <div class='col-md-2 col-sm-2 col-xs-2'>
-                                        <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel
-                                        </button>
-                                    </div>
-                                </div>                           
+                            </div>
+                        </div>
+                    <div class='form-group'>
+                        <div class='col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
+                            <button class='btn-lg btn-primary' type="button" ng-disabled="userForm.$invalid"
+                                ng-click="updateskill()">Save
+                            </button>
+                        </div>
+                        <div class='col-md-2 col-sm-2 col-xs-2'>
+                            <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel
+                            </button>
+                        </div>
+                    </div>                           
                 </form>
-
-
-
-
-
-</div>
-
+            </div>
+        </div>
+    </div>
 </body>
 </html>
