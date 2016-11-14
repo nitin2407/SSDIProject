@@ -14,4 +14,5 @@ public interface IExecuteQuery {
     int insertUser(Connection conn,User user);
     User retrieveUser(Connection conn,String username);
     void updateUser(Connection conn, User user);
+    void clearAll();
 }

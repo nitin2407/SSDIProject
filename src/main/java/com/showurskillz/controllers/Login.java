@@ -118,6 +118,7 @@ public class Login{
         userSession.invalidate();
         user=null;
         address=null;
+        executeQuery.clearAll();
         //}
        /*userSession=request.getSession(false);
         if(userSession != null){

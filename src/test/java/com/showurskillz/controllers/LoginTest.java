@@ -34,8 +34,8 @@ public class LoginTest {
     @Before
     public void prepareForTestcases() {
         validUser = new User();
-        validUser.setUsername("validUsername");
-        validUser.setPassword("validPassword");
+        validUser.setUsername("vshukla3@uncc.edu");
+        validUser.setPassword("password");
 
         invalidUser = new User();
         invalidUser.setUsername("invalidUsername");
@@ -72,20 +72,36 @@ public class LoginTest {
 
     @Test
     public void sendUser() throws Exception {
-        mockHttpSession.setAttribute("username", "validUsername");
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
         mockHttpServletRequest.setSession(mockHttpSession);
-        User response = login.sendUser(mockHttpSession,mockHttpServletRequest,mockHttpServletResponse);
-        assertEquals("validUsername", response.getUsername());
+        User response = login.sendUser(mockHttpSession, mockHttpServletRequest, mockHttpServletResponse);
+        assertEquals("vshukla3@uncc.edu", response.getUsername());
     }
 
     @Test
-    public void sendUserDetails() throws Exception {
-        mockHttpSession.setAttribute("username", "validUsername");
+    public void sendUserDetailsTest() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
         mockHttpServletRequest.setSession(mockHttpSession);
         User response = login.sendUserDetails(mockHttpSession);
-        assertEquals("validUsername", response.getUsername());
+        assertEquals("vshukla3@uncc.edu", response.getUsername());
     }
 
+ @Test
+    public void editUserTest() throws Exception{
+     mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+     mockHttpServletRequest.setSession(mockHttpSession);
+     mockHttpServletResponse = new MockHttpServletResponse();
 
+     validUser.setUsername("Vipul");
+     validUser.setPassword("Shukla");
+     address.setAddressLine1("9539, University Terrace Dr., APT#A");
+     validUser.setAddress(address);
+     validUser.setPhoneNumber("9803958824");
+     validUser.setPassword("password");
+     login.editUser(validUser);
+
+     User user=login.sendUser(mockHttpSession,mockHttpServletRequest, mockHttpServletResponse);
+     assertEquals(user.getPassword(),"password");
+ }
 
 }

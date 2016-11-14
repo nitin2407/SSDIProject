@@ -7,6 +7,8 @@ import com.showurskillz.repository.SkillQuery;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 /**
@@ -17,14 +19,55 @@ public class SkillQueryTest {
     private Skill skill;
 
     @Before
-    public void prepareForTestcases(){
-         dao = new JdbcConnection();
+    public void prepareForTestcases() {
+        dao = new JdbcConnection();
     }
 
     @Test
     public void retrieveAllSkills() throws Exception {
         SkillQuery skillQuery = new SkillQuery();
         List<Skill> listOfSkills = skillQuery.retrieveAllSkills(dao.establishConnection());
+        assertNotEquals(listOfSkills, null);
     }
+
+    @Test
+    public void getSkillByIdTest() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        Skill skill = skillQuery.getSkillById(dao.establishConnection(), 1);
+        assertEquals(skill.getSkillId(), 1);
+    }
+
+    @Test
+    public void filterSkillsByCategoryTest() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        List<Skill> skillList = skillQuery.filterSkillsByCategory(dao.establishConnection(), "study");
+        assertNotEquals(skillList, null);
+    }
+
+    @Test
+    public void getSkillByTutorTest() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        Skill skill = skillQuery.getSkillByTutor(dao.establishConnection(), "vshukla3@uncc.edu");
+        assertEquals(skill.getTutor(), "vshukla3@uncc.edu");
+    }
+
+    @Test
+    public void retrieveSkillsTest(){
+        SkillQuery skillQuery=new SkillQuery();
+        List<Skill> skillList=skillQuery.retrieveSkills(dao.establishConnection(),"vshukla3@uncc.edu");
+        assertNotEquals(skillList, null);
+    }
+
+    @Test
+    public void testIncreaseInterestedCount() throws Exception{
+        SkillQuery skillQuery=new SkillQuery();
+        Skill skill=skillQuery.getSkillById(dao.establishConnection(),1);
+        int interestedCountBefore=skill.getNumberOfInterestedPeople();
+        Skill skills=skillQuery.increaseInterestedCount(dao.establishConnection(),1);
+        int interestedCountAfter=skills.getNumberOfInterestedPeople();
+        assertEquals(interestedCountBefore+1 , interestedCountAfter);
+    }
+
+
 
 }

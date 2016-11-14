@@ -21,7 +21,7 @@ public class SkillQuery implements ISkillQuery{
     private List<Skill> skillList;
     private String query;
     private Time time;
-    private Skill skill;
+    private Skill skill = new Skill();
 
 
     @Override

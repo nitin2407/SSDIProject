@@ -24,6 +24,8 @@ public class ExecuteQuery implements IExecuteQuery  {
     private Address address;
     private String qry;
 
+    public ExecuteQuery(){}
+
     @Autowired
     public ExecuteQuery(UserAuthorize authorize,User user,Address address)
     {
@@ -72,14 +74,13 @@ public class ExecuteQuery implements IExecuteQuery  {
     }
 
     @Override
-    public UserAuthorize loginQuery(String qry, Connection conn, User user) {
+    public UserAuthorize loginQuery(String qry, Connection conn, User newUser) {
 
-        clearAll();
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(qry);
-            pst.setString(1, user.getUsername());
-            pst.setString(2, user.getPassword());
+            pst.setString(1, newUser.getUsername());
+            pst.setString(2, newUser.getPassword());
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 authorize.setAllow(true);
@@ -158,8 +159,6 @@ public class ExecuteQuery implements IExecuteQuery  {
 
     @Override
     public void updateUser(Connection conn, User user) {
-
-        clearAll();
         qry="Update user set fname=?,lname=?,password=?,addr1=?,addr2=?,city=?,state=?,zip_code=?,phone_no=? where user_name=?";
         PreparedStatement pst = null;
         try {

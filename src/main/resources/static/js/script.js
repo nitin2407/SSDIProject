@@ -118,7 +118,8 @@ app.controller('MainController', function($scope) {
 
 
 
-<<<<<<< HEAD
+<<<
+<<<< HEAD
 =======
 var app = angular.module('home',[]);
 app.controller('homeCntrl',function($scope,$http, $window,$timeout) {

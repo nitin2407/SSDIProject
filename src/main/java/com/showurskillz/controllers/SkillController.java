@@ -93,9 +93,7 @@ public class SkillController {
     }
 
     @RequestMapping(path = "/skillForUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public
-    @ResponseBody
-    List<Skill> getSkills(HttpSession userSession,HttpServletRequest request) {
+    public @ResponseBody List<Skill> getSkills(HttpSession userSession,HttpServletRequest request) {
 
         //userSession = request.getSession();
         return skillQuery.retrieveSkills(dao.establishConnection(), (String) userSession.getAttribute("username"));

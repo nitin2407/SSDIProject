@@ -28,8 +28,8 @@ public class ExecuteQueryTest {
     @Before
     public void prepareForTestCases() {
         validUser = new User();
-        validUser.setUsername("validUsername");
-        validUser.setPassword("validPassword");
+        validUser.setUsername("vshukla3@uncc.edu");
+        validUser.setPassword("password");
 
         invalidUser = new User();
         invalidUser.setUsername("invalidUsername");
@@ -51,11 +51,26 @@ public class ExecuteQueryTest {
     }
 
     @Test
-    public void retrieveUser() throws Exception {
+    public void retrieveUserTest() throws Exception {
         Connection conn = dao.establishConnection();
         User validUser=executeQuery.retrieveUser(conn, "validUsername");
         assertEquals("validUsername",validUser.getUsername());
         assertEquals("validPassword", validUser.getPassword());
+    }
+
+    @Test
+    public void updateUserTest() throws Exception{
+        Connection conn = dao.establishConnection();
+        validUser.setUsername("Vipul");
+        validUser.setPassword("Shukla");
+        address.setAddressLine1("9539, University Terrace Dr., APT#A");
+        validUser.setAddress(address);
+        validUser.setPhoneNumber("9803958824");
+        validUser.setPassword("password");
+        executeQuery.updateUser(dao.establishConnection(), validUser);
+
+        User user=executeQuery.retrieveUser(dao.establishConnection(),"vshukla3@uncc.edu");
+        assertEquals(user.getPassword(),"password");
     }
 
 }
