@@ -18,4 +18,12 @@ public interface ISkillQuery {
     List<Skill> filterSkillsByCategory(Connection conn, String category);
     int insertSkill(Connection conn, Skill skill, String tutor);
     int insertSkillTime(Connection conn,Time time,String tutor);
+    Skill getSkillByTutor(Connection conn, String tutor);
+    int updateSkill(Connection conn, Skill skill);
+    List<Time> getSkillTime(Connection conn,String tutor,int skillId);
+    int deleteSkillTime(Connection conn,String tutor,int skillId);
+    int updateSkillTime(Connection conn,Skill skill,Time time);
+    List<Skill> retrieveSkills(Connection conn, String tutor);
+    boolean deleteSkillById(Connection connection, int id);
+    Skill increaseInterestedCount(Connection connection, int id);
 }

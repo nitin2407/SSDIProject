@@ -55,6 +55,10 @@ public class Skill {
         return time;
     }
 
+    public void setTime(List<Time> time) {
+        this.time = time;
+    }
+
     public String getTutor() {
         return tutor;
     }

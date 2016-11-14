@@ -409,6 +409,19 @@ app.controller('profileCntrl',function($scope,$http, $window,$timeout) {
             });
         }
     };
+
+       $scope.openManageCourses = function(){           
+         var url = "http://" + $window.location.host + "/html/managecourses.html";           
+         $window.location.href = url;            
+     };          
+             
+     $scope.showSkill = function(tutor){         
+         var result=$http.get('/skills/'+tutor);         
+         result.success(function (data) {            
+             $scope.skillDetails = data;         
+             alert(data.skillName);          
+         });         
+     };
 });
 
 angular.module('profileApp.directives', [])
@@ -452,5 +465,220 @@ app.controller('addSkillCntrl',function($scope,$http, $window,$timeout) {
   };
   
 });
+
+
+var app = angular.module('MyApp',[]);
+
+app.controller('CourseControl',function($scope,$http, $window,$timeout,$location) {
+
+         //var url = "http://" + $window.location.host + "/index.html?id="+$scope.skillId;
+         //$scope.skillId = $location.search().id;
+        //$scope.GetQueryStringParameter = function (paramToRetrieve) {
+        var params = document.URL.split("?")[1].split("&");
+        var strParams = "";
+        for (var i = 0; i < params.length; i = i + 1) {
+            var singleParam = params[i].split("=");
+            if (singleParam[0] == "id")
+                $scope.skillId = singleParam[1];
+            }
+        //};
+
+        $scope.timings = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
+        var res = $http.get('/manageSkill/'+$scope.skillId);
+        res.success(function (data) {
+            $scope.skillDetails = data;
+            /*if ($scope.skillDetails.tutor == null) {
+                //alert("please login");
+                swal({
+                    title: 'Please login',
+                    type: 'warning'
+                });
+                $timeout(function () {
+                    var url = "http://" + $window.location.host + "/index.html";
+                    $window.location.href = url;
+                }, 2000)
+            }
+            else {*/
+                $scope.skill_ID = $scope.skillDetails.skillId;
+                $scope.skill_Name = $scope.skillDetails.skillName;
+                $scope.skill_Description = $scope.skillDetails.skillDescription;
+                $scope.cate_gory = $scope.skillDetails.category;
+                $scope.timings = $scope.skillDetails.time;
+
+                //$scope.tu_tor = $scope.skillDetails.tutor;
+                //$scope.interested_People_Count = $scope.skillDetails.numberOfInterestedPeople;
+            //}
+        });
+        res.error(function (data, status) {
+            swal({
+                title: 'not able to retrieve skill details',
+                type: 'warning',
+                showCloseButton: true
+            });
+            $timeout(function () {
+                var url = "http://" + $window.location.host + "/html/manageCourses.html";
+                $window.location.href = url;
+            }, 2000)
+            //alert("please login");
+
+        });
+
+        $scope.cancel = function () {
+            var url = "http://" + $window.location.host + "/html/home.html";
+            $window.location.href = url;
+        };
+
+        $scope.logout = function () {
+            var log = $http.get('/logout');
+            log.success(function (data) {
+                var url = "http://" + $window.location.host + "/index.html";
+                $window.location.href = url;
+            });
+        };
+    //$scope.choices = [{id: 'choice1'}, {id: 'choice2'}];
+
+    $scope.addNewChoice = function() {
+        var newItemNo = $scope.timings.length+1;
+        $scope.timings.push({day: 'Monday',toTime:'+new Date(1970, 0, 1, 14, 57, 0)+',fromTime:'+new Date(1970, 0, 1, 14, 57, 0)'});
+    };
+
+    $scope.removeChoice = function() {
+        var lastItem = $scope.timings.length-1;
+        $scope.timings.splice(lastItem);
+    };
+    //};
+        $scope.updateskill = function() {
+                var dataObj = {
+                    skillName: $scope.skill_Name,
+                    category: $scope.cate_gory,
+                    time: $scope.timings,
+                    skillDescription: $scope.skill_Description,
+                    //category: $scope.cate_gory,
+                    //skillName: $scope.skill_Name,
+                    //skillDescription: $scope.skill_Description,
+                    skillId: $scope.skillId
+                };
+
+                var res = $http.post('/manageSkill', dataObj);
+
+                res.success(function (data) {
+                    swal({
+                         title: "Skill details saved.",
+                         type: "success"
+                    });
+                    //alert("user details have been saved");
+                });
+                res.error(function (data, status) {
+                    swal({
+                         title: "Unable to save skill details",
+                         type: "error"
+                         //alert("user details have been saved");
+                     });
+                    //alert("user details cannot be saved");
+                });
+
+        };
+
+        $scope.openManageCourses = function(){
+            var url = "http://" + $window.location.host + "/html/manageCourses.html";
+            $window.location.href = url;
+        };
+
+        $scope.showSkill = function(tutor){
+            var result=$http.get('/skills/'+tutor);
+            result.success(function (data) {
+                $scope.skillDetails = data;
+                alert(data.skillName);
+            });
+        };
+
+
+
+});
+
+//code for manageCourses page 
+var app = angular.module('manageApp',[]);
+app.controller('manageSkillsCntrl', function($scope, $http,$window) {
+    var result = $http.get('/skillForUser');
+    result.success(function (data) {
+        console.log(data);
+        $scope.skills = data;
+    });
+
+    $scope.editSkill = function (id) {
+        var url = "http://" + $window.location.host + "/html/courseEdit.html?id="+id;
+        $window.location.href = url;
+    }
+
+
+    $scope.deleteSkill = function (id) {
+        var result = $http.get('/deleteSkill/'+id);
+        result.success(function (data) {
+            //$scope.skillDetails = data;
+            //alert(data.skillName);
+
+            swal({
+                title: "Skill Deleted",
+                type: "success"
+            });
+        });
+        result.error(function (data, status) {
+            if (status == 404) {
+                swal({
+                    title: "Skill cannot be deleted",
+                    type: "info"
+                });
+                //alert("username already exists");
+            }
+        })
+
+    };
+    /*$scope.show = function (id) {
+        var result = $http.get('/deleteSkill/'+id);
+        result.success(function (data) {
+            //$scope.skillDetails = data;
+            //alert(data.skillName);
+            swal({
+                title: "Skill Deleted",
+                type: "success"
+            });
+
+        });
+        result.error(function (data, status) {
+            if (status == 404) {
+                swal({
+                    title: "Skill cannot be deleted",
+                    type: "info"
+                });
+                //alert("username already exists");
+            }
+        })
+
+    };*/
+});
+    app.controller('manageCtrl', function ($scope, $http, $window) {
+        $scope.name = "";
+        var res = $http.get('/profile');
+        res.success(function (data) {
+            console.log(data);
+            $scope.user = data;
+            if ($scope.user.username != null) {
+                {
+                    $scope.f_name = $scope.user.fname;
+                }
+            }
+
+        });
+        $scope.logout = function () {
+            var log = $http.get('/logout');
+            log.success(function (data) {
+                var url = "http://" + $window.location.host + "/index.html";
+                $window.location.href = url;
+            });
+        };
+    });
+
+
+
 
 

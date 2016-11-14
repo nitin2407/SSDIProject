@@ -175,4 +175,10 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
                 $window.location.href = url;
             });
         };
+
+        $scope.clickInterest=function (id){
+        var result=$http.get('/increaseInterestedCount/'+id);
+            var url = "http://" + $window.location.host + "/index.html";
+            $window.location.href = url;
+        };
 });

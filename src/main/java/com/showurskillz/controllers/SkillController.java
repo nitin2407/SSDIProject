@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -59,4 +61,55 @@ public class SkillController {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         }
     }
+
+
+    @RequestMapping(path="/manageSkill/{id}",method = RequestMethod.GET,produces= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Skill sendSkill(@PathVariable("id") int id, HttpSession userSession, HttpServletResponse response) throws IOException {
+
+        return skillQuery.getSkillById(dao.establishConnection(),id);
+
+    }
+
+    @RequestMapping(path="/manageSkill",method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public  void editSkill(@RequestBody Skill skill,HttpSession userSession,HttpServletResponse response) {
+
+        int skillResult=0;
+        int timeResult=0;
+        skill.setTutor((String) userSession.getAttribute("username"));
+        skillResult = skillQuery.updateSkill(dao.establishConnection(), skill);
+        for(Time skillTime: skill.getTime()){
+            timeResult = skillQuery.updateSkillTime(dao.establishConnection(),skill,skillTime);
+            if(timeResult==0){
+                break;
+            }
+        }
+        if(skillResult>0 && timeResult>0){
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
+        else
+        {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    @RequestMapping(path = "/skillForUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public
+    @ResponseBody
+    List<Skill> getSkills(HttpSession userSession,HttpServletRequest request) {
+
+        //userSession = request.getSession();
+        return skillQuery.retrieveSkills(dao.establishConnection(), (String) userSession.getAttribute("username"));
+    }
+
+    @RequestMapping(path="/deleteSkill/{id}",method=RequestMethod.GET)
+    public @ResponseBody boolean deleteSkillById(@PathVariable("id") int id) {
+        return skillQuery.deleteSkillById(dao.establishConnection(),id);
+    }
+    @RequestMapping(path="/increaseInterestedCount/{id}",method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Skill increaseInterestedCount(@PathVariable("id") int id)
+    {
+        return skillQuery.increaseInterestedCount(dao.establishConnection(),id);
+    }
+
+
 }

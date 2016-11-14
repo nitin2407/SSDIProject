@@ -1,0 +1,60 @@
+
+html,body{
+    height: 100%;
+    background-color: #67b168;
+}
+
+.navbar-fixed-left {
+    width: 140px;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+}
+#manage{
+    border-radius: 0px;
+    float: left;
+}
+#nav-manage{
+    background: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0px;
+    box-shadow: none;
+
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 35%;
+    height:250px;
+    margin: auto;
+
+    margin-top:5%;
+
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+}
+.row .col-form-label>
+
+
+.navbar-fixed-left .navbar-nav > li {
+    float: none;  /* Cancel default li float: left */
+    width: 139px;
+}
+
+.navbar-fixed-left + .container {
+    padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+    margin-top: -50px;
+    margin-left: 140px;
+}

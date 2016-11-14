@@ -1,7 +1,6 @@
 package com.showurskillz.services;
 
 import com.showurskillz.model.Address;
-import com.showurskillz.model.SkillDemo;
 import com.showurskillz.model.User;
 import com.showurskillz.model.UserAuthorize;
 import com.showurskillz.repository.ExecuteQuery;
