@@ -26,6 +26,7 @@
                 <div class="item col-xs-10 col-sm-10 col-lg-4">
                     <div class="thumbnail">
                         <div class="caption">
+                            <button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Interest</button>
                             <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
                             <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
                             <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
@@ -35,7 +36,12 @@
                                     <p class="lead">Tutor: {{ skill.tutor }}</p>
                                 </div>
                             </div>
+                            <!--<div class="col-sm-3" style="float: right;">
+                                <!--<img src="heatimage.png" alt="Intereted" style="width:20px;height:20px;">-->
+                                <!--<button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)">Interest</button>
+                            </div>-->
                         </div>
+                        
                     </div>
                 </div>
             </div>
