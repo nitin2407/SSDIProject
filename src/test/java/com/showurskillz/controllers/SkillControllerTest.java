@@ -1,11 +1,10 @@
 package com.showurskillz.controllers;
 
 import com.showurskillz.model.Skill;
-import com.showurskillz.repository.JdbcConnection;
+import com.showurskillz.repository.JdbcTestDBConnection;
 import com.showurskillz.repository.SkillQuery;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
@@ -22,12 +21,12 @@ public class SkillControllerTest {
     MockHttpSession mockHttpSession;
     MockHttpServletRequest mockHttpServletRequest;
     MockHttpServletResponse mockHttpServletResponse;
-    JdbcConnection dao;
+    JdbcTestDBConnection dao;
 
     @Before
     public void prepareForTest() {
         SkillQuery skillQuery=new SkillQuery();
-         dao=new JdbcConnection();
+         dao=new JdbcTestDBConnection();
         skillController=new SkillController(skillQuery,dao);
         mockHttpSession = new MockHttpSession();
         mockHttpServletRequest = new MockHttpServletRequest();

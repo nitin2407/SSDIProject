@@ -24,7 +24,7 @@ public class SkillController {
     private IConnection dao;
 
     @Autowired
-    public SkillController(SkillQuery skillQuery , JdbcConnection dao) {
+    public SkillController(SkillQuery skillQuery , IConnection dao) {
         this.skillQuery = skillQuery;
         this.dao = dao;
     }

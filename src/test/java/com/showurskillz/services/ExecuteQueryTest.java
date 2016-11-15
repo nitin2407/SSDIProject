@@ -5,7 +5,8 @@ import com.showurskillz.model.User;
 import com.showurskillz.model.UserAuthorize;
 import com.showurskillz.repository.ExecuteQuery;
 import com.showurskillz.repository.IConnection;
-import com.showurskillz.repository.JdbcConnection;
+
+import com.showurskillz.repository.JdbcTestDBConnection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class ExecuteQueryTest {
         address = new Address();
 
         executeQuery = new ExecuteQuery(authorize, validUser, address);
-        dao = new JdbcConnection();
+        dao = new JdbcTestDBConnection();
     }
 
     @Test

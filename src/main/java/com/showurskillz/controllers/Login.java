@@ -28,7 +28,7 @@ public class Login{
     private ICheckAuthorize checkUser;
 
     @Autowired
-    public Login(UserAuthorize access, User user, JdbcConnection dao, Address address, ExecuteQuery executeQuery, CheckAuthorization checkUser){
+    public Login(UserAuthorize access, User user, IConnection dao, Address address, ExecuteQuery executeQuery, CheckAuthorization checkUser){
         this.access=access;
         this.user=user;
         this.address=address;

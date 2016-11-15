@@ -2,7 +2,7 @@ package com.showurskillz.services;
 
 import com.showurskillz.model.Skill;
 import com.showurskillz.repository.IConnection;
-import com.showurskillz.repository.JdbcConnection;
+import com.showurskillz.repository.JdbcTestDBConnection;
 import com.showurskillz.repository.SkillQuery;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class SkillQueryTest {
 
     @Before
     public void prepareForTestcases() {
-        dao = new JdbcConnection();
+        dao = new JdbcTestDBConnection();
     }
 
     @Test

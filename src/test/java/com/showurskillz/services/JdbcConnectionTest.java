@@ -1,6 +1,6 @@
 package com.showurskillz.services;
 
-import com.showurskillz.repository.JdbcConnection;
+import com.showurskillz.repository.JdbcTestDBConnection;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class JdbcConnectionTest {
     @Test
     public void establishConnection() throws Exception {
-    JdbcConnection jdbcConnection = new JdbcConnection();
+    JdbcTestDBConnection jdbcConnection = new JdbcTestDBConnection();
         Connection conn = jdbcConnection.establishConnection();
         assertNotEquals(conn, null);
     }
