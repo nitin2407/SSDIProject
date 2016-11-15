@@ -47,8 +47,8 @@ public class SkillQueryTest {
     @Test
     public void getSkillByTutorTest() throws Exception {
         SkillQuery skillQuery = new SkillQuery();
-        Skill skill = skillQuery.getSkillByTutor(dao.establishConnection(), "vshukla3@uncc.edu");
-        assertEquals(skill.getTutor(), "vshukla3@uncc.edu");
+        Skill skill = skillQuery.getSkillByTutor(dao.establishConnection(), "npurohi1@uncc.edu");
+        assertEquals(skill.getTutor(), "npurohi1@uncc.edu");
     }
 
     @Test

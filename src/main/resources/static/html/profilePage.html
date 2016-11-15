@@ -7,6 +7,7 @@
       <title>ShowYourSkillz</title>
       <link rel="stylesheet" href="../css/bootstrap.min.css">
       <link rel="stylesheet" href="../css/profilestyle.css">
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
       <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
       <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
@@ -16,9 +17,13 @@
       <script src="../js/jquery-2.1.4.min.js"></script>
       <script src="../js/bootstrap.js"></script>
       <script src="../js/angular.min.js"></script>
-      <script src="../js/script.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+      <!--<script src="../js/script.js"></script>-->
   </head>
-  <body ng-app="profile" ng-controller="profileCntrl">
+  <body ng-app="SkillsApp" ng-controller="profileCntrl">
     <nav id="header-nav" class="navbar default navbar-light bg-faded">
       <div class="container-fluid">
         <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
@@ -56,9 +61,9 @@
               <form>
                 <label style="font-size:16px; margin-bottom:10px; letter-spacing: 0.1em; margin-top: 20px;font-family: 'Impact';font-weight:normal;">Manage Profile</label><br>
                 <div class="Skills">
-                  <label style="font-size:16px; margin-bottom:10px; letter-spacing: 0.1em; font-family: 'Impact';font-weight:normal">
-                      <a class="btn btn-outline-success btn-color" style="color: black;" href="manageCourses.html">Manage Courses</a>
-                  </label><br>
+                  <!--<label style="font-size:16px; margin-bottom:10px; letter-spacing: 0.1em; font-family: 'Helvetica';font-weight:normal">-->
+                      <a style="color: black;" href="manageCourses.html">Manage Courses</a>
+                  <!--</label>--><br>
                 </div>
                 <!--<label style="font-size:13px; margin-bottom:10px; letter-spacing: 0.05em; font-family: 'Helvetica'; font-weight: 100;" ng-click="openManageCourses()">Manage Courses</label><br>-->
               </form>                                 
@@ -175,5 +180,8 @@
         </div>
       </div>
     </div>
+    <script src="../js/app/app.js"></script>
+    <script src="../js/directives/directive.js"></script>
+    <script src="../js/controllers/controller.js"></script>
   </body>
 </html>

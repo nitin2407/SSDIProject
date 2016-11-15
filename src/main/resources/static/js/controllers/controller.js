@@ -1,4 +1,5 @@
-/*app.controller('LoginCtrl',function($scope,$http, $window) {
+
+app.controller('LoginCtrl',function($scope,$http, $window) {
 
     var load = $http.get('/home');
     load.success(function (data, status, headers, config) {
@@ -26,7 +27,6 @@
                 title: 'Username/password invalid.',
                 type: 'error'
           });
-          //alert("Username/password invalid.");
         }
       });
       res.error(function (data) {
@@ -48,81 +48,22 @@ app.controller('skillsController', function($rootScope, $http, $scope){
     result.success(function (data) {
         $rootScope.skills = data;
     });
-
-    $scope.viewSkill = function(id){
-        var result=$http.get('/skills/'+id);
-        result.success(function (data) {
-            $scope.skillDetails = data;
-            alert(data.skillName);
-        });
-    }
-
 });
 
-
-
-app.directive('checkList', function($http,$rootScope) {
-    return {
-        scope: {
-            list: '=checkList',
-            value: '@'
-        },
-        link: function(scope, elem, attrs) {
-            var handler = function(setup) {
-                var checked = elem.prop('checked');
-                var index = scope.list.indexOf(scope.value);
-
-                if (checked && index == -1) {
-                    if (setup) elem.prop('checked', false);
-                    else scope.list.push(scope.value);
-                } else if (!checked && index != -1) {
-                    if (setup) elem.prop('checked', true);
-                    else scope.list.splice(index, 1);
-                }
-            };
-
-            var setupHandler = handler.bind(null, true);
-            var changeHandler = handler.bind(null, false);
-
-            elem.bind('change', function() {
-                scope.$apply(changeHandler);
-                if(scope.list.length==0){
-                    var result=$http.get('/skills');
-                    result.success(function (data) {
-                        $rootScope.skills = data;
-                    });
-                }
-                else{
-                    var result=$http.get('/skills/category/'+scope.list);
-                    result.success(function (data) {
-                        $rootScope.skills = data;
-                    });
-                }
-
-            });
-            scope.$watch('list', setupHandler, true);
-        }
-    };
-});
 
 
 app.controller('MainController', function($scope) {
-    $scope.fruits = ['study', 'dance', 'singing', 'arts', 'sports'];
-    $scope.checked_fruits = [];
-    $scope.addFruit = function(fruit) {
-        if ($scope.checked_fruits.indexOf(fruit) != -1) return;
-        $scope.checked_fruits.push(fruit);
+    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking'];
+    $scope.checked_category = [];
+    $scope.addFruit = function(category) {
+        if ($scope.checked_category.indexOf(category) != -1) return;
+        $scope.checked_category.push(category);
     };
 });
 
 
 
-
-<<<
-<<<< HEAD
-=======
-var app = angular.module('home',[]);
-app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
+app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {
         $scope.name = "";
         var res = $http.get('/home');
         res.success(function (data) {
@@ -152,9 +93,81 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
                 var url = "http://" + $window.location.host + "/index.html";
                 $window.location.href = url;
             },2000);
-            //alert("please login");
 
         });
+        $scope.openDialog = function(){
+            $mdDialog.show({
+                controller: function($scope, $mdDialog){     
+                },
+                controller: DialogController,
+                templateUrl: '/tpl.html',
+                windowClass: 'large-Modal',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose:true,
+      //fullscreen: $scope.customFullscreen     
+            });
+        };
+        function DialogController($scope, $mdDialog) {
+
+            $scope.categories = [{name:'study'},{name:'dance'},{name:'singing'},{name:'arts'},{name:'sports'},{name:'cooking'}];
+            $scope.skill = [{name:'nitin',category:'study'}];
+            $scope.categoryChoice = 'study';
+            $scope.choices = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
+            $scope.days = [{name:'Monday'},{name:'Tuesday'},{name:'Wednesday'},{name:'Thurday'},{name:'Friday'},{name:'Saturday'},{name:'Sunday'}];
+            $scope.description="";
+                $scope.addNewChoice = function() {
+                  var newItemNo = $scope.choices.length+1;
+                  $scope.choices.push({day: 'Monday',toTime:'+new Date(1970, 0, 1, 14, 57, 0)+',fromTime:'+new Date(1970, 0, 1, 14, 57, 0)'});
+                };
+            
+                $scope.removeChoice = function() {
+                  var lastItem = $scope.choices.length-1;
+                  $scope.choices.splice(lastItem);
+                };
+
+
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+
+
+            $scope.submitForm = function(isValid) {
+                if(isValid) {
+                    var dataObj = {
+                        skillName: $scope.skill_name,
+                        category: $scope.categoryChoice,
+                        time: $scope.choices,
+                        skillDescription: $scope.description
+                    };
+                    console.log(dataObj);
+                    var res = $http.post('/addskill', dataObj);
+                    res.success(function (data, status) {
+                        $mdDialog.cancel();
+                        swal({
+                            title: "skill added",
+                            type: "success"
+                        });
+                    });
+                    res.error(function (data, status) {
+                        swal({
+                            title: "Unable to add skill details",
+                            type: "error"
+                            //alert("user details have been saved");
+                        });
+                        //alert("user not created");
+                    });
+                }
+            };
+        }
         $scope.logout = function () {
             var log = $http.get('/logout');
             log.success(function (data) {
@@ -162,84 +175,13 @@ app.controller('homeCntrl',function($scope,$http, $window,$timeout) {
                 $window.location.href = url;
             });
         };
+
+        $scope.clickInterest=function (id){
+        var result=$http.get('/increaseInterestedCount/'+id);
+            var url = "http://" + $window.location.host + "/index.html";
+            $window.location.href = url;
+        };
 });
->>>>>>> master
-
-var app = angular.module('home');
-app.controller('skillsController', function($rootScope, $http, $scope){
-    var result=$http.get('/skills');
-    result.success(function (data) {
-        $rootScope.skills = data;
-    });
-
-    $scope.viewSkill = function(id){
-        var result=$http.get('/skills/'+id);
-        result.success(function (data) {
-            $scope.skillDetails = data;
-            alert(data.skillName);
-        });
-    }
-
-});
-
-var app = angular.module('home');
-app.directive('checkList', function($http,$rootScope) {
-    return {
-        scope: {
-            list: '=checkList',
-            value: '@'
-        },
-        link: function(scope, elem, attrs) {
-            var handler = function(setup) {
-                var checked = elem.prop('checked');
-                var index = scope.list.indexOf(scope.value);
-
-                if (checked && index == -1) {
-                    if (setup) elem.prop('checked', false);
-                    else scope.list.push(scope.value);
-                } else if (!checked && index != -1) {
-                    if (setup) elem.prop('checked', true);
-                    else scope.list.splice(index, 1);
-                }
-            };
-
-            var setupHandler = handler.bind(null, true);
-            var changeHandler = handler.bind(null, false);
-
-            elem.bind('change', function() {
-                scope.$apply(changeHandler);
-                if(scope.list.length==0){
-                    var result=$http.get('/skills');
-                    result.success(function (data) {
-                        $rootScope.skills = data;
-                    });
-                }
-                else{
-                    var result=$http.get('/skills/category/'+scope.list);
-                    result.success(function (data) {
-                        $rootScope.skills = data;
-                    });
-                }
-
-            });
-            scope.$watch('list', setupHandler, true);
-        }
-    };
-});
-
-var app = angular.module('home');
-app.controller('MainController', function($scope) {
-    $scope.fruits = ['study', 'dance', 'singing', 'arts', 'sports'];
-    $scope.checked_fruits = [];
-    $scope.addFruit = function(fruit) {
-        if ($scope.checked_fruits.indexOf(fruit) != -1) return;
-        $scope.checked_fruits.push(fruit);
-    };
-});
-*/
-//for signup page
-
-var app = angular.module('signUpApp',['signUpApp.directives']);
 
 
 app.controller('signUpCntrl',function($scope,$http, $window,$timeout) {
@@ -295,33 +237,8 @@ app.controller('signUpCntrl',function($scope,$http, $window,$timeout) {
     };
 });
 
-angular.module('signUpApp.directives', [])
-    .directive('compareTo', function() {
-        return {
-            require: 'ngModel',
-            link: function (scope, elem, attrs, ngModel) {
-                ngModel.$parsers.unshift(validate);
-
-                // Force-trigger the parsing pipeline.
-                scope.$watch(attrs.CompareTo, function () {
-                    ngModel.$setViewValue(ngModel.$viewValue);
-                });
-
-                function validate(value) {
-                    var isValid = scope.$eval(attrs.compareTo) == value;
-
-                    ngModel.$setValidity('compare-to', isValid);
-
-                    return isValid ? value : undefined;
-                }
-            }
-        };
-    });
 
 //for profile page
-
-var app = angular.module('profile',['profileApp.directives']);
-
 app.controller('profileCntrl',function($scope,$http, $window,$timeout) {
 
     var res = $http.get('/profile');
@@ -425,53 +342,11 @@ app.controller('profileCntrl',function($scope,$http, $window,$timeout) {
      };
 });
 
-angular.module('profileApp.directives', [])
-    .directive('compareTo', function() {
-        return {
-            require: 'ngModel',
-            link: function (scope, elem, attrs, ngModel) {
-                ngModel.$parsers.unshift(validate);
-
-                // Force-trigger the parsing pipeline.
-                scope.$watch(attrs.CompareTo, function () {
-                    ngModel.$setViewValue(ngModel.$viewValue);
-                });
-
-                function validate(value) {
-                    var isValid = scope.$eval(attrs.compareTo) == value;
-
-                    ngModel.$setValidity('compare-to', isValid);
-
-                    return isValid ? value : undefined;
-                }
-            }
-        };
-    });
 
 
-var app = angular.module('addSkillApp',[]);
-
-
-app.controller('addSkillCntrl',function($scope,$http, $window,$timeout) {
-    $scope.choices = [{id: 'choice1'}, {id: 'choice2'}];
-  
-  $scope.addNewChoice = function() {
-    var newItemNo = $scope.choices.length+1;
-    $scope.choices.push({'id':'choice'+newItemNo});
-  };
-    
-  $scope.removeChoice = function() {
-    var lastItem = $scope.choices.length-1;
-    $scope.choices.splice(lastItem);
-  };
-  
-});
-
-
-var app = angular.module('SkillsApp',['ngMaterial']);
 app.controller('CourseControl',function($scope,$http, $window,$timeout,$location) {
 
-        /*var res = $http.get('/home');
+        var res = $http.get('/home');
         res.success(function (data) {
             $scope.user = data;
             if($scope.user.username==null){
@@ -485,7 +360,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
                 },2000);
             }
             else{
-                $scope.name = $scope.user.fname;
+                $scope.f_name = $scope.user.fname;
             }
         });
         res.error(function (data,status) {
@@ -499,7 +374,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
                 $window.location.href = url;
             },2000);
 
-        });*/
+        });
 
         var params = document.URL.split("?")[1].split("&");
         var strParams = "";
@@ -581,10 +456,8 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
                 res.error(function (data, status) {
                     swal({
                          title: "Unable to save skill details",
-                         type: "error"
-                         //alert("user details have been saved");
+                         type: "error" 
                      });
-                    //alert("user details cannot be saved");
                 });
 
         };
@@ -607,7 +480,6 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
 });
 
 //code for manageCourses page 
-var app = angular.module('manageApp',[]);
 app.controller('manageSkillsCntrl', function($scope, $http,$window) {
     var result = $http.get('/skillForUser');
     result.success(function (data) {
@@ -624,8 +496,6 @@ app.controller('manageSkillsCntrl', function($scope, $http,$window) {
     $scope.deleteSkill = function (id,index) {
         var result = $http.get('/deleteSkill/'+id);
         result.success(function (data) {
-            //$scope.skillDetails = data;
-            //alert(data.skillName);
             $scope.skills.splice(index,1);
             swal({
                 title: "Skill Deleted",
@@ -638,44 +508,28 @@ app.controller('manageSkillsCntrl', function($scope, $http,$window) {
                     title: "Skill cannot be deleted",
                     type: "info"
                 });
-                //alert("username already exists");
             }
         })
 
     };
-    /*$scope.show = function (id) {
-        var result = $http.get('/deleteSkill/'+id);
-        result.success(function (data) {
-            //$scope.skillDetails = data;
-            //alert(data.skillName);
-            swal({
-                title: "Skill Deleted",
-                type: "success"
-            });
-
-        });
-        result.error(function (data, status) {
-            if (status == 404) {
-                swal({
-                    title: "Skill cannot be deleted",
-                    type: "info"
-                });
-                //alert("username already exists");
-            }
-        })
-
-    };*/
 });
-    app.controller('manageCtrl', function ($scope, $http, $window) {
+    app.controller('manageCtrl', function ($scope, $http, $window,$timeout) {
         $scope.name = "";
         var res = $http.get('/profile');
         res.success(function (data) {
-            console.log(data);
             $scope.user = data;
             if ($scope.user.username != null) {
-                {
                     $scope.f_name = $scope.user.fname;
                 }
+            else{
+                swal({
+                    title: 'Please login',
+                    type :'warning'
+                });
+                $timeout(function(){
+                    var url = "http://" + $window.location.host + "/index.html";
+                    $window.location.href = url;
+                },2000);
             }
 
         });

@@ -7,6 +7,7 @@
     <title>ShowYourSkillz</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/profilestyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
@@ -16,9 +17,12 @@
     <script src="../js/jquery-2.1.4.min.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/angular.min.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
 </head>
-<body ng-app="MyApp" ng-controller="CourseControl">
+<body ng-app="SkillsApp" ng-controller="CourseControl">
     <nav id="header-nav" class="navbar default navbar-light bg-faded">
         <div class="container-fluid">
             <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
@@ -52,7 +56,7 @@
         <div class="col-lg-2 col-sm-3 col-xs-3 col-md-2" id="sideList">
             <div class="grid1">
                 <div class="grid1elements">
-                    <h3>Your COurse</h3>
+                    <h3>Your Course</h3>
                     <br>
                     <h4 style="text-transform: Capitalize;">{{skill_Name}}</h4>
                 </div>
@@ -75,17 +79,6 @@
                                             <span ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine"
                                                   class="help-block" style="color: red;">Skill name is required.</span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class='form-group'>
-                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
-                            <div class='col-md-6'>
-                                <div class='form-group'>
-                                    <div class='col-md-11'>
-                                        <input ng-model="skill_Description" class='form-control' placeholder='Description' type='text' name="skill_Name" ng-required="true">
                                     </div>
                                 </div>
                             </div>
@@ -127,11 +120,12 @@
                                                 </select>           
                                             </div>
                                             <div class='col-md-4' style="padding: 0px 0px 0px 0px;margin: 0px;">
-                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime" ng-value="{{ time.toTime | date: 'h:mm a' }}">
+                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime">
                                                 <span>{{ time.toTime | date: 'h:mm a' }}</span>
                                             </div>
                                                 <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime" value="{{ time.toTime | date: 'h:mm a' }}">
+                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime">
+                                                    <span>{{ time.fromTime | date: 'h:mm a' }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,6 +133,16 @@
                                     </fieldset>
                                     <button class="addfields btn-primary"  style="max-width: 30px;" ng-click="addNewChoice()">+
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
+                            <div class='col-md-6'>
+                                <div class='form-group'>
+                                    <div class='col-md-11' style="padding-left: 0px;padding-right: 0px;">
+                                        <textarea style="margin-bottom: 10px;" ng-model="skill_Description" class='form-control' id='id_description' placeholder='Description' name="skill_Description" ng-required="true" rows='3'></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -157,5 +161,8 @@
             </div>
         </div>
     </div>
+    <script src="../js/app/app.js"></script>
+    <script src="../js/directives/directive.js"></script>
+    <script src="../js/controllers/controller.js"></script>
 </body>
 </html>

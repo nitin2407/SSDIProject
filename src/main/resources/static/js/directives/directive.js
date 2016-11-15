@@ -41,3 +41,28 @@ app.directive('checkList', function($http,$rootScope) {
         }
     };
 });
+
+
+angular.module('SkillsApp.directives', [])
+    .directive('compareTo', function() {
+        return {
+            require: 'ngModel',
+            link: function (scope, elem, attrs, ngModel) {
+                ngModel.$parsers.unshift(validate);
+
+                // Force-trigger the parsing pipeline.
+                scope.$watch(attrs.CompareTo, function () {
+                    ngModel.$setViewValue(ngModel.$viewValue);
+                });
+
+                function validate(value) {
+                    var isValid = scope.$eval(attrs.compareTo) == value;
+
+                    ngModel.$setValidity('compare-to', isValid);
+
+                    return isValid ? value : undefined;
+                }
+            }
+        };
+    });
+

@@ -228,4 +228,13 @@ li.dropdown-toggle {
   .navbar-brand {font-size: 12px;}  /* show it on small screens */
 }
 
+.Skills{
+    word-wrap: break-word !important;
+}
+
+.Skills>a:hover{
+    font-weight: bold;
+    font-family: impact;
+}
+
 

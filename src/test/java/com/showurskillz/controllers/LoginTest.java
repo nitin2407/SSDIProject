@@ -35,7 +35,7 @@ public class LoginTest {
     public void prepareForTestcases() {
         validUser = new User();
         validUser.setUsername("vshukla3@uncc.edu");
-        validUser.setPassword("password");
+        validUser.setPassword("vipul123");
 
         invalidUser = new User();
         invalidUser.setUsername("invalidUsername");
@@ -101,7 +101,7 @@ public class LoginTest {
      login.editUser(validUser);
 
      User user=login.sendUser(mockHttpSession,mockHttpServletRequest, mockHttpServletResponse);
-     assertEquals(user.getPassword(),"password");
+     assertEquals(user.getPassword(),"vipul123");
  }
 
 }
