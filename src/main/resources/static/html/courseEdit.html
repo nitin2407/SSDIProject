@@ -115,7 +115,7 @@
                                 <fieldset data-ng-repeat="time in timings">
                                     <div class="col-md-10">
                                         <div class='form-group internal'>
-                                            <div class='col-md-6' style="padding: 0px 5px 5px 0px;margin: 0px;">
+                                            <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
                                                 <select class='form-control' ng-model = "time.day">
                                                     <option>Monday</option>
                                                     <option>Tuesday</option>
@@ -126,11 +126,12 @@
                                                     <option>Sunday</option>
                                                 </select>           
                                             </div>
-                                            <div class='col-md-3' style="padding: 0px 0px 0px 0px;margin: 0px;">
-                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime | date : 'shortTime'">
+                                            <div class='col-md-4' style="padding: 0px 0px 0px 0px;margin: 0px;">
+                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime" ng-value="{{ time.toTime | date: 'h:mm a' }}">
+                                                <span>{{ time.toTime | date: 'h:mm a' }}</span>
                                             </div>
-                                                <div class='col-md-3' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime | date : 'shortTime'">
+                                                <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
+                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime" value="{{ time.toTime | date: 'h:mm a' }}">
                                                 </div>
                                             </div>
                                         </div>

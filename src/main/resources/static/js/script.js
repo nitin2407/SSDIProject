@@ -525,7 +525,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
         });
 
         $scope.cancel = function () {
-            var url = "http://" + $window.location.host + "/html/home.html";
+            var url = "http://" + $window.location.host + "/html/manageCourses.html";
             $window.location.href = url;
         };
 
