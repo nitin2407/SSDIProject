@@ -8,9 +8,9 @@ import java.sql.SQLException;
  * Created by vipul on 11/15/2016.
  */
 public class JdbcTestDBConnection implements IConnection{
-    private String connectionString="jdbc:mysql://localhost:3306/showyourskillzTest";
+    private String connectionString="jdbc:mysql://localhost:3306/showyourskillztest";
     private String sqlUser="root";
-    private String sqlPass="password";
+    private String sqlPass="nitin4192";
 
     @Override
     public Connection establishConnection() {
