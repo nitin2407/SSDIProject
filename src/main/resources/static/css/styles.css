@@ -4,11 +4,15 @@ html{
 }
 body {
     font-family: "Oxygen", sans-serif;
-
     position: relative;
-    background: #fff;
     overflow-x: hidden;
 }
+
+.image-holder{
+    background: url(../images/intro-bg.jpg) no-repeat center center;
+    height:700px;
+}
+
 p {
     line-height: 1.6;
     letter-spacing: 1px;
