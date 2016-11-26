@@ -30,7 +30,7 @@ public class ExecuteQueryTest {
     public void prepareForTestCases() {
         validUser = new User();
         validUser.setUsername("vshukla3@uncc.edu");
-        validUser.setPassword("vipul123");
+        validUser.setPassword("password");
 
         invalidUser = new User();
         invalidUser.setUsername("invalidUsername");
@@ -71,7 +71,7 @@ public class ExecuteQueryTest {
         executeQuery.updateUser(dao.establishConnection(), validUser);
 
         User user=executeQuery.retrieveUser(dao.establishConnection(),"vshukla3@uncc.edu");
-        assertEquals(user.getPassword(),"vipul123");
+        assertEquals(user.getPassword(),"password");
     }
 
 }
