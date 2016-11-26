@@ -36,8 +36,8 @@ public class SkillController {
     }
 
     @RequestMapping(path="/skills/category/{category}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Skill> filterCategoryBySkills(@PathVariable("category") String category) {
-        return skillQuery.filterSkillsByCategory(dao.establishConnection(), category);
+    public @ResponseBody List<Skill> filterCategoryBySkills(@PathVariable("category") String category, HttpSession userSession) {
+        return skillQuery.filterSkillsByCategory(dao.establishConnection(), category, (String) userSession.getAttribute("username"));
     }
 
     @RequestMapping(path="/addskill",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)

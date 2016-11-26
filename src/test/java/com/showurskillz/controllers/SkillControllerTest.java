@@ -29,6 +29,7 @@ public class SkillControllerTest {
          dao=new JdbcTestDBConnection();
         skillController=new SkillController(skillQuery,dao);
         mockHttpSession = new MockHttpSession();
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
         mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletResponse = new MockHttpServletResponse();
     }
@@ -42,7 +43,7 @@ public class SkillControllerTest {
 
     @Test
     public void filterCategoryBySkills() throws Exception {
-       List<Skill>skillList= skillController.filterCategoryBySkills("study");
+       List<Skill>skillList= skillController.filterCategoryBySkills("study", mockHttpSession);
         assertNotEquals(skillList, null);
     }
 
