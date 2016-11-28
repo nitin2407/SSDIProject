@@ -1,0 +1,72 @@
+<md-dialog class = "skillDialog" aria-label="Add skill">
+                <div layout="column" ng-cloak class="md-inline-form">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>Post a new skill</h2>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="cancel()">Cancel</md-button>
+                        </div>  
+                    </md-toolbar>
+                    <md-dialog-content layout-padding>
+                        <div>
+                            <form name="userForm" ng-submit="submitForm(userForm.$valid)" ng-cloak novalidate>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex-gt-xs id="skill_name"> 
+                                        <label>Skill Name</label>
+                                        <input ng-model="skill_name" class='form-control' id='Skill Name' placeholder='Skill Name' type='text' name="skill_name" ng-required="true">
+                                        <div ng-messages="userForm.skill_name.$error" ng-show="userForm.skill_name.$invalid && userForm.skill_name.$touched">
+                                            <div ng-message-exp="['required']" ng-hide="userForm.skill_name.$valid">
+                                                <span translate>Skill name is required.</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div>
+                                    <md-input-container class="md-block" flex>
+                                        <label>Category</label>
+                                        <md-select ng-model="categoryChoice" name="skill_category">
+                                            <md-option ng-value="category" ng-repeat="category in categories">{{ category }}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" layout-xs="row">
+                                        <label class="Skill-timings">Timings</label><br/>
+                                        <fieldset data-ng-repeat="choice in choices" class="md-block">
+                                        <md-input-container class="day" flex-gt-sm>
+                                            <label>Day</label>
+                                            <md-select ng-model="choice.day">
+                                                <!--<md-optgroup label="Day">-->
+                                                    <md-option ng-value="weekDay.name" ng-repeat="weekDay in days">
+                                                    {{weekDay.name}}
+                                                    <!--</md-option>-->
+                                                </md-optgroup>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex-gt-sm>
+                                            <label>To</label>
+                                            <input type="time" id="exampleInput" name="input" ng-model="choice.toTime"
+                                            placeholder="To" required/>
+                                        </md-input-container>
+                                        <md-input-container flex-gt-sm>
+                                            <label>From</label>
+                                            <input type="time" id="exampleInput" name="input" ng-model="choice.fromTime"
+                                            placeholder="From" required/>
+                                        </md-input-container>                
+                                        <md-button class="remove md-raised md-warn" ng-show="$last" ng-click="removeChoice()">-</md-button>
+                                    </fieldset>
+                                    <md-button class="addfields md-raised md-primary" ng-click="addNewChoice()">+</md-button>
+                                </md-input-container>
+                            </div></br>
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                    <div>
+                                        <textarea ng-model="description" class='form-control' id='id_description' placeholder='Description' rows='3'></textarea>
+                                    </div>
+                            </md-input-container>
+                            <md-dialog-actions layout="row" layout-align="center center" layout-wrap>
+                                <md-button class='md-raised md-primary' type="submit" ng-disabled="userForm.$invalid" ng-click="register()">Add Skill</md-button>
+                            </md-dialog-actions>          
+                        </form>
+                        </div>
+                    </md-dialog-content>
+                </div>  
+            </md-dialog>

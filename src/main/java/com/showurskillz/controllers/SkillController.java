@@ -92,7 +92,7 @@ public class SkillController {
         }
     }
 
-    @RequestMapping(path = "/skillForUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/skillByUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Skill> getSkills(HttpSession userSession,HttpServletRequest request) {
 
         //userSession = request.getSession();
@@ -103,11 +103,26 @@ public class SkillController {
     public @ResponseBody boolean deleteSkillById(@PathVariable("id") int id) {
         return skillQuery.deleteSkillById(dao.establishConnection(),id);
     }
-    @RequestMapping(path="/increaseInterestedCount/{id}",method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Skill increaseInterestedCount(@PathVariable("id") int id)
+    @RequestMapping(path="/increaseInterestedCount/{id}",method=RequestMethod.POST)
+    public void increaseInterestedCount(@PathVariable("id") int id,HttpSession userSession)
     {
-        return skillQuery.increaseInterestedCount(dao.establishConnection(),id);
+        skillQuery.increaseInterestedCount(dao.establishConnection(),id);
+        skillQuery.insertInterestedUser(dao.establishConnection(),id,(String) userSession.getAttribute("username"));
     }
 
+    @RequestMapping(path="/decreaseInterestedCount/{id}",method=RequestMethod.POST)
+    public void decreaseInterestedCount(@PathVariable("id") int id,HttpSession userSession)
+    {
+        if(skillQuery.getInterestedPeopleCount(id,dao.establishConnection())>0) {
+            skillQuery.decreaseInterestedCount(dao.establishConnection(), id);
+            skillQuery.removeInterestedUser(dao.establishConnection(), id, (String) userSession.getAttribute("username"));
+        }
+    }
+
+    @RequestMapping(path="/checkInterest/{id}",method=RequestMethod.GET)
+    public @ResponseBody boolean checkSkillInterestById(@PathVariable("id") int id,HttpSession userSession) {
+
+        return skillQuery.checkSkillInterest(dao.establishConnection(),id,(String) userSession.getAttribute("username"));
+    }
 
 }

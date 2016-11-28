@@ -228,3 +228,15 @@ body.md-dialog-is-showing {
     min-height: 12px !important;
 }
 
+.skillCard{
+    min-height: 220px !important;
+    min-width: 220px !important;
+    word-wrap: break-word;
+}
+
+.skillDialog{
+    max-height: 80% !important;
+}
+
+
+

@@ -1,0 +1,53 @@
+<script>
+    $(document).ready(function () {
+        $('#list').click(function (event) {
+            event.preventDefault();
+            $('#products .item').addClass('list-group-item');
+        });
+        $('#grid').click(function (event) {
+            event.preventDefault();
+            $('#products .item').removeClass('list-group-item');
+            $('#products .item').addClass('grid-group-item');
+        });
+    })
+</script>
+<div class="container">
+    <div class="well well-sm">
+        <strong>Browse Skills</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+
+        <div id="products" class="row list-group" ng-controller="skillsController">
+
+            <div ng-repeat="skill in skills">
+                <md-card class="item col-xs-10 col-sm-10 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <!--<md-button>
+                                <md-icon md-font-icon="icon-home" ng-style="{color: 'green', 'font-size':'36px', height:'36px'}" ng-click="clickInterest(skill.skillId)" style="float: right;">
+                                </md-icon>
+                            </md-button>-->
+                            <md-button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Interest</md-button>
+                            <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
+                            <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
+                            <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
+                            <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="lead">Tutor: {{ skill.tutor }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        
+                    </md-card>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

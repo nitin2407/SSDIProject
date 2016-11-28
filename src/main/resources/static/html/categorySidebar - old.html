@@ -1,0 +1,22 @@
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <!-- Sidebar -->
+        <div class="categorybar">
+            <label style="font-size:16px; letter-spacing: 0.08em; color:white">Categories</label>
+        </div>
+
+        <div ng-controller='MainController' style="font-size:12px; letter-spacing: 0.08em; color:white">
+  <span ng-repeat="category in categories">
+    <input type='checkbox' value="{{category}}" check-list='checked_category'> {{category}}<br/>
+  </span>
+        </div>
+
+
+    </div>
+</div>
+
+<style>
+  .categorybar{
+      top:40px;
+  }
+</style>

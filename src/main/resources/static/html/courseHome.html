@@ -22,7 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
 </head>
-<body ng-app="SkillsApp" ng-controller="CourseControl">
+<body ng-app="SkillsApp" ng-controller="Course">
     <nav id="header-nav" class="navbar default navbar-light bg-faded">
         <div class="container-fluid">
             <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
@@ -73,12 +73,8 @@
                             <div class='col-md-6'>
                                 <div class='form-group'>
                                     <div class='col-md-11'>
-                                        <input ng-model="skill_Name" class='form-control' id='Skill Name'
-                                               placeholder='Skill Name' type='text' name="skill_Name" ng-required="true">
-                                        <div class="msg-block" style="padding-bottom: 0px;margin-bottom: 0px">
-                                            <span ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine"
-                                                  class="help-block" style="color: red;">Skill name is required.</span>
-                                        </div>
+                                        <p ng-model="skill_Name" id='Skill Name'
+                                               placeholder='Skill Name' type='text' name="skill_Name" ng-required="true"></p>
                                     </div>
                                 </div>
                             </div>
@@ -88,66 +84,66 @@
                         <div class='form-group'>
                             <label class='control-label col-md-2 col-md-offset-2'>Category</label>
                             <div class='col-md-6'>
-                                <div class='form-group'>
                                     <div class='col-md-11'>
-                                        <select class='form-control' ng-model="cate_gory">
-                                            <option>Study</option>
-                                            <option>Dance</option>
-                                            <option>Singing</option>
-                                            <option>Arts</option>
-                                            <option>Sports</option>
-                                            <option>Cooking</option>
-                                        </select>
+                                        <p ng-model="cate_gory"></p>
                                     </div>
-                                </div> 
                             </div>
                         </div>
                         <div class='form-group'>
-                            <label class='control-label col-md-2 col-md-offset-2'>Timings</label>
-                            <div class='time-choice col-md-6'>
-                                <fieldset data-ng-repeat="time in timings">
-                                    <div class="col-md-10">
-                                        <div class='form-group internal'>
+                            <!--<label class='control-label col-md-2 col-md-offset-2'>Timings</label>-->
+                            <div class='col-md-7'>
+                                <label>Timings</label>            
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Day</th>
+                                        <th>To</th>
+                                        <th>From</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>Monday</td>
+                                        <td>abc</td>
+                                        <td>xyz</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                            
+                                <!--<fieldset data-ng-repeat="time in timings">-->
+                                    <!--<div class="col-md-10">
+                                        <div class='internal'>
                                             <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                <select class='form-control' ng-model = "time.day">
-                                                    <option>Monday</option>
-                                                    <option>Tuesday</option>
-                                                    <option>Wednesday</option>
-                                                    <option>Thursday</option>
-                                                    <option>Friday</option>
-                                                    <option>Saturday</option>
-                                                    <option>Sunday</option>
-                                                </select>           
+                                                <span >Day: </span>-->
+                                                <!--<span ng-model = "time.day">abc</span>-->
+                                                <!--<span >abc</span>         
                                             </div>
                                             <div class='col-md-4' style="padding: 0px 0px 0px 0px;margin: 0px;">
-                                                <input type="time" name="toTime" class="form-control" ng-model = "time.toTime">
-                                                <span>{{ time.toTime | date: 'h:mm a' }}</span>
+                                                <span>{{ time.toTime | date: 'h:mm a' }}abc</span>
                                             </div>
                                                 <div class='col-md-4' style="padding: 0px 5px 5px 0px;margin: 0px;">
-                                                    <input type="time" name="fromTime" class="form-control" ng-model = "time.fromTime">
                                                     <span>{{ time.fromTime | date: 'h:mm a' }}</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <button class="remove btn-danger" style="max-width: 30px;" ng-show="$last" ng-click="removeChoice()">-</button>
-                                    </fieldset>
-                                    <button class="addfields btn-primary"  style="max-width: 30px;" ng-click="addNewChoice()">+
-                                    </button>
+                                        </div>-->
+                                    <!--</fieldset>-->
                                 </div>
                             </div>
-                        </div>
+                        <!--</div>-->
                         <div class='form-group'>
                             <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
                             <div class='col-md-6'>
                                 <div class='form-group'>
                                     <div class='col-md-11' style="padding-left: 0px;padding-right: 0px;">
-                                        <textarea style="margin-bottom: 10px;" ng-model="skill_Description" class='form-control' id='id_description' placeholder='Description' name="skill_Description" ng-required="true" rows='3'></textarea>
+                                        <span style="margin-bottom: 10px;border: none;box-shadow: none;" ng-model="skill_Description" class='form-control' id='id_description' name="skill_Description" rows='3'>asdasdasdasdasd</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <div class='form-group'>
-                        <div class='col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
+                    <div class='form-group' style="border-top: 2px solid black">
+                        <h5>Discussion Forum</h5>
+                        <!--<div class='col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
                             <button class='btn-lg btn-primary' type="button" ng-disabled="userForm.$invalid"
                                 ng-click="updateskill()">Save
                             </button>
@@ -155,7 +151,7 @@
                         <div class='col-md-2 col-sm-2 col-xs-2'>
                             <button class='btn-lg btn-danger' type="button" ng-click="cancel()">Cancel
                             </button>
-                        </div>
+                        </div>-->
                     </div>                           
                 </form>
             </div>
@@ -163,10 +159,6 @@
     </div>
     <script src="../js/app/app.js"></script>
     <script src="../js/directives/directive.js"></script>
-    <script src="../js/factory/urlFactory.js"></script>
-    <script src="../js/login/loginService.js"></script>
-    <script src="../js/skill/skillService.js"></script>
-    <!--<script src="../js/login/loginController.js"></script>-->
-    <script src="../js/skill/skillController.js"></script>
+    <script src="../js/controllers/controller.js"></script>
 </body>
 </html>

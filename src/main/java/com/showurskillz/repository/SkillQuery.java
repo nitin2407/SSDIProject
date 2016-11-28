@@ -1,5 +1,6 @@
 package com.showurskillz.repository;
 
+import com.mysql.jdbc.*;
 import com.showurskillz.model.*;
 import com.showurskillz.model.Time;
 import com.showurskillz.repository.IConnection;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +45,7 @@ public class SkillQuery implements ISkillQuery{
                 skill.setCategory(rs.getString("category"));
                 skill.setTutor(rs.getString("tutor"));
                 skill.setNumberOfInterestedPeople(rs.getInt("interestedPeopleCount"));
+                skill.setInterestedUsers(getInterestedUsersList(conn,skill.getSkillId()));
                 skillList.add(skill);
             }
             rs.close();
@@ -339,7 +344,7 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public Skill increaseInterestedCount(Connection conn, int id) {
+    public void increaseInterestedCount(Connection conn, int id) {
 
         int interestedPeopleCount = getInterestedPeopleCount(id, conn);
 
@@ -355,11 +360,32 @@ public class SkillQuery implements ISkillQuery{
             ex.printStackTrace();
         }
 
-        Skill skill = getSkillById(conn, id);
-        return skill;
+        //Skill skill = getSkillById(conn, id);
+        //return skill;
     }
 
-    private int getInterestedPeopleCount(int id, Connection conn) {
+    @Override
+    public void decreaseInterestedCount(Connection conn, int id) {
+
+        int interestedPeopleCount = getInterestedPeopleCount(id, conn);
+
+        query = "UPDATE skills SET interestedPeopleCount = ? where skillId=?";
+        PreparedStatement pst = null;
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,interestedPeopleCount-1);
+            pst.setInt(2, id);
+            pst.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        //Skill skill = getSkillById(conn, id);
+        //return skill;
+    }
+
+    public int getInterestedPeopleCount(int id, Connection conn) {
         query = "select interestedPeopleCount from skills where skillId=?";
         PreparedStatement pst = null;
         int interestedPeopleCount = 0;
@@ -374,6 +400,73 @@ public class SkillQuery implements ISkillQuery{
             ex.printStackTrace();
         }
         return interestedPeopleCount;
+    }
+
+    public void insertInterestedUser(Connection conn,int id,String username){
+
+        query="Insert into skillinterest VALUES (?,?)";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            pst.setString(2,username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeInterestedUser(Connection conn,int id,String username){
+
+        query="delete from skillinterest where skillId = ? and username = ?";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            pst.setString(2,username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<String> getInterestedUsersList(Connection conn,int id){
+        query = "select * from skillinterest where skillId=?";
+        PreparedStatement pst = null;
+        List<String> userList = new ArrayList<String>();
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                userList.add(rs.getString("username"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return userList;
+    }
+
+    public boolean checkSkillInterest(Connection conn,int id,String username){
+
+        query = "select * from skillinterest where skillId=? and username=?";
+        PreparedStatement pst = null;
+        int interestedPeopleCount = 0;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.setString(2,username);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+
     }
 
 

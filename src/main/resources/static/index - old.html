@@ -7,13 +7,13 @@
     <title>ShowYourSkillz</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <!--<link rel="stylesheet" href="css/profilestyle.css">-->
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/color/color-1.css" id="color"/>
     <link rel="stylesheet" href="css/sweetalert2.min.css">
     <script src="js/sweetalert2.min.js"></script>
     <script src="js/jquery-2.1.4.min.js"></script>
@@ -95,22 +95,16 @@
     <!--<script src="js/script.js"></script>-->
 </head>
 <body ng-app="SkillsApp">
-    <nav class="navbar navbar-fixed-top z-depth-1" role="navigation">
+    <nav>
     <!--<nav id="header-nav" class="navbar default navbar-light bg-faded">-->
-        <div class="container">
-            <!--<a href = "index.html" class="brand-logo right">ShowYourSkillz</a>-->
-            <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand waves-effect waves-light" href="index.html">ShowYourSkillz</a>
-            </div>
-            <div class="collapse navbar-collapse navbar-right" ng-controller="LoginCtrl"  id="bs-example-navbar-collapse-1">
-            <!--<ul id="nav-mobile" class="left">-->
-                <ul class="nav navbar-nav">
+        <div class="nav-wrapper" ng-controller="LoginCtrl">
+            <a href = "index.html" class="brand-logo right">ShowYourSkillz</a>
+            <!--<div class="navbar-header col-sm-2 col-xs-1 col-md-2">
+                <a class="navbar-brand" href="index.html">ShowYourSkillz</a>
+            </div>-->
+            <!--<div class="nav pull-right" id="myNavbar" ng-controller="LoginCtrl">-->
+
+                <ul class="nav navbar-nav pull-right">
                     <li class="nav-item dropdown" id="menuLogin">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdownMenuLink"
                            aria-haspopup="true" aria-expanded="false">Login</a>
@@ -136,16 +130,12 @@
         </div>
     </nav>
     <div class = "wrapper" style="padding-top: 7%;"> 
-        <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2" ng-include="'html/categorySidebar.html'"></div>
-        <div class = "col-lg-10 col-md-10 col-sm-10 col-xs-10" ng-include="'html/skillsHolder.html'"></div>
+        <div class = "col-md-1 col-sm-2 col-xs-2" ng-include="'html/categorySidebar.html'"></div>
+        <div class = "col-md-9 col-sm-10 col-xs-10" ng-include="'html/skillsHolder.html'"></div>
     </div>
     <script src="js/app/app.js"></script>
     <script src="js/directives/directive.js"></script>
-    <script src="js/factory/urlFactory.js"></script>
-    <script src="js/login/loginService.js"></script>
-    <script src="js/skill/skillService.js"></script>
-    <script src="js/skill/skillController.js"></script>
-    <script src="js/login/loginController.js"></script>
+    <script src="js/controllers/controller.js"></script>
 </body>
 </html>
 	

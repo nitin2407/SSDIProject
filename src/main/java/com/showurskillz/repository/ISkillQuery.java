@@ -25,5 +25,11 @@ public interface ISkillQuery {
     int updateSkillTime(Connection conn,Skill skill,Time time);
     List<Skill> retrieveSkills(Connection conn, String tutor);
     boolean deleteSkillById(Connection connection, int id);
-    Skill increaseInterestedCount(Connection connection, int id);
+    void increaseInterestedCount(Connection connection, int id);
+    void insertInterestedUser(Connection conn,int id,String username);
+    boolean checkSkillInterest(Connection conn,int id,String username);
+    List<String> getInterestedUsersList(Connection conn,int id);
+    void decreaseInterestedCount(Connection conn, int id);
+    void removeInterestedUser(Connection conn,int id,String username);
+    int getInterestedPeopleCount(int id, Connection conn);
 }

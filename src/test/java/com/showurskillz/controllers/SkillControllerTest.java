@@ -74,7 +74,7 @@ public class SkillControllerTest {
         Skill skillBefore=skillController.sendSkill(1,mockHttpSession,mockHttpServletResponse);
         int countBefore=skillBefore.getNumberOfInterestedPeople();
 
-        skillController.increaseInterestedCount(1);
+        skillController.increaseInterestedCount(1,mockHttpSession);
 
         Skill skillAfter=skillController.sendSkill(1,mockHttpSession,mockHttpServletResponse);
         int countAfter=skillAfter.getNumberOfInterestedPeople();

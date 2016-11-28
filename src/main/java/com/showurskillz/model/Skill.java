@@ -18,6 +18,7 @@ public class Skill {
     private List<Time> time;
     private String tutor;
     private int numberOfInterestedPeople;
+    private List<String> interestedUsers;
 
     public int getSkillId() {
         return skillId;
@@ -73,5 +74,13 @@ public class Skill {
 
     public void setNumberOfInterestedPeople(int numberOfInterestedPeople) {
         this.numberOfInterestedPeople = numberOfInterestedPeople;
+    }
+
+    public List<String> getInterestedUsers() {
+        return interestedUsers;
+    }
+
+    public void setInterestedUsers(List<String> interestedUsers) {
+        this.interestedUsers = interestedUsers;
     }
 }

@@ -55,10 +55,25 @@ app.controller('skillsController', function($rootScope, $http, $scope){
 app.controller('MainController', function($scope) {
     $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking'];
     $scope.checked_category = [];
-    $scope.addFruit = function(category) {
+
+    /*$scope.toggle = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+
+      $scope.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+      };*/
+
+    /*$scope.addFruit = function(category) {
         if ($scope.checked_category.indexOf(category) != -1) return;
         $scope.checked_category.push(category);
-    };
+    };*/
 });
 
 
@@ -382,7 +397,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
             var singleParam = params[i].split("=");
             if (singleParam[0] == "id")
                 $scope.skillId = singleParam[1];
-            }
+        }
 
         $scope.timings = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
         var res = $http.get('/manageSkill/'+$scope.skillId);
@@ -406,8 +421,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
             }, 2000)
             //alert("please login");
 
-        });
-
+        
         $scope.cancel = function () {
             var url = "http://" + $window.location.host + "/html/manageCourses.html";
             $window.location.href = url;

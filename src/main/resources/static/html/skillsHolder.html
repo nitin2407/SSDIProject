@@ -11,7 +11,11 @@
         });
     })
 </script>
-<div class="container">
+<div ng-controller="skillsController" ng-cloak>
+  <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
+    <div flex-gt-xs flex-gt-sm layout="row" layout-xs="column" layout-sm="column" layout-wrap>
+
+<!--<div class="container">
     <div class="well well-sm">
         <strong>Browse Skills</strong>
         <div class="btn-group">
@@ -20,13 +24,42 @@
                 class="glyphicon glyphicon-th"></span>Grid</a>
         </div>
 
-        <div id="products" class="row list-group" ng-controller="skillsController">
+        <div id="products" class="row list-group" ng-controller="skillsController">-->
 
-            <div ng-repeat="skill in skills">
-                <div class="item col-xs-10 col-sm-10 col-lg-4">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Interest</button>
+            <!--<div ng-repeat="skill in skills">-->
+                <md-card class = "skillCard" ng-repeat="skill in skills">
+                <!--<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>-->
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{ skill.skillName }}</span>
+                            <span class="md-subhead">{{ skill.tutor }}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
+                        <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
+                        <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button type="button" class="md-icon-button" style="color: blue;" ng-click="clickInterest(skill)" ng-if = '!skill.isInterested' aria-label="Favorite">
+                            <!--<md-icon style = "fill: grey;" md-svg-icon="../images/thumb_up.svg"></md-icon>-->
+                            <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+                        </md-button>
+                        <md-button type="button" class="md-icon-button" style="color: blue;" ng-click="clickInterest(skill)" ng-if = 'skill.isInterested' aria-label="Favorite">
+                            <!--<md-icon style = "fill: grey;" md-svg-icon="../images/thumb_up.svg"></md-icon> && auth.allow-->
+                            <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
+                        </md-button>
+                        <md-button>View</md-button>
+                        <!--<md-button>Action 2</md-button>-->
+                    </md-card-actions>
+                </md-card>
+                    <!--<div class="thumbnail">
+                        <div class="caption">-->
+                            <!--<md-button>
+                                <md-icon md-font-icon="icon-home" ng-style="{color: 'green', 'font-size':'36px', height:'36px'}" ng-click="clickInterest(skill.skillId)" style="float: right;">
+                                </md-icon>
+                            </md-button>-->
+                            <!--<md-button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Interest</md-button>
                             <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
                             <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
                             <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
@@ -36,17 +69,15 @@
                                     <p class="lead">Tutor: {{ skill.tutor }}</p>
                                 </div>
                             </div>
-                            <!--<div class="col-sm-3" style="float: right;">
-                                <!--<img src="heatimage.png" alt="Intereted" style="width:20px;height:20px;">-->
-                                <!--<button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)">Interest</button>
-                            </div>-->
+                        </div>
                         </div>
                         
-                    </div>
+                    </md-card>-->
                 </div>
-            </div>
+            <!--</div>
 
         </div>
-    </div>
+    </div>-->
+    </md-content>
 
 </div>
