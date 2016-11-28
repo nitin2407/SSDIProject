@@ -14,7 +14,7 @@ public class JdbcConnection implements IConnection {
 
     private String connectionString="jdbc:mysql://localhost:3306/showyourskillz";
     private String sqlUser="root";
-    private String sqlPass="password";
+    private String sqlPass="nitin4192";
 
     @Override
     public Connection establishConnection() {
