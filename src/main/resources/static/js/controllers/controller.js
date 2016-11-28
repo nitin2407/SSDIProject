@@ -53,7 +53,7 @@ app.controller('skillsController', function($rootScope, $http, $scope){
 
 
 app.controller('MainController', function($scope) {
-    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking'];
+    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking', 'zipcode', 'city'];
     $scope.checked_category = [];
 
     /*$scope.toggle = function (item, list) {
@@ -74,8 +74,7 @@ app.controller('MainController', function($scope) {
         if ($scope.checked_category.indexOf(category) != -1) return;
         $scope.checked_category.push(category);
     };*/
-});
-
+	});
 
 
 app.controller('homeCntrl',function($scope,$http, $window,$timeout,$mdDialog) {

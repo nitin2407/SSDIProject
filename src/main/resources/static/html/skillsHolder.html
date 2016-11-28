@@ -60,6 +60,13 @@
                                 </md-icon>
                             </md-button>-->
                             <!--<md-button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Interest</md-button>
+
+            <div ng-repeat="skill in skills">
+                <div class="item col-xs-10 col-sm-10 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <button type="button" class="btn btn-outline-success btn-sm" ng-click="clickInterest(skill.skillId)" style="float: right;">Show Interest</button>
+
                             <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
                             <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
                             <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>

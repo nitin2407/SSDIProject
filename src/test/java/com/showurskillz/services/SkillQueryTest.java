@@ -40,7 +40,7 @@ public class SkillQueryTest {
     @Test
     public void filterSkillsByCategoryTest() throws Exception {
         SkillQuery skillQuery = new SkillQuery();
-        List<Skill> skillList = skillQuery.filterSkillsByCategory(dao.establishConnection(), "study");
+        List<Skill> skillList = skillQuery.filterSkillsByCategory(dao.establishConnection(), "study", "vshukla3@uncc.edu");
         assertNotEquals(skillList, null);
     }
 

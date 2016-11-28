@@ -89,10 +89,32 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public List<Skill> filterSkillsByCategory(Connection conn, String category) {
+    public List<Skill> filterSkillsByCategory(Connection conn, String category, String username) {
         String commaSeperatedCategory=createSearchParameters(category);
+
+        //Zipcode
+        if(((commaSeperatedCategory.contains("zipcode")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '"+username+"' )) and category IN ("+commaSeperatedCategory+")";
+        }
+        else if(((commaSeperatedCategory.contains("zipcode")) && !(  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '"+username+"' ))";
+        }
+        else if((!(commaSeperatedCategory.contains("zipcode")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where category IN ("+commaSeperatedCategory+")";
+        }
+
+        //City
+        else if(((commaSeperatedCategory.contains("city")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '"+username+"' )) and category IN ("+commaSeperatedCategory+")";
+        }
+        else if(((commaSeperatedCategory.contains("city")) && !(  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '"+username+"' ))";
+        }
+        else if((!(commaSeperatedCategory.contains("city")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
+            query = "select * from skills where category IN ("+commaSeperatedCategory+")";
+        }
+
         skillList=new ArrayList<Skill>();
-        query = "select * from skills where category IN ("+commaSeperatedCategory+")";
         PreparedStatement pst = null;
         try {
             pst=conn.prepareStatement(query);

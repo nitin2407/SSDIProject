@@ -7,15 +7,18 @@
         </div>
 
         <div ng-controller='MainController' style="font-size:12px; letter-spacing: 0.08em; color:white">
+
         <!--<div flex-gt-sm="50" ng-repeat="category in categories">
           <md-checkbox md-no-ink ng-click="toggle(category)" check-list='checked_category'>
             {{ category }}
           </md-checkbox>
         </div>-->
 
-        <span ng-repeat="category in categories">
-            <input type='checkbox' value="{{category}}" check-list='checked_category'> {{category}}<br/>
+       
+          <span ng-repeat="category in categories">
+            <input type='checkbox' value="{{category}}" check-list='checked_category'> {{category}}<br><br>
           </span>
+
         </div>
 
 
