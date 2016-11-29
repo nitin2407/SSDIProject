@@ -22,8 +22,8 @@ app.controller('skillsController', function($rootScope, $http, $scope,skillServi
 
 
 
-app.controller('MainController', function($scope,skillsFactory) {
-    $scope.categories = skillsFactory.categories();
+app.controller('MainController', function($scope) {
+    $scope.categories = ['Study', 'Dance', 'Singing', 'Arts', 'Sports', 'Cooking', 'zipcode', 'city'];
     $scope.checked_category = [];
      /*$scope.toggle = function (item, list) {
         var idx = list.indexOf(item);
@@ -38,6 +38,11 @@ app.controller('MainController', function($scope,skillsFactory) {
       $scope.exists = function (item, list) {
         return list.indexOf(item) > -1;
       };*/
+
+      $scope.addFruit = function(category) {
+        if ($scope.checked_category.indexOf(category) != -1) return;
+        $scope.checked_category.push(category);
+    };
 
 });
 
