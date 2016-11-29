@@ -23,7 +23,7 @@ app.controller('skillsController', function($rootScope, $http, $scope,skillServi
 
 
 app.controller('MainController', function($scope) {
-    $scope.categories = ['Study', 'Dance', 'Singing', 'Arts', 'Sports', 'Cooking', 'zipcode', 'city'];
+    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking', 'zipcode', 'city'];
     $scope.checked_category = [];
      /*$scope.toggle = function (item, list) {
         var idx = list.indexOf(item);
