@@ -20,7 +20,7 @@ import java.util.List;
  * Created by vipul on 11/3/2016.
  */
 @Repository
-public class SkillQuery implements ISkillQuery{
+public class SkillQuery implements ISkillQuery {
 
     private List<Skill> skillList;
     private String query;
@@ -33,12 +33,12 @@ public class SkillQuery implements ISkillQuery{
     public List<Skill> retrieveAllSkills(Connection conn) {
         query = "select * from skills";
         PreparedStatement pst = null;
-        skillList=new ArrayList<Skill>();
+        skillList = new ArrayList<Skill>();
 
         try {
             pst = conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 skill = new Skill();
                 skill.setSkillId(rs.getInt("skillId"));
                 skill.setSkillName(rs.getString("skillName"));
@@ -46,30 +46,29 @@ public class SkillQuery implements ISkillQuery{
                 skill.setCategory(rs.getString("category"));
                 skill.setTutor(rs.getString("tutor"));
                 skill.setNumberOfInterestedPeople(rs.getInt("interestedPeopleCount"));
-                skill.setInterestedUsers(getInterestedUsersList(conn,skill.getSkillId()));
+                skill.setInterestedUsers(getInterestedUsersList(conn, skill.getSkillId()));
                 skillList.add(skill);
             }
             rs.close();
             conn.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
-       return skillList;
+        return skillList;
     }
 
     @Override
     public Skill getSkillById(Connection conn, int id) {
 
-        String tutor=null;
-        String skillName=null;
+        String tutor = null;
+        String skillName = null;
         query = "select * from skills where skillId=?";
         PreparedStatement pst = null;
         try {
-            pst=conn.prepareStatement(query);
-            pst.setInt(1,id);
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 tutor = rs.getString("tutor");
                 skillName = rs.getString("skillName");
                 skill.setSkillId(id);
@@ -81,46 +80,41 @@ public class SkillQuery implements ISkillQuery{
                 rs.close();
                 //conn.close();
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        skill.setTime(getSkillTime(conn,tutor,id));
+        skill.setTime(getSkillTime(conn, tutor, id));
         return skill;
     }
 
     @Override
     public List<Skill> filterSkillsByCategory(Connection conn, String category, String username) {
-        String commaSeperatedCategory=createSearchParameters(category);
+        String commaSeperatedCategory = createSearchParameters(category);
 
         //Zipcode
-        if(((commaSeperatedCategory.contains("zipcode")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '"+username+"' )) and category IN ("+commaSeperatedCategory+")";
-        }
-        else if(((commaSeperatedCategory.contains("zipcode")) && !(  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '"+username+"' ))";
-        }
-        else if((!(commaSeperatedCategory.contains("zipcode")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where category IN ("+commaSeperatedCategory+")";
+        if (((commaSeperatedCategory.contains("zipcode")) && ((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '" + username + "' )) and category IN (" + commaSeperatedCategory + ")";
+        } else if (((commaSeperatedCategory.contains("zipcode")) && !((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where tutor IN (select user_name from user where zip_code IN (select zip_code from user where user_name = '" + username + "' ))";
+        } else if ((!(commaSeperatedCategory.contains("zipcode")) && ((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where category IN (" + commaSeperatedCategory + ")";
         }
 
         //City
-        else if(((commaSeperatedCategory.contains("city")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '"+username+"' )) and category IN ("+commaSeperatedCategory+")";
-        }
-        else if(((commaSeperatedCategory.contains("city")) && !(  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '"+username+"' ))";
-        }
-        else if((!(commaSeperatedCategory.contains("city")) && (  (commaSeperatedCategory.contains("study"))|| (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing"))|| (commaSeperatedCategory.contains("arts"))|| (commaSeperatedCategory.contains("sports"))|| (commaSeperatedCategory.contains("cooking"))  )) ){
-            query = "select * from skills where category IN ("+commaSeperatedCategory+")";
+        else if (((commaSeperatedCategory.contains("city")) && ((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '" + username + "' )) and category IN (" + commaSeperatedCategory + ")";
+        } else if (((commaSeperatedCategory.contains("city")) && !((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where tutor IN (select user_name from user where city IN (select city from user where user_name = '" + username + "' ))";
+        } else if ((!(commaSeperatedCategory.contains("city")) && ((commaSeperatedCategory.contains("study")) || (commaSeperatedCategory.contains("dance")) || (commaSeperatedCategory.contains("singing")) || (commaSeperatedCategory.contains("arts")) || (commaSeperatedCategory.contains("sports")) || (commaSeperatedCategory.contains("cooking"))))) {
+            query = "select * from skills where category IN (" + commaSeperatedCategory + ")";
         }
 
-        skillList=new ArrayList<Skill>();
+        skillList = new ArrayList<Skill>();
         PreparedStatement pst = null;
         try {
-            pst=conn.prepareStatement(query);
+            pst = conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 skill = new Skill();
                 skill.setSkillId(rs.getInt("skillId"));
                 skill.setSkillName(rs.getString("skillName"));
@@ -132,18 +126,17 @@ public class SkillQuery implements ISkillQuery{
             }
             rs.close();
             //conn.close();
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return skillList;
     }
 
-    private String createSearchParameters(String incomingCategory){
+    private String createSearchParameters(String incomingCategory) {
         String[] categoryArray = incomingCategory.split(",");
-        String commaSeperatedCategories="";
-        for(String category: categoryArray){
-            commaSeperatedCategories=commaSeperatedCategories+"'"+category+"',";
+        String commaSeperatedCategories = "";
+        for (String category : categoryArray) {
+            commaSeperatedCategories = commaSeperatedCategories + "'" + category + "',";
         }
         commaSeperatedCategories = commaSeperatedCategories.replaceAll(",$", "");
         return commaSeperatedCategories;
@@ -153,7 +146,7 @@ public class SkillQuery implements ISkillQuery{
     public int insertSkill(Connection conn, Skill skill, String tutor) {
 
         int result;
-        query="Insert into skills VALUES (?,?,?,?,?,?)";
+        query = "Insert into skills VALUES (?,?,?,?,?,?)";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
@@ -163,7 +156,7 @@ public class SkillQuery implements ISkillQuery{
             pst.setString(4, skill.getCategory());
             pst.setString(5, tutor);
             pst.setInt(6, 0);
-            result=pst.executeUpdate();
+            result = pst.executeUpdate();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,21 +166,20 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public int insertSkillTime(Connection conn,Time time,String tutor) {
+    public int insertSkillTime(Connection conn, Time time, String tutor) {
 
         int result;
         int skillId;
         String queryInitial = "SELECT skillId FROM skills ORDER BY skillId DESC LIMIT 1";
-        query="Insert into skilltimings VALUES (?,?,?,?,?)";
+        query = "Insert into skilltimings VALUES (?,?,?,?,?)";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(queryInitial);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 skillId = rs.getInt("skillId");
-            }
-            else{
-                skillId=0;
+            } else {
+                skillId = 0;
             }
             pst = conn.prepareStatement(query);
             pst.setString(1, tutor);
@@ -195,7 +187,7 @@ public class SkillQuery implements ISkillQuery{
             pst.setString(3, time.getDay());
             pst.setTimestamp(4, new Timestamp((time.getToTime()).getTime()));
             pst.setTimestamp(5, new Timestamp((time.getFromTime()).getTime()));
-            result=pst.executeUpdate();
+            result = pst.executeUpdate();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -205,7 +197,7 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public List<Time> getSkillTime(Connection conn,String tutor,int skillId) {
+    public List<Time> getSkillTime(Connection conn, String tutor, int skillId) {
 
         List<Time> skillTimings = new ArrayList<Time>();
         query = "SELECT * FROM skilltimings where tutor=? and skillId=?";
@@ -215,7 +207,7 @@ public class SkillQuery implements ISkillQuery{
             pst.setString(1, tutor);
             pst.setInt(2, skillId);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 time = new Time();
                 time.setDay(rs.getString("dayOfWeek"));
                 time.setToTime(rs.getTimestamp("toTime"));
@@ -235,8 +227,8 @@ public class SkillQuery implements ISkillQuery{
         PreparedStatement pst = null;
         Skill skill = new Skill();
         try {
-            pst=conn.prepareStatement(query);
-            pst.setString(1,tutor);
+            pst = conn.prepareStatement(query);
+            pst.setString(1, tutor);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
 
@@ -250,8 +242,7 @@ public class SkillQuery implements ISkillQuery{
                 rs.close();
                 conn.close();
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return skill;
@@ -262,8 +253,8 @@ public class SkillQuery implements ISkillQuery{
 
         //String skillTimeQuery;
         int result;
-        deleteSkillTime(conn,skill.getTutor(),skill.getSkillId());
-        query="Update skills set skillName=?,skillDescription=?, category=? where skillId=?";
+        deleteSkillTime(conn, skill.getTutor(), skill.getSkillId());
+        query = "Update skills set skillName=?,skillDescription=?, category=? where skillId=?";
         //skillTimeQuery="Update skilltimings set skillName=?,skillDescription=?, category=? where skillId=?";
         PreparedStatement pst = null;
         try {
@@ -271,8 +262,8 @@ public class SkillQuery implements ISkillQuery{
             pst.setString(1, skill.getSkillName());
             pst.setString(2, skill.getSkillDescription());
             pst.setString(3, skill.getCategory());
-            pst.setInt(4,skill.getSkillId());
-            result=pst.executeUpdate();
+            pst.setInt(4, skill.getSkillId());
+            result = pst.executeUpdate();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -281,7 +272,7 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public int deleteSkillTime(Connection conn,String tutor,int skillId) {
+    public int deleteSkillTime(Connection conn, String tutor, int skillId) {
 
         int result;
         query = "DELETE FROM skilltimings where tutor=? and skillId=?";
@@ -300,7 +291,7 @@ public class SkillQuery implements ISkillQuery{
     }
 
     @Override
-    public int updateSkillTime(Connection conn,Skill skill,Time time) {
+    public int updateSkillTime(Connection conn, Skill skill, Time time) {
 
         int result;
         query = "INSERT into skilltimings values(?,?,?,?,?)";
@@ -312,7 +303,7 @@ public class SkillQuery implements ISkillQuery{
             pst.setString(3, time.getDay());
             pst.setTimestamp(4, new Timestamp((time.getToTime()).getTime()));
             pst.setTimestamp(5, new Timestamp((time.getFromTime()).getTime()));
-            result=pst.executeUpdate();
+            result = pst.executeUpdate();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -376,7 +367,7 @@ public class SkillQuery implements ISkillQuery{
 
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,interestedPeopleCount+1);
+            pst.setInt(1, interestedPeopleCount + 1);
             pst.setInt(2, id);
             pst.execute();
         } catch (SQLException ex) {
@@ -397,7 +388,7 @@ public class SkillQuery implements ISkillQuery{
 
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,interestedPeopleCount-1);
+            pst.setInt(1, interestedPeopleCount - 1);
             pst.setInt(2, id);
             pst.execute();
         } catch (SQLException ex) {
@@ -425,14 +416,14 @@ public class SkillQuery implements ISkillQuery{
         return interestedPeopleCount;
     }
 
-    public void insertInterestedUser(Connection conn,int id,String username){
+    public void insertInterestedUser(Connection conn, int id, String username) {
 
-        query="Insert into skillinterest VALUES (?,?)";
+        query = "Insert into skillinterest VALUES (?,?)";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,id);
-            pst.setString(2,username);
+            pst.setInt(1, id);
+            pst.setString(2, username);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -440,14 +431,14 @@ public class SkillQuery implements ISkillQuery{
 
     }
 
-    public void removeInterestedUser(Connection conn,int id,String username){
+    public void removeInterestedUser(Connection conn, int id, String username) {
 
-        query="delete from skillinterest where skillId = ? and username = ?";
+        query = "delete from skillinterest where skillId = ? and username = ?";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,id);
-            pst.setString(2,username);
+            pst.setInt(1, id);
+            pst.setString(2, username);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -455,13 +446,13 @@ public class SkillQuery implements ISkillQuery{
 
     }
 
-    public List<String> getInterestedUsersList(Connection conn,int id){
+    public List<String> getInterestedUsersList(Connection conn, int id) {
         query = "select * from skillinterest where skillId=?";
         PreparedStatement pst = null;
         List<String> userList = new ArrayList<String>();
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 userList.add(rs.getString("username"));
@@ -472,7 +463,7 @@ public class SkillQuery implements ISkillQuery{
         return userList;
     }
 
-    public boolean checkSkillInterest(Connection conn,int id,String username){
+    public boolean checkSkillInterest(Connection conn, int id, String username) {
 
         query = "select * from skillinterest where skillId=? and username=?";
         PreparedStatement pst = null;
@@ -480,7 +471,7 @@ public class SkillQuery implements ISkillQuery{
         try {
             pst = conn.prepareStatement(query);
             pst.setInt(1, id);
-            pst.setString(2,username);
+            pst.setString(2, username);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 return true;
@@ -492,14 +483,14 @@ public class SkillQuery implements ISkillQuery{
 
     }
 
-    public List<Post> getDiscussionList(Connection conn,int id){
+    public List<Post> getDiscussionList(Connection conn, int id) {
 
         query = "select * from coursediscussions where skillId=?";
         PreparedStatement pst = null;
         List<Post> discussionList = new ArrayList<Post>();
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 post = new Post();
@@ -513,18 +504,90 @@ public class SkillQuery implements ISkillQuery{
         return discussionList;
     }
 
-    public void postDiscussion(Connection conn,String reply,int id,String username){
-        query="Insert into coursediscussions VALUES (null,?,?,?)";
+    public void postDiscussion(Connection conn, String reply, int id, String username) {
+        query = "Insert into coursediscussions VALUES (null,?,?,?)";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
-            pst.setInt(1,id);
-            pst.setString(2,username);
-            pst.setString(3,reply);
+            pst.setInt(1, id);
+            pst.setString(2, username);
+            pst.setString(3, reply);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Skill> retrieveAllEnrolledCourses(Connection conn, String username) {
+        query = "select s.skillId, s.skillName, s.tutor, s.skillDescription, s.category, s.interestedPeopleCount from skills s inner join enrolledskills e on s.skillId=e.skillId where e.user_name=?";
+
+        PreparedStatement pst = null;
+        List<Skill> courseList = new ArrayList<Skill>();
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Skill skill = new Skill();
+                skill.setSkillId(rs.getInt("s.skillId"));
+                skill.setSkillName(rs.getString("s.skillName"));
+                skill.setSkillDescription(rs.getString("s.skillDescription"));
+                skill.setCategory(rs.getString("s.category"));
+                skill.setTutor(rs.getString("s.tutor"));
+                skill.setNumberOfInterestedPeople(rs.getInt("s.interestedPeopleCount"));
+                courseList.add(skill);
+            }
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return courseList;
+    }
+
+    @Override
+    public void subscribeForEmailNotifications(Connection conn, int skillId, String username) {
+        query = "insert into mailinglist(skillId, username) values (?,?)";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, skillId);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Skill> retrieveAllInterestedCourses(Connection conn, String username) {
+        query = "select s.skillId, s.skillName, s.tutor, s.skillDescription, s.category, s.interestedPeopleCount from skills s inner join skillinterest e on s.skillId=e.skillId where e.username=?";
+
+        PreparedStatement pst = null;
+        List<Skill> courseList = new ArrayList<Skill>();
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Skill skill = new Skill();
+                skill.setSkillId(rs.getInt("s.skillId"));
+                skill.setSkillName(rs.getString("s.skillName"));
+                skill.setSkillDescription(rs.getString("s.skillDescription"));
+                skill.setCategory(rs.getString("s.category"));
+                skill.setTutor(rs.getString("s.tutor"));
+                skill.setNumberOfInterestedPeople(rs.getInt("s.interestedPeopleCount"));
+                courseList.add(skill);
+            }
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return courseList;
     }
 
 }

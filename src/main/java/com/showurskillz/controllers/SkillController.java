@@ -135,4 +135,22 @@ public class SkillController {
         skillQuery.postDiscussion(dao.establishConnection(),reply,id,(String) userSession.getAttribute("username"));
     }
 
+    @RequestMapping(path="/enrolledCoursesOfUser",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Skill> getAllEnrolledCourses(HttpSession userSession) {
+        return skillQuery.retrieveAllEnrolledCourses(dao.establishConnection(), (String) userSession.getAttribute("username"));
+    }
+
+    @RequestMapping(path="/subscribeForEmailNotification/{skillId}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    void subscribeForEmailNotification(@PathVariable("skillId") int skillId,HttpSession userSession) {
+         skillQuery.subscribeForEmailNotifications(dao.establishConnection(), skillId, (String) userSession.getAttribute("username"));
+    }
+
+    @RequestMapping(path="/interestedCoursesOfUser",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Skill> getAllInterestedCourses(HttpSession userSession) {
+        return skillQuery.retrieveAllInterestedCourses(dao.establishConnection(), (String) userSession.getAttribute("username"));
+    }
+
 }

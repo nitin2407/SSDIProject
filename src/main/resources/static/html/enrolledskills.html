@@ -21,6 +21,7 @@
     <!--<script src="../js/script.js"></script>-->
 </head>
 <title>ShowyourSkillz</title>
+this page is newly developed
 <body ng-app="SkillsApp">
 <div ng-controller="manageCtrl">
     <nav id="header-nav" class="navbar default navbar-light bg-faded">
@@ -57,42 +58,40 @@
         <a class="navbar-brand" href="#">COURSES</a>
     </div>
     <ul class="nav navbar-nav" style="float: left;">
-        <li class="active"><a href="#">Posted Skills</a></li><br>
-        <li><a href="enrolledskills.html">Enrolled Skills</a></li><br>
+        <li><a href="manageCourses.html">Posted Skills</a></li><br>
+        <li class="active"><a href="#">Enrolled Skills</a></li><br>
         <li><a href="interestedskills.html">Interested Skills</a></li>
     </ul>
 </div>
 <div class="container">
     <div class="well well-sm">
-       <!-- <strong>Browse Skills</strong>-->
+        <!-- <strong>Browse Skills</strong>-->
         <!--<div class="btn-group">
             <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
             </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
                 class="glyphicon glyphicon-th"></span>Grid</a>
         </div>-->
 
-        <div id="products" class="row list-group" ng-controller="manageSkillsCntrl">
+        <div id="products" class="row list-group" ng-controller="enrolledSkillsController">
 
-            <div ng-repeat="skill in skills" trackBy $index>
+            <div ng-repeat="course in courses" trackBy $index>
                 <!--<form class="container">-->
                 <div class="item col-xs-10 col-sm-10 col-lg-4">
                     <div class="thumbnail">
                         <div class="caption">
-                            <h4 class="group inner list-group-item-heading">{{ skill.skillName }}</h4>
-                            <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
-                            <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
-                            <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
-                            <!--<p class="group inner list-group-item-text">Timings:{{skill.skillTimings}}</p>-->
+                            <h4 class="group inner list-group-item-heading">{{ course.skillName }}</h4>
+                            <p class="group inner list-group-item-text">{{ course.skillDescription }}</p>
+                            <p class="group inner list-group-item-text">Category: {{ course.category }}</p>
+                            <p class="group inner list-group-item-text">Popularity count: {{ course.numberOfInterestedPeople }}</p>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <p class="lead">Tutor: {{ skill.tutor }}</p>
+                                    <p class="lead">Tutor: {{ course.tutor }}</p>
                                 </div>
                             </div>
                             <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10">
-                                <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-click="editSkill(skill.skillId)">Edit</a>
-                                <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-4" ng-click="deleteSkill(skill.skillId,$index)">Delete</a>
-                            </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10">
+                                    <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-click="subscribeForEmailNotification(course.skillId)">Subscribe for email notifications</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,15 +104,12 @@
 
 </div>
 
-    <script src="../js/app/app.js"></script>
-    <script src="../js/directives/directive.js"></script>
-    <script src="../js/factory/urlFactory.js"></script>
-    <script src="../js/login/loginService.js"></script>
-    <script src="../js/skill/skillService.js"></script>
-    <!--<script src="../js/login/loginController.js"></script>-->
-    <script src="../js/skill/skillController.js"></script>
+<script src="../js/app/app.js"></script>
+<script src="../js/directives/directive.js"></script>
+<script src="../js/factory/urlFactory.js"></script>
+<script src="../js/login/loginService.js"></script>
+<script src="../js/skill/skillService.js"></script>
+<!--<script src="../js/login/loginController.js"></script>-->
+<script src="../js/skill/skillController.js"></script>
 </body>
 </html>
-
-
-
