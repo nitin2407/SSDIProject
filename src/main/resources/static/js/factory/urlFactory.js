@@ -22,6 +22,10 @@ app.factory('urlFactory', function($window){
 	 	return "http://" + $window.location.host + "/html/courseEdit.html?id="+ id; 
 	};
 
+	urlFactory.skillHomebyId = function(id){
+	 	return "http://" + $window.location.host + "/html/courseHome.html?id="+ id; 
+	};
+
 	return urlFactory;
 	
 });

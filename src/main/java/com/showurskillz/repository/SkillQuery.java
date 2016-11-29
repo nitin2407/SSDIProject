@@ -26,6 +26,7 @@ public class SkillQuery implements ISkillQuery{
     private String query;
     private Time time;
     private Skill skill = new Skill();
+    private Post post;
 
 
     @Override
@@ -491,7 +492,39 @@ public class SkillQuery implements ISkillQuery{
 
     }
 
+    public List<Post> getDiscussionList(Connection conn,int id){
 
+        query = "select * from coursediscussions where skillId=?";
+        PreparedStatement pst = null;
+        List<Post> discussionList = new ArrayList<Post>();
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                post = new Post();
+                post.setUsername(rs.getString("username"));
+                post.setData(rs.getString("post"));
+                discussionList.add(post);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return discussionList;
+    }
 
+    public void postDiscussion(Connection conn,String reply,int id,String username){
+        query="Insert into coursediscussions VALUES (null,?,?,?)";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            pst.setString(2,username);
+            pst.setString(3,reply);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

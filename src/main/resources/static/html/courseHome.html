@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/profilestyle.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
@@ -22,7 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
 </head>
-<body ng-app="SkillsApp" ng-controller="Course">
+<body ng-app="SkillsApp" ng-controller="courseHomeCntrl">
     <nav id="header-nav" class="navbar default navbar-light bg-faded">
         <div class="container-fluid">
             <div class="navbar-header col-sm-2 col-xs-2 col-md-2">
@@ -41,7 +42,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <p>
-                                <a class="btn btn-outline-success" href="#">Profile</a>
+                                <a class="btn btn-outline-success" href="/profilePage.html">Profile</a>
                             </p>
                             <div class="dropdown-divider">
                                 <a href="#" type="submit" ng-click="logout()">Logout</a>
@@ -69,12 +70,11 @@
                     <form class='form-horizontal' role='form' name="userForm" ng-submit="submitForm(userForm.$valid)"
                           novalidate>
                         <div class='form-group'>
-                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Skill Name</label>
+                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Skill Name : </label>
                             <div class='col-md-6'>
                                 <div class='form-group'>
                                     <div class='col-md-11'>
-                                        <p ng-model="skill_Name" id='Skill Name'
-                                               placeholder='Skill Name' type='text' name="skill_Name" ng-required="true"></p>
+                                        <p id='Skill Name'>{{skill_Name}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,17 +82,19 @@
 
 
                         <div class='form-group'>
-                            <label class='control-label col-md-2 col-md-offset-2'>Category</label>
+                            <label class='control-label col-md-2 col-md-offset-2'>Category : </label>
                             <div class='col-md-6'>
+                                <div class='form-group'>
                                     <div class='col-md-11'>
-                                        <p ng-model="cate_gory"></p>
+                                        <p>{{cate_gory}}</p>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <div class='form-group'>
                             <!--<label class='control-label col-md-2 col-md-offset-2'>Timings</label>-->
                             <div class='col-md-7'>
-                                <label>Timings</label>            
+                                <label>Timings:</label>            
                                   <table class="table">
                                     <thead>
                                       <tr>
@@ -102,10 +104,10 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        <td>Monday</td>
-                                        <td>abc</td>
-                                        <td>xyz</td>
+                                      <tr ng-repeat="time in timings">
+                                        <td>{{time.day}}</td>
+                                        <td>{{ time.toTime | date: 'h:mm a' }}</td>
+                                        <td>{{ time.fromTime | date: 'h:mm a' }}</td>   
                                       </tr>
                                     </tbody>
                                   </table>
@@ -132,17 +134,54 @@
                             </div>
                         <!--</div>-->
                         <div class='form-group'>
-                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description</label>
+                            <label class='control-label col-md-2 col-md-offset-2' for='Skill Name'>Description : </label>
                             <div class='col-md-6'>
                                 <div class='form-group'>
                                     <div class='col-md-11' style="padding-left: 0px;padding-right: 0px;">
-                                        <span style="margin-bottom: 10px;border: none;box-shadow: none;" ng-model="skill_Description" class='form-control' id='id_description' name="skill_Description" rows='3'>asdasdasdasdasd</span>
+                                        <span style="margin-bottom: 10px;border: none;box-shadow: none;" class='form-control' id='id_description' name="skill_Description" rows='3'>{{skill_Description}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <div class='form-group' style="border-top: 2px solid black">
-                        <h5>Discussion Forum</h5>
+                        <div class='form-group' style="border-top: 2px solid black" ng-cloak layout-gt-sm="row" layout="column">
+
+                            <div flex-gt-sm="50" flex>
+                                <h5>Discussion Forum</h5>
+
+                                <!--<md-toolbar layout="row" class="md-hue-3">
+                                    <div class="md-toolbar-tools">
+                                        <span>Discussion Forum</span>
+                                    </div>
+                                </md-toolbar>-->
+
+                                <md-content>
+                                  <md-list class = "md-dense" flex>
+                                    <!--<md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>-->
+                                    <md-list-item class="md-2-line" ng-repeat="post in posts" ng-click="null">
+                                      <!--<img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />-->
+                                      <div class="md-list-item-text" layout="column">
+                                        <h3>{{ post.username }}</h3>
+                                        <!--<span class = "md-caption">{{Date.now() | date:'M/d/yy h:mm a'}}</span>-->
+                                        <p>{{ post.data }}</p>
+                                      </div>
+                                    </md-list-item>
+                                    <md-divider ></md-divider>
+                                    <div class="md-background" style="background-color: rgb(250,250,250);padding: 10px 10px 10px 10px;" layout-gt-sm="row">
+                                      <!--<input class="md-block" style="background-color: white;" flex-gt-sm>-->
+                                        
+                                        <textarea flex = "90" style="background-color: white;border-radius: 3px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" name = "post" ng-model="reply" id='id_post' placeholder='post' rows='2' ng-required="true"></textarea>
+                                        <md-button flex = "10" type="button" class="md-icon-button" style="color: blue;    align-self: center;margin: 0px;padding: 0px;" ng-click="reply_discussion()" ng-disabled="userForm.post.$invalid" aria-label="post">
+                                            <i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i>
+                                        </md-button>
+                                      
+                                    </div>
+                                </md-list>
+                                </md-content>
+                                </div>
+                            <!--<div ng-repeat = "post in posts">
+                                <span>{{post.username}} : </span>
+                                <span></span>-->
+
                         <!--<div class='col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-sm-4 col-xs-4'>
                             <button class='btn-lg btn-primary' type="button" ng-disabled="userForm.$invalid"
                                 ng-click="updateskill()">Save
@@ -159,6 +198,10 @@
     </div>
     <script src="../js/app/app.js"></script>
     <script src="../js/directives/directive.js"></script>
-    <script src="../js/controllers/controller.js"></script>
+    <script src="../js/factory/urlFactory.js"></script>
+    <script src="../js/login/loginService.js"></script>
+    <script src="../js/skill/skillService.js"></script>
+    <!--<script src="../js/login/loginController.js"></script>-->
+    <script src="../js/skill/skillController.js"></script>
 </body>
 </html>

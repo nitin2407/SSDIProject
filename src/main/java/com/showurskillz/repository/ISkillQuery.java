@@ -32,4 +32,6 @@ public interface ISkillQuery {
     void decreaseInterestedCount(Connection conn, int id);
     void removeInterestedUser(Connection conn,int id,String username);
     int getInterestedPeopleCount(int id, Connection conn);
+    List<Post> getDiscussionList(Connection conn,int id);
+    void postDiscussion(Connection conn,String reply,int id,String username);
 }

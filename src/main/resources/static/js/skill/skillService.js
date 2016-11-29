@@ -45,5 +45,13 @@ app.service('skillService',function($http,$rootScope){
         return $http.post('/manageSkill', dataObj);
     }
 
+    this.getPostsBySkillId = function(id){
+        return $http.get('/discussionForum/' + id);
+    }
+
+    this.postDiscussion = function(reply,id){
+        return $http.post('/postDiscussion/'+ reply + '/' + id);
+    }
+
 	
 });

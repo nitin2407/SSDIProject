@@ -1,16 +1,4 @@
-<script>
-    $(document).ready(function () {
-        $('#list').click(function (event) {
-            event.preventDefault();
-            $('#products .item').addClass('list-group-item');
-        });
-        $('#grid').click(function (event) {
-            event.preventDefault();
-            $('#products .item').removeClass('list-group-item');
-            $('#products .item').addClass('grid-group-item');
-        });
-    })
-</script>
+
 <div ng-controller="skillsController" ng-cloak>
   <md-content class="md-padding" layout-xs="column" layout="row" layout-wrap>
     <div flex-gt-xs flex-gt-sm layout="row" layout-xs="column" layout-sm="column" layout-wrap>
@@ -49,7 +37,7 @@
                             <!--<md-icon style = "fill: grey;" md-svg-icon="../images/thumb_up.svg"></md-icon> && auth.allow-->
                             <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
                         </md-button>
-                        <md-button>View</md-button>
+                        <md-button ng-click="viewSkill(skill.skillId)">View</md-button>
                         <!--<md-button>Action 2</md-button>-->
                     </md-card-actions>
                 </md-card>
