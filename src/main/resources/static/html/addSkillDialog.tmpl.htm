@@ -31,28 +31,28 @@
                                     <md-input-container class="md-block" layout-xs="row">
                                         <label class="Skill-timings">Timings</label><br/>
                                         <fieldset data-ng-repeat="choice in choices" class="md-block">
-                                        <md-input-container class="day" flex-gt-sm>
-                                            <label>Day</label>
-                                            <md-select ng-model="choice.day">
-                                                <!--<md-optgroup label="Day">-->
-                                                    <md-option ng-value="weekDay.name" ng-repeat="weekDay in days">
-                                                    {{weekDay.name}}
-                                                    <!--</md-option>-->
-                                                </md-optgroup>
-                                            </md-select>
-                                        </md-input-container>
-                                        <md-input-container flex-gt-sm>
-                                            <label>To</label>
-                                            <input type="time" id="exampleInput" name="input" ng-model="choice.toTime"
-                                            placeholder="To" required/>
-                                        </md-input-container>
-                                        <md-input-container flex-gt-sm>
-                                            <label>From</label>
-                                            <input type="time" id="exampleInput" name="input" ng-model="choice.fromTime"
-                                            placeholder="From" required/>
-                                        </md-input-container>                
-                                        <md-button class="remove md-raised md-warn" ng-show="$last" ng-click="removeChoice()">-</md-button>
-                                    </fieldset>
+                                            <md-input-container class="day" flex-gt-sm>
+                                                <label>Day</label>
+                                                <md-select ng-model="choice.day">
+                                                    <!--<md-optgroup label="Day">-->
+                                                        <md-option ng-value="weekDay.name" ng-repeat="weekDay in days">
+                                                        {{weekDay.name}}
+                                                        <!--</md-option>-->
+                                                    </md-optgroup>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container flex-gt-sm>
+                                                <label>To</label>
+                                                <input type="time" id="exampleInput" name="input" ng-model="choice.toTime"
+                                                placeholder="To" required/>
+                                            </md-input-container>
+                                            <md-input-container flex-gt-sm>
+                                                <label>From</label>
+                                                <input type="time" id="exampleInput" name="input" ng-model="choice.fromTime"
+                                                placeholder="From" required/>
+                                            </md-input-container>                
+                                            <md-button class="remove md-raised md-warn" ng-show="$last" ng-click="removeChoice()">-</md-button>
+                                        </fieldset>
                                     <md-button class="addfields md-raised md-primary" ng-click="addNewChoice()">+</md-button>
                                 </md-input-container>
                             </div></br>

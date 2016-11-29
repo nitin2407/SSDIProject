@@ -125,4 +125,14 @@ public class SkillController {
         return skillQuery.checkSkillInterest(dao.establishConnection(),id,(String) userSession.getAttribute("username"));
     }
 
+    @RequestMapping(path = "/discussionForum/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Post> getPosts(@PathVariable int id) {
+        return skillQuery.getDiscussionList(dao.establishConnection(), id);
+    }
+
+    @RequestMapping(path = "/postDiscussion/{reply}/{id}", method = RequestMethod.POST)
+    public void postDiscussion(@PathVariable("reply") String reply,@PathVariable("id") int id,HttpSession userSession) {
+        skillQuery.postDiscussion(dao.establishConnection(),reply,id,(String) userSession.getAttribute("username"));
+    }
+
 }

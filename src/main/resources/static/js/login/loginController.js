@@ -183,6 +183,10 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
                  }
             }
 
+            $scope.viewSkill = function (id) {
+              $window.location.href = urlFactory.skillHomebyId(id);
+            }
+
       /*$scope.checkInterest = function(){ 
         return skillService.checkInterest($scope.username);
           function(interestCheck){

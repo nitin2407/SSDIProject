@@ -244,6 +244,85 @@ app.controller('manageSkillsCntrl', function($scope, $http,$window,urlFactory,sk
     });
 
 
+app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlFactory,skillService,loginService) {
+
+
+	//$scope.today = $filter('date')(new Date(), 'MM/dd/yy');
+  //alert($scope.today);
+
+  	loginService.userDetails().then(
+          function (user) {
+              $scope.user = user.data;
+              if($scope.user.username==null){
+                  swal({
+                      title: 'Please login',
+                      type :'warning'
+                  });
+                  $timeout(function(){
+                      $window.location.href = urlFactory.index();
+                  },2000);
+              }
+              else{
+                  $scope.f_name = $scope.user.fname;
+                  $scope.username = $scope.user.username;
+              }
+          },
+          function (data,status) {
+              swal({
+                      title: 'Please login',
+                      type :'warning',
+                      showCloseButton: true
+                  });
+              $timeout(function(){
+                  $window.location.href = urlFactory.index();
+              },2000);
+
+          });
+
+  	$scope.skillId = skillService.getSkillIdParameter(document.URL);
+
+  	skillService.getSkillById($scope.skillId).then(
+          function (skillDetails) {
+              $scope.skillDetails = skillDetails.data;
+                  $scope.skill_ID = $scope.skillDetails.skillId;
+                  $scope.skill_Name = $scope.skillDetails.skillName;
+                  $scope.skill_Description = $scope.skillDetails.skillDescription;
+                  $scope.cate_gory = $scope.skillDetails.category;
+                  $scope.timings = $scope.skillDetails.time;
+                  skillService.getPostsBySkillId($scope.skillId).then(
+                  	function(postDetails){
+                  		$scope.posts = postDetails.data;	
+                  	})
+          },
+          function (data, status) {
+              swal({
+                  title: 'not able to retrieve skill details',
+                  type: 'warning',
+                  showCloseButton: true
+              });
+              $timeout(function () {
+                  var url = "http://" + $window.location.host + "/html/home.html";
+                  $window.location.href = url;
+              }, 2000)
+          });
+
+        	//$scope.posts = [];
+
+        	$scope.reply_discussion = function() {
+                var newItemNo = $scope.posts.length+1;
+                $scope.posts.push({username: $scope.username ,data: $scope.reply});
+                skillService.postDiscussion($scope.reply,$scope.skill_ID);
+                $scope.reply = "";
+            };
+
+            $scope.logout = function () {
+            loginService.logout().then(
+              function () {
+                $window.location.href = urlFactory.index();
+            });
+        };
+});
+
 
 
 
