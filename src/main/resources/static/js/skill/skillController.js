@@ -34,6 +34,7 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
     function ViewDialogController($scope, $mdDialog, $window,$timeout,urlFactory,skillService,skillId) {
 
       $scope.skillId = skillId;
+      $scope.isEnrolled = false;
 
       skillService.getSkillById($scope.skillId).then(
             function (skillDetails) {
@@ -44,7 +45,6 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
                     $scope.cate_gory = $scope.skillDetails.category;
                     $scope.timings = $scope.skillDetails.time;
                     $scope.tutor = $scope.skillDetails.tutor;
-                    isEnrolled = false;
             },
             function (data, status) {
                 swal({
@@ -68,6 +68,17 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
             $scope.answer = function (answer) {
                 $mdDialog.hide(answer);
             };
+
+            $scope.enrollSkill = function(){
+
+                skillService.enrollSkill($scope.skill_ID).then(
+                  function(){
+                    swal({
+                      title: 'Skill enrolled',
+                      type :'success'
+                    });
+                  });  
+            }
 
     }
 

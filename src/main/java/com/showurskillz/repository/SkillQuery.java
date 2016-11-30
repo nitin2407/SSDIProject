@@ -590,4 +590,17 @@ public class SkillQuery implements ISkillQuery {
         return courseList;
     }
 
+    public void enrollSkill(Connection conn,int id,String username){
+        query = "insert into enrolledskills values (?,?)";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

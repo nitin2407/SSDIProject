@@ -1,6 +1,7 @@
 package com.showurskillz.repository;
 
 import com.showurskillz.model.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +38,5 @@ public interface ISkillQuery {
     List<Skill> retrieveAllEnrolledCourses(Connection conn, String username);
     void subscribeForEmailNotifications(Connection conn, int skillId, String username);
     List<Skill> retrieveAllInterestedCourses(Connection conn, String username);
+    void enrollSkill(Connection conn,int id,String username);
 }

@@ -153,4 +153,9 @@ public class SkillController {
         return skillQuery.retrieveAllInterestedCourses(dao.establishConnection(), (String) userSession.getAttribute("username"));
     }
 
+    @RequestMapping(path = "/enrollSkill/{id}", method = RequestMethod.POST)
+    public void getPosts(@PathVariable int id,HttpSession userSession) {
+        skillQuery.enrollSkill(dao.establishConnection(), id,(String)userSession.getAttribute("username"));
+    }
+
 }

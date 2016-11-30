@@ -101,8 +101,8 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
                 var newItemNo = $scope.choices.length + 1;
                 $scope.choices.push({
                     day: 'Monday',
-                    toTime: '+new Date(1970, 0, 1, 14, 57, 0)+',
-                    fromTime: '+new Date(1970, 0, 1, 14, 57, 0)'
+                    toTime: new Date(1970, 0, 1, 14, 57, 0),
+                    fromTime: new Date(1970, 0, 1, 14, 57, 0)
                 });
             };
 

@@ -53,5 +53,9 @@ app.service('skillService',function($http,$rootScope){
         return $http.post('/postDiscussion/'+ reply + '/' + id);
     }
 
+    this.enrollSkill = function(id){
+        return $http.post('/enrollSkill/'+ id);
+    }
+
 	
 });
