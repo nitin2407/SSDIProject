@@ -1,4 +1,4 @@
-app.controller('skillsController', function($rootScope, $http, $scope,skillService,userFactory){
+app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,skillService,userFactory){
 
     skillService.getSkills().then(
         function (skills) {
@@ -12,12 +12,66 @@ app.controller('skillsController', function($rootScope, $http, $scope,skillServi
                   }
               }
           });
-
-
           $rootScope.skills = skills.data;
             //checkInterest($rootScope.skills.);
         }
     );
+
+    $scope.openSkill = function(id){
+      $mdDialog.show({
+        controller: ViewDialogController,
+        templateUrl: 'viewSkillDialog.tmpl.htm',
+        windowClass: 'large-Modal',
+        parent: angular.element(document.body),
+        targetEvent: event,
+        clickOutsideToClose:true,
+        locals: {
+          skillId: id
+        }    
+      });
+    }
+
+    function ViewDialogController($scope, $mdDialog, $window,$timeout,urlFactory,skillService,skillId) {
+
+      $scope.skillId = skillId;
+
+      skillService.getSkillById($scope.skillId).then(
+            function (skillDetails) {
+                    $scope.skillDetails = skillDetails.data;
+                    $scope.skill_ID = $scope.skillDetails.skillId;
+                    $scope.skill_Name = $scope.skillDetails.skillName;
+                    $scope.skill_Description = $scope.skillDetails.skillDescription;
+                    $scope.cate_gory = $scope.skillDetails.category;
+                    $scope.timings = $scope.skillDetails.time;
+                    $scope.tutor = $scope.skillDetails.tutor;
+                    isEnrolled = false;
+            },
+            function (data, status) {
+                swal({
+                    title: 'not able to retrieve skill details',
+                    type: 'warning',
+                    showCloseButton: true
+                });
+                $timeout(function () {
+                    $window.location.href = urlFactory.home();
+                }, 2000)
+            });
+
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
+
+    }
+
+            
 });
 
 
@@ -98,6 +152,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
                   $scope.skill_Description = $scope.skillDetails.skillDescription;
                   $scope.cate_gory = $scope.skillDetails.category;
                   $scope.timings = $scope.skillDetails.time;
+                  $scope.tutor = $scope.skillDetails.tutor;
           },
           function (data, status) {
               swal({
@@ -124,7 +179,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
 
     $scope.addNewChoice = function() {
         var newItemNo = $scope.timings.length+1;
-        $scope.timings.push({day: 'Monday',toTime:'+new Date(1970, 0, 1, 14, 57, 0)+',fromTime:'+new Date(1970, 0, 1, 14, 57, 0)'});
+        $scope.timings.push({day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0) ,fromTime: new Date(1970, 0, 1, 14, 57, 0) });
     };
 
     $scope.removeChoice = function() {
@@ -289,6 +344,7 @@ app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlF
                   $scope.skill_Description = $scope.skillDetails.skillDescription;
                   $scope.cate_gory = $scope.skillDetails.category;
                   $scope.timings = $scope.skillDetails.time;
+                  $scope.tutor = $scope.skillDetails.tutor;
                   skillService.getPostsBySkillId($scope.skillId).then(
                   	function(postDetails){
                   		$scope.posts = postDetails.data;	

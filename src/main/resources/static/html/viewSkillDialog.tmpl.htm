@@ -1,0 +1,37 @@
+            <md-dialog class = "skillDialog" aria-label="View skill">
+                <div layout="column" ng-cloak class="md-inline-form">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>{{skill_Name}}</h2>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="cancel()">Cancel</md-button>
+                        </div>  
+                    </md-toolbar>
+                    <md-dialog-content layout-padding>
+                        <div class="md-dialog-content" style = "font-size: 15px;"> 
+                            <div layout-wrap>
+                            <p style = "font-size: 20px;"> 
+                                <!--<label>Skill Name : </label>-->
+                                <span>{{skill_Description}}</span>
+                            </p>
+                            </div>
+                            <div> 
+                                <label>Timings : </label>
+                                <div ng-repeat = "time in timings">
+                                    <span>{{$index+1}}.</span>
+                                    <span> {{time.day}}, </span>
+                                    <span> {{ time.toTime | date: 'h:mm a' }} - </span>
+                                    <span>{{ time.fromTime | date: 'h:mm a' }}.</span>
+                                </div>
+                            </div>
+
+                            <h4><strong>Taught By :</strong> {{tutor}} </h4>
+
+                            <md-dialog-actions layout="row" layout-align="center center" layout-wrap>
+                                <md-button class='md-raised md-primary' type="submit" ng-if='!isEnrolled' ng-click="enrollSkill()">Enroll</md-button>
+                                <md-button class='md-raised md-primary' type="submit" ng-if='isEnrolled' ng-click="enrollSkill()">Disenroll</md-button>
+                            </md-dialog-actions>          
+                        </div>
+                    </md-dialog-content>
+                </div>  
+            </md-dialog>

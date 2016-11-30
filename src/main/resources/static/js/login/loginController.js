@@ -184,7 +184,8 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
             }
 
             $scope.viewSkill = function (id) {
-              $window.location.href = urlFactory.skillHomebyId(id);
+              $window.location.href = urlFactory.skillPopUpbyId(id);
+              //$window.location.href = urlFactory.skillHomebyId(id);
             }
 
       /*$scope.checkInterest = function(){ 
