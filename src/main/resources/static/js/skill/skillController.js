@@ -1,8 +1,9 @@
-app.controller('skillsController', function ($rootScope, $http, $scope, skillService, userFactory) {
+
+app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,skillService,userFactory){
+
 
     skillService.getSkills().then(
         function (skills) {
-
             angular.forEach(skills.data, function (value, index) {
                 value.isInterested = true;
                 for (i = 0; i < value.interestedUsers.length; i++) {
@@ -12,12 +13,65 @@ app.controller('skillsController', function ($rootScope, $http, $scope, skillSer
                     }
                 }
             });
-
-
             $rootScope.skills = skills.data;
-            //checkInterest($rootScope.skills.);
         }
     );
+
+    $scope.openSkill = function(id){
+      $mdDialog.show({
+        controller: ViewDialogController,
+        templateUrl: 'viewSkillDialog.tmpl.htm',
+        windowClass: 'large-Modal',
+        parent: angular.element(document.body),
+        targetEvent: event,
+        clickOutsideToClose:true,
+        locals: {
+          skillId: id
+        }    
+      });
+    }
+
+    function ViewDialogController($scope, $mdDialog, $window,$timeout,urlFactory,skillService,skillId) {
+
+      $scope.skillId = skillId;
+
+      skillService.getSkillById($scope.skillId).then(
+            function (skillDetails) {
+                    $scope.skillDetails = skillDetails.data;
+                    $scope.skill_ID = $scope.skillDetails.skillId;
+                    $scope.skill_Name = $scope.skillDetails.skillName;
+                    $scope.skill_Description = $scope.skillDetails.skillDescription;
+                    $scope.cate_gory = $scope.skillDetails.category;
+                    $scope.timings = $scope.skillDetails.time;
+                    $scope.tutor = $scope.skillDetails.tutor;
+                    isEnrolled = false;
+            },
+            function (data, status) {
+                swal({
+                    title: 'not able to retrieve skill details',
+                    type: 'warning',
+                    showCloseButton: true
+                });
+                $timeout(function () {
+                    $window.location.href = urlFactory.home();
+                }, 2000)
+            });
+
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
+
+    }
+
+            
 });
 
 
@@ -45,77 +99,76 @@ app.controller('MainController', function ($scope) {
 
 });
 
-app.controller('CourseControl', function ($scope, $http, $window, $timeout, $location, urlFactory, loginService, skillService) {
 
-    loginService.userDetails().then(
-        function (user) {
-            $scope.user = user.data;
-            if ($scope.user.username == null) {
-                swal({
-                    title: 'Please login',
-                    type: 'warning'
-                });
-                $timeout(function () {
-                    $window.location.href = urlFactory.index();
-                }, 2000);
-            }
-            else {
-                $scope.f_name = $scope.user.fname;
-            }
-        },
-        function (data, status) {
-            swal({
-                title: 'Please login',
-                type: 'warning',
-                showCloseButton: true
-            });
-            $timeout(function () {
-                $window.location.href = urlFactory.index();
-            }, 2000);
+app.controller('CourseControl',function($scope,$http, $window,$timeout,$location,urlFactory,loginService,skillService) {
 
-        });
+        loginService.userDetails().then(
+          function (user) {
+              $scope.user = user.data;
+              if($scope.user.username==null){
+                  swal({
+                      title: 'Please login',
+                      type :'warning'
+                  });
+                  $timeout(function(){
+                      $window.location.href = urlFactory.index();
+                  },2000);
+              }
+              else{
+                  $scope.f_name = $scope.user.fname;
+              }
+          },
+          function (data,status) {
+              swal({
+                      title: 'Please login',
+                      type :'warning',
+                      showCloseButton: true
+                  });
+              $timeout(function(){
+                  $window.location.href = urlFactory.index();
+              },2000);
+
+          });
 
 
-    /*var params = document.URL.split("?")[1].split("&");
-     var strParams = "";
-     for (var i = 0; i < params.length; i = i + 1) {
-     var singleParam = params[i].split("=");
-     if (singleParam[0] == "id")
-     $scope.skillId = singleParam[1];
-     }*/
 
-    $scope.skillId = skillService.getSkillIdParameter(document.URL);
+        /*var params = document.URL.split("?")[1].split("&");
+        var strParams = "";
+        for (var i = 0; i < params.length; i = i + 1) {
+            var singleParam = params[i].split("=");
+            if (singleParam[0] == "id")
+                $scope.skillId = singleParam[1];
+            }*/
 
-    $scope.timings = [{
-        day: 'Monday',
-        toTime: new Date(1970, 0, 1, 14, 57, 0),
-        fromTime: new Date(1970, 0, 1, 14, 57, 0)
-    }];
+        $scope.skillId = skillService.getSkillIdParameter(document.URL);
 
-    skillService.getSkillById($scope.skillId).then(
-        function (skillDetails) {
-            $scope.skillDetails = skillDetails.data;
-            $scope.skill_ID = $scope.skillDetails.skillId;
-            $scope.skill_Name = $scope.skillDetails.skillName;
-            $scope.skill_Description = $scope.skillDetails.skillDescription;
-            $scope.cate_gory = $scope.skillDetails.category;
-            $scope.timings = $scope.skillDetails.time;
-        },
-        function (data, status) {
-            swal({
-                title: 'not able to retrieve skill details',
-                type: 'warning',
-                showCloseButton: true
-            });
-            $timeout(function () {
-                var url = "http://" + $window.location.host + "/html/manageCourses.html";
-                $window.location.href = url;
-            }, 2000)
-        });
+        $scope.timings = [{day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0),fromTime: new Date(1970, 0, 1, 14, 57, 0)}];
+        
+        skillService.getSkillById($scope.skillId).then(
+          function (skillDetails) {
+              $scope.skillDetails = skillDetails.data;
+                  $scope.skill_ID = $scope.skillDetails.skillId;
+                  $scope.skill_Name = $scope.skillDetails.skillName;
+                  $scope.skill_Description = $scope.skillDetails.skillDescription;
+                  $scope.cate_gory = $scope.skillDetails.category;
+                  $scope.timings = $scope.skillDetails.time;
+                  $scope.tutor = $scope.skillDetails.tutor;
+          },
+          function (data, status) {
+              swal({
+                  title: 'not able to retrieve skill details',
+                  type: 'warning',
+                  showCloseButton: true
+              });
+              $timeout(function () {
+                  var url = "http://" + $window.location.host + "/html/manageCourses.html";
+                  $window.location.href = url;
+              }, 2000)
+          });
 
-    $scope.cancel = function () {
-        $window.location.href = urlFactory.manageCourses();
-    };
+        $scope.cancel = function () {
+            $window.location.href = urlFactory.manageCourses();
+        };
 
     $scope.logout = function () {
         loginService.logout().then(
@@ -124,13 +177,9 @@ app.controller('CourseControl', function ($scope, $http, $window, $timeout, $loc
             });
     };
 
-    $scope.addNewChoice = function () {
-        var newItemNo = $scope.timings.length + 1;
-        $scope.timings.push({
-            day: 'Monday',
-            toTime: '+new Date(1970, 0, 1, 14, 57, 0)+',
-            fromTime: '+new Date(1970, 0, 1, 14, 57, 0)'
-        });
+    $scope.addNewChoice = function() {
+        var newItemNo = $scope.timings.length+1;
+        $scope.timings.push({day: 'Monday',toTime: new Date(1970, 0, 1, 14, 57, 0) ,fromTime: new Date(1970, 0, 1, 14, 57, 0) });
     };
 
     $scope.removeChoice = function () {
@@ -249,83 +298,84 @@ app.controller('manageCtrl', function ($scope, $http, $window, $timeout, urlFact
 });
 
 
-app.controller('courseHomeCntrl', function ($scope, $http, $window, $timeout, urlFactory, skillService, loginService) {
+app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlFactory,skillService,loginService) {
 
 
-    //$scope.today = $filter('date')(new Date(), 'MM/dd/yy');
-    //alert($scope.today);
+	//$scope.today = $filter('date')(new Date(), 'MM/dd/yy');
+  //alert($scope.today);
 
-    loginService.userDetails().then(
-        function (user) {
-            $scope.user = user.data;
-            if ($scope.user.username == null) {
-                swal({
-                    title: 'Please login',
-                    type: 'warning'
-                });
-                $timeout(function () {
-                    $window.location.href = urlFactory.index();
-                }, 2000);
-            }
-            else {
-                $scope.f_name = $scope.user.fname;
-                $scope.username = $scope.user.username;
-            }
-        },
-        function (data, status) {
-            swal({
-                title: 'Please login',
-                type: 'warning',
-                showCloseButton: true
-            });
-            $timeout(function () {
-                $window.location.href = urlFactory.index();
-            }, 2000);
+  	loginService.userDetails().then(
+          function (user) {
+              $scope.user = user.data;
+              if($scope.user.username==null){
+                  swal({
+                      title: 'Please login',
+                      type :'warning'
+                  });
+                  $timeout(function(){
+                      $window.location.href = urlFactory.index();
+                  },2000);
+              }
+              else{
+                  $scope.f_name = $scope.user.fname;
+                  $scope.username = $scope.user.username;
+              }
+          },
+          function (data,status) {
+              swal({
+                      title: 'Please login',
+                      type :'warning',
+                      showCloseButton: true
+                  });
+              $timeout(function(){
+                  $window.location.href = urlFactory.index();
+              },2000);
 
-        });
+          });
 
-    $scope.skillId = skillService.getSkillIdParameter(document.URL);
+  	$scope.skillId = skillService.getSkillIdParameter(document.URL);
 
-    skillService.getSkillById($scope.skillId).then(
-        function (skillDetails) {
-            $scope.skillDetails = skillDetails.data;
-            $scope.skill_ID = $scope.skillDetails.skillId;
-            $scope.skill_Name = $scope.skillDetails.skillName;
-            $scope.skill_Description = $scope.skillDetails.skillDescription;
-            $scope.cate_gory = $scope.skillDetails.category;
-            $scope.timings = $scope.skillDetails.time;
-            skillService.getPostsBySkillId($scope.skillId).then(
-                function (postDetails) {
-                    $scope.posts = postDetails.data;
-                })
-        },
-        function (data, status) {
-            swal({
-                title: 'not able to retrieve skill details',
-                type: 'warning',
-                showCloseButton: true
-            });
-            $timeout(function () {
-                var url = "http://" + $window.location.host + "/html/home.html";
-                $window.location.href = url;
-            }, 2000)
-        });
+  	skillService.getSkillById($scope.skillId).then(
+          function (skillDetails) {
+              $scope.skillDetails = skillDetails.data;
+                  $scope.skill_ID = $scope.skillDetails.skillId;
+                  $scope.skill_Name = $scope.skillDetails.skillName;
+                  $scope.skill_Description = $scope.skillDetails.skillDescription;
+                  $scope.cate_gory = $scope.skillDetails.category;
+                  $scope.timings = $scope.skillDetails.time;
+                  $scope.tutor = $scope.skillDetails.tutor;
+                  skillService.getPostsBySkillId($scope.skillId).then(
+                  	function(postDetails){
+                  		$scope.posts = postDetails.data;	
+                  	})
+          },
+          function (data, status) {
+              swal({
+                  title: 'not able to retrieve skill details',
+                  type: 'warning',
+                  showCloseButton: true
+              });
+              $timeout(function () {
+                  var url = "http://" + $window.location.host + "/html/home.html";
+                  $window.location.href = url;
+              }, 2000)
+          });
 
-    //$scope.posts = [];
+        	//$scope.posts = [];
 
-    $scope.reply_discussion = function () {
-        var newItemNo = $scope.posts.length + 1;
-        $scope.posts.push({username: $scope.username, data: $scope.reply});
-        skillService.postDiscussion($scope.reply, $scope.skill_ID);
-        $scope.reply = "";
-    };
+        	$scope.reply_discussion = function() {
+                var newItemNo = $scope.posts.length+1;
+                $scope.posts.push({username: $scope.username ,data: $scope.reply});
+                skillService.postDiscussion($scope.reply,$scope.skill_ID);
+                $scope.reply = "";
+            };
 
-    $scope.logout = function () {
-        loginService.logout().then(
-            function () {
-                $window.location.href = urlFactory.index();
-            });
-    };
+          $scope.logout = function () {
+              loginService.logout().then(
+                  function () {
+                      $window.location.href = urlFactory.index();
+                  });
+          };
 });
 
 app.controller('enrolledSkillsController', function ($scope, $http) {

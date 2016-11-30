@@ -154,10 +154,10 @@ li.dropdown-toggle {
 
 md-dialog.md-transition-in{
     min-width: 200px !important;
-    width: 500px !important;
-    max-height: 600px !important;
+    /*width: 500px !important;*/
+    /*max-height: 600px !important;*/
     top: 35px !important;
-    height: 100% !important; 
+    /*height: 100% !important;*/ 
 }
 
 md-dialog-actions>.md-primary:not([disabled]):hover {
@@ -235,8 +235,21 @@ body.md-dialog-is-showing {
 }
 
 .skillDialog{
-    max-height: 75% !important;
+    max-height: 95% !important;*/
+    
 }
+
+.md-dialog-container{
+    /*top: 10% !important;
+    max-height: 95% !important;*/
+    z-index: 999 !important;
+}
+
+/*.dialogUsage #popupContainer {
+    /*top: 10% !important;
+    max-height: 75% !important; 
+    z-index: 999 !important;
+}*/
 
 
 

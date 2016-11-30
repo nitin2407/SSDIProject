@@ -24,7 +24,7 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content>
-                        <p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>
+                        <!--<p class="group inner list-group-item-text">{{ skill.skillDescription }}</p>-->
                         <p class="group inner list-group-item-text">Category: {{ skill.category }}</p>
                         <p class="group inner list-group-item-text">Popularity count: {{ skill.numberOfInterestedPeople }}</p>
                     </md-card-content>
@@ -37,7 +37,8 @@
                             <!--<md-icon style = "fill: grey;" md-svg-icon="../images/thumb_up.svg"></md-icon> && auth.allow-->
                             <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
                         </md-button>
-                        <md-button ng-click="viewSkill(skill.skillId)">View</md-button>
+                        <md-button type="button" ng-click="openSkill(skill.skillId)">View</md-button>
+                        <!--md-button ng-click="viewSkill(skill.skillId)">View</md-button>-->
                         <!--<md-button>Action 2</md-button>-->
                     </md-card-actions>
                 </md-card>
