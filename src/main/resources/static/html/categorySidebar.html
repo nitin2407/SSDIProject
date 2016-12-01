@@ -19,6 +19,14 @@
             <input type='checkbox' value="{{category}}" check-list='checked_category'> {{category}}<br><br>
           </span>
 
+          <div class="categorybar">
+            <label style="font-size:20px; letter-spacing: 0.08em; color:white">Filters:</label>
+          </div>
+
+          <span ng-repeat="filter in filters">
+            <input type='checkbox' value="{{filter}}" check-list='checked_filter'> {{filter}}<br><br>
+          </span>
+
         </div>
 
 

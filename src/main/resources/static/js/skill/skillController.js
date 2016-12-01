@@ -87,8 +87,11 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
 
 
 app.controller('MainController', function ($scope) {
-    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking', 'zipcode', 'city'];
+    $scope.categories = ['study', 'dance', 'singing', 'arts', 'sports', 'cooking'];
     $scope.checked_category = [];
+
+    $scope.filters = ['zipcode', 'city'];
+    $scope.checked_filter = [];
     /*$scope.toggle = function (item, list) {
      var idx = list.indexOf(item);
      if (idx > -1) {
@@ -103,10 +106,10 @@ app.controller('MainController', function ($scope) {
      return list.indexOf(item) > -1;
      };*/
 
-    $scope.addFruit = function (category) {
+    /*$scope.addFruit = function (category) {
         if ($scope.checked_category.indexOf(category) != -1) return;
         $scope.checked_category.push(category);
-    };
+    };*/
 
 });
 
