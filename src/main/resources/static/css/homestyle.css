@@ -2,7 +2,7 @@ html{
     overflow-x:hidden;
 }
 body {
-    font-family: "Oxygen", sans-serif;
+    font-family: "roboto", sans-serif;
 
     position: relative;
     background: #fff;
@@ -31,7 +31,7 @@ ul {
     /*border-radius: 1px !important;*/
 }
 nav {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(50,50, 50,1);
     padding: 10px 0;
     transition: all 0.3s linear;
     box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
@@ -56,7 +56,7 @@ nav:hover {
 	color: #fff;
 	font-weight: bold;
 }
-.navbar-nav li a {
+/*.navbar-nav li a {
     color: black;
     font-size: 15px;
     font-weight: 300;
@@ -72,25 +72,25 @@ nav:hover {
 .nav>li>a:active{
     background: transparent;
     font-weight: 600;
-}
+}*/
 
 .dropdown-divider{
-    border-top: 1px solid black;
+    border-top: 1px solid white;
     padding: 0px;
 }
 
-.dropdown-divider>a{
+/*.dropdown-divider>a{
     display: block; 
-}
+}*/
 
-.dropdown-divider>a:focus,
+/*.dropdown-divider>a:focus,
 .dropdown-divider>a:hover
 {
     border: 1px solid black;
     background-color: black;
     color: white; 
     text-decoration: none;
-}
+}*/
 .active {
     border-bottom: 2px solid #fff;
     transition-duration: 0.4s;
@@ -124,20 +124,31 @@ li.dropdown-toggle {
 }
 
 .dropdown-menu{
-    background-color: white !important;
-    float: right !important;
-    width: 10px !important;
-    border: 2px solid black !important;
+    background-color: rgba(50,50, 50,1) !important;
+    /*float: right !important;*/
+    width: 100% !important;
+    /*border: 2px solid black !important;*/
 }
 
 .dropdown-menu>p{
     padding: auto !important;
     margin: auto !important;
 }
-.dropdown-menu>div{
+
+.dropdown-menu>li>a{
+    color: white !important;
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus
+{
+    background-color: rgba(0,0, 0,1) !important;
+    color: white !important;
+}
+/*.dropdown-menu>div{
     padding-bottom: 0px !important;
     margin-bottom: 0px !important;
-}
+}*/
 
 .btn{
     padding-left: 0px;
@@ -145,7 +156,12 @@ li.dropdown-toggle {
 
 
 @media screen and (min-width: 0px) and (max-width: 400px) {
-  .navbar-brand {font-size: 12px;}  /* show it on small screens */
+  .navbar-brand {font-size: 12px;} 
+  .dropdown-menu{
+    background-color: transparent !important;
+    width: 100% !important;
+}
+
 }
 
 #skill_name{
