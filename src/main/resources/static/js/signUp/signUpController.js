@@ -53,7 +53,7 @@ app.controller('signUpCntrl',function($scope,$http, $window,$timeout,urlFactory,
 //for profile page
 app.controller('profileCntrl',function($scope,$http, $window,$timeout,urlFactory,signUpService,loginService) {
 
-    /*loginService.userDetails().then(
+    loginService.userDetails().then(
     	function (user) {
 	        $scope.user=user.data;
 	        if($scope.user.username==null){
@@ -89,7 +89,7 @@ app.controller('profileCntrl',function($scope,$http, $window,$timeout,urlFactory
 	        $timeout(function(){
 	            $window.location.href = urlFactory.index();
 	        },2000)
-    	});*/
+    	});
 
     $scope.cancel = function () {
         $window.location.href = urlFactory.home();

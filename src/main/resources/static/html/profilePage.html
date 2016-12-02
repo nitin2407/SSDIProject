@@ -23,7 +23,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
       <!--<script src="../js/script.js"></script>-->
   </head>
-  <body ng-app="SkillsApp" ng-cloak>
+  <body ng-app="SkillsApp" ng-controller="profileCntrl" ng-cloak>
     <nav class="navbar navbar-fixed-top z-depth-1" role="navigation">
         <!--<nav id="header-nav" class="navbar default navbar-light bg-faded">-->
             <!--<div class="container-fluid">-->
@@ -37,7 +37,7 @@
                     </button>
                     <a class="navbar-brand waves-effect waves-light" href="/html/home.html">ShowYourSkillz</a></li>
                 </div>
-                <div class="collapse navbar-collapse navbar-right" ng-controller="profileCntrl"  id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav btn-group">
                         <li class="nav-item dropdown" id="menuLogin">
                             <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{name}}</button>
