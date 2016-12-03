@@ -47,6 +47,7 @@ public class SkillQuery implements ISkillQuery {
                 skill.setTutor(rs.getString("tutor"));
                 skill.setNumberOfInterestedPeople(rs.getInt("interestedPeopleCount"));
                 skill.setInterestedUsers(getInterestedUsersList(conn, skill.getSkillId()));
+                //skill.setEnrolledUsers(getEnrolledUsersList(conn, skill.getSkillId()));
                 skillList.add(skill);
             }
             rs.close();
@@ -77,6 +78,7 @@ public class SkillQuery implements ISkillQuery {
                 skill.setCategory(rs.getString("category"));
                 skill.setTutor(tutor);
                 skill.setNumberOfInterestedPeople(rs.getInt("interestedPeopleCount"));
+                skill.setEnrolledUsers(getEnrolledUsersList(conn, id));
                 rs.close();
                 //conn.close();
             }
@@ -463,6 +465,23 @@ public class SkillQuery implements ISkillQuery {
         return userList;
     }
 
+    public List<String> getEnrolledUsersList(Connection conn, int id) {
+        query = "select * from enrolledskills where skillId=?";
+        PreparedStatement pst = null;
+        List<String> userList = new ArrayList<String>();
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                userList.add(rs.getString("user_name"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return userList;
+    }
+
     public boolean checkSkillInterest(Connection conn, int id, String username) {
 
         query = "select * from skillinterest where skillId=? and username=?";
@@ -638,4 +657,18 @@ public class SkillQuery implements ISkillQuery {
         }
         return listOfSubscribedUsers;
     }
+
+    public void DeEnrollSkill(Connection conn,int id,String username){
+        query = "delete from enrolledskills where skillId = ? and user_name = ?)";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -163,8 +163,13 @@ public class SkillController {
     }
 
     @RequestMapping(path = "/enrollSkill/{id}", method = RequestMethod.POST)
-    public void getPosts(@PathVariable int id,HttpSession userSession) {
+    public void enrollSkill(@PathVariable int id,HttpSession userSession) {
         skillQuery.enrollSkill(dao.establishConnection(), id,(String)userSession.getAttribute("username"));
+    }
+
+    @RequestMapping(path = "/deEnrollSkill/{id}", method = RequestMethod.POST)
+    public void deEnrollSkill(@PathVariable int id,HttpSession userSession) {
+        skillQuery.DeEnrollSkill(dao.establishConnection(), id,(String)userSession.getAttribute("username"));
     }
 
 }

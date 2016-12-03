@@ -41,4 +41,5 @@ public interface ISkillQuery {
     List<Skill> retrieveAllInterestedCourses(Connection conn, String username);
     void enrollSkill(Connection conn,int id,String username);
     List<String> retrieveAllUsersEnrolledForSubscriptionInACourse(Connection conn, int skillId);
+    void DeEnrollSkill(Connection conn,int id,String username);
 }

@@ -6,18 +6,25 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
         function (skills) {
             angular.forEach(skills.data, function (value, index) {
                 value.isInterested = true;
+                value.isEnrolled = false;
                 for (i = 0; i < value.interestedUsers.length; i++) {
                     if (value.interestedUsers[i] == $rootScope.username) {
                         value.isInterested = false;
                         break;
                     }
                 }
+                /*for (i = 0; i < value.enrolledUsers.length; i++) {
+                    if (value.enrolledUsers[i] == $rootScope.username) {
+                        value.isEnrolled = true;
+                        break;
+                    }
+                }*/
             });
             $rootScope.skills = skills.data;
         }
     );
 
-    $scope.openSkill = function(id){
+    $scope.openSkill = function(skill){
       $mdDialog.show({
         controller: ViewDialogController,
         templateUrl: 'viewSkillDialog.tmpl.htm',
@@ -26,15 +33,15 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
         targetEvent: event,
         clickOutsideToClose:true,
         locals: {
-          skillId: id
+          skillData: skill
         }    
       });
     }
 
-    function ViewDialogController($scope, $mdDialog, $window,$timeout,urlFactory,skillService,skillId) {
+    function ViewDialogController($scope, $mdDialog, $window,$timeout,urlFactory,skillService,skillData) {
 
-      $scope.skillId = skillId;
-      $scope.isEnrolled = false;
+      $scope.skillId = skillData.skillId;
+      //$scope.isEnrolled = false;
 
       skillService.getSkillById($scope.skillId).then(
             function (skillDetails) {
@@ -45,6 +52,13 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
                     $scope.cate_gory = $scope.skillDetails.category;
                     $scope.timings = $scope.skillDetails.time;
                     $scope.tutor = $scope.skillDetails.tutor;
+                    $scope.skillDetails.isEnrolled = false;
+                    for (i = 0; i < $scope.skillDetails.enrolledUsers.length; i++) {
+                        if ($scope.skillDetails.enrolledUsers[i] == $rootScope.username) {
+                            $scope.skillDetails.isEnrolled = true;
+                            break;
+                        }
+                    }
             },
             function (data, status) {
                 swal({
@@ -71,13 +85,24 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
 
             $scope.enrollSkill = function(){
 
-                skillService.enrollSkill($scope.skill_ID).then(
-                  function(){
-                    swal({
-                      title: 'Skill enrolled',
-                      type :'success'
-                    });
-                  });  
+              if(!$scope.skillDetails.isEnrolled)
+                 {
+                    skillService.enrollSkill($scope.skillId).then(
+                      function () {
+                        $scope.skillDetails.isEnrolled = true;
+                        swal({
+                          title: 'Skill enrolled',
+                          type :'success'
+                        });
+                      })
+                 }
+                 else
+                 {
+                    skillService.deEnrollSkill($scope.skillId).then(
+                      function () {
+                        $scope.skillDetails.isEnrolled = false;
+                      })  
+                 }  
             }
 
     }

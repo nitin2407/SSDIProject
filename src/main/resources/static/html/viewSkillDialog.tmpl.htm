@@ -28,8 +28,8 @@
                             <h4><strong>Taught By :</strong> {{tutor}} </h4>
 
                             <md-dialog-actions layout="row" layout-align="center center" layout-wrap>
-                                <md-button class='md-raised md-primary' type="submit" ng-if='!isEnrolled' ng-click="enrollSkill()">Enroll</md-button>
-                                <md-button class='md-raised md-primary' type="submit" ng-if='isEnrolled' ng-click="enrollSkill()">Disenroll</md-button>
+                                <md-button class='md-raised md-primary' type="submit" ng-if='!skillDetails.isEnrolled' ng-click="enrollSkill()">Enroll</md-button>
+                                <md-button class='md-raised md-primary' type="submit" ng-if='skillDetails.isEnrolled' ng-click="enrollSkill()">Disenroll</md-button>
                             </md-dialog-actions>          
                         </div>
                     </md-dialog-content>

@@ -57,5 +57,9 @@ app.service('skillService',function($http,$rootScope){
         return $http.post('/enrollSkill/'+ id);
     }
 
+    this.deEnrollSkill = function(id){
+        return $http.post('/deEnrollSkill/'+ id);
+    }
+
 	
 });
