@@ -562,6 +562,20 @@ public class SkillQuery implements ISkillQuery {
     }
 
     @Override
+    public void unsubscribeFromEmailNotifications(Connection conn, int skillId, String username) {
+        query = "delete from mailinglist where skillId=? and username=?";
+        PreparedStatement pst = null;
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, skillId);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Skill> retrieveAllInterestedCourses(Connection conn, String username) {
         query = "select s.skillId, s.skillName, s.tutor, s.skillDescription, s.category, s.interestedPeopleCount from skills s inner join skillinterest e on s.skillId=e.skillId where e.username=?";
 

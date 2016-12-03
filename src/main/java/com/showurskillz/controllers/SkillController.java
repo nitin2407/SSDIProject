@@ -150,6 +150,12 @@ public class SkillController {
          skillQuery.subscribeForEmailNotifications(dao.establishConnection(), skillId, (String) userSession.getAttribute("username"));
     }
 
+    @RequestMapping(path="/unsubscribeFromEmailNotification/{skillId}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    void unsubscribeFromEmailNotification(@PathVariable("skillId") int skillId,HttpSession userSession) {
+        skillQuery.unsubscribeFromEmailNotifications(dao.establishConnection(), skillId, (String) userSession.getAttribute("username"));
+    }
+
     @RequestMapping(path="/interestedCoursesOfUser",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Skill> getAllInterestedCourses(HttpSession userSession) {

@@ -401,9 +401,13 @@ app.controller('enrolledSkillsController', function ($scope, $http) {
     });
 
     $scope.subscribeForEmailNotification = function(skillId){
-        alert(skillId);
         var result = $http.get('/subscribeForEmailNotification/'+skillId);
         result.success(alert("Subscribed successfully"));
+    }
+
+    $scope.unsubscribeFromEmailNotification = function(skillId){
+        var result = $http.get('/unsubscribeFromEmailNotification/'+skillId);
+        result.success(alert("Un-subscribed successfully"));
     }
 
 });

@@ -37,6 +37,7 @@ public interface ISkillQuery {
     void postDiscussion(Connection conn,String reply,int id,String username);
     List<Skill> retrieveAllEnrolledCourses(Connection conn, String username);
     void subscribeForEmailNotifications(Connection conn, int skillId, String username);
+    void unsubscribeFromEmailNotifications(Connection conn, int skillId, String username);
     List<Skill> retrieveAllInterestedCourses(Connection conn, String username);
     void enrollSkill(Connection conn,int id,String username);
     List<String> retrieveAllUsersEnrolledForSubscriptionInACourse(Connection conn, int skillId);
