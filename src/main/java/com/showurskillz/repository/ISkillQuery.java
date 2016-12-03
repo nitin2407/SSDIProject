@@ -39,4 +39,5 @@ public interface ISkillQuery {
     void subscribeForEmailNotifications(Connection conn, int skillId, String username);
     List<Skill> retrieveAllInterestedCourses(Connection conn, String username);
     void enrollSkill(Connection conn,int id,String username);
+    List<String> retrieveAllUsersEnrolledForSubscriptionInACourse(Connection conn, int skillId);
 }

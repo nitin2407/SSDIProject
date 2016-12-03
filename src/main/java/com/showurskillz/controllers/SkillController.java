@@ -5,6 +5,7 @@ import com.showurskillz.repository.IConnection;
 import com.showurskillz.repository.ISkillQuery;
 import com.showurskillz.repository.JdbcConnection;
 import com.showurskillz.repository.SkillQuery;
+import com.showurskillz.services.MailSendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -85,6 +86,8 @@ public class SkillController {
         }
         if(skillResult>0 && timeResult>0){
             response.setStatus(HttpServletResponse.SC_OK);
+            MailSendingService mailSendingService=new MailSendingService();
+            mailSendingService.sendMail(dao,skill);
         }
         else
         {

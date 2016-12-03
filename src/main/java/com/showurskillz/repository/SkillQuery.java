@@ -590,7 +590,7 @@ public class SkillQuery implements ISkillQuery {
         return courseList;
     }
 
-    public void enrollSkill(Connection conn,int id,String username){
+    public void enrollSkill(Connection conn, int id, String username) {
         query = "insert into enrolledskills values (?,?)";
         PreparedStatement pst = null;
         try {
@@ -603,4 +603,25 @@ public class SkillQuery implements ISkillQuery {
         }
     }
 
+    @Override
+    public List<String> retrieveAllUsersEnrolledForSubscriptionInACourse(Connection conn, int skillId) {
+
+        query = "select username from  mailinglist where skillId = ?";
+        PreparedStatement pst = null;
+        List<String> listOfSubscribedUsers = new ArrayList<String>();
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, skillId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                listOfSubscribedUsers.add(rs.getString("username"));
+            }
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listOfSubscribedUsers;
+    }
 }
