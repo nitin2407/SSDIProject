@@ -417,7 +417,7 @@ app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlF
           };
 });
 
-app.controller('enrolledSkillsController', function ($scope, $http) {
+app.controller('enrolledSkillsController', function ($scope, $http,$window,urlFactory) {
 
     var result = $http.get('/enrolledCoursesOfUser');
     result.success(function (data) {
@@ -427,12 +427,16 @@ app.controller('enrolledSkillsController', function ($scope, $http) {
 
     $scope.subscribeForEmailNotification = function(skillId){
         var result = $http.get('/subscribeForEmailNotification/'+skillId);
-        result.success(alert("Subscribed successfully"));
+        result.success(swal('subscribed successfully'));
     }
 
     $scope.unsubscribeFromEmailNotification = function(skillId){
         var result = $http.get('/unsubscribeFromEmailNotification/'+skillId);
-        result.success(alert("Un-subscribed successfully"));
+        result.success(swal('un-subscribed successfully'));
+    }
+
+    $scope.viewSkill = function (id) {
+      $window.location.href = urlFactory.skillHomebyId(id);
     }
 
 });
