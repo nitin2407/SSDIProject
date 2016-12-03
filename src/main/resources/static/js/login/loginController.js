@@ -30,14 +30,14 @@ app.controller('LoginCtrl',function($rootScope,$scope,$window,loginService,urlFa
           function (data) {
             swal({
                 title: 'Unable to login.',
-                type: 'error'
-              });
+            });
           });
-    };
+      };
 
-    $scope.signup = function () {
-      $window.location.href = urlFactory.signUp();
-    };
+          $scope.signup = function () {
+                $window.location.href = urlFactory.signUp();
+                //type: 'error'
+              };
 });
 
 
@@ -202,6 +202,4 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
       }*/
 
 });
-
-
 
