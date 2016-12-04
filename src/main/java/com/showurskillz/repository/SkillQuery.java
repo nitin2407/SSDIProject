@@ -556,6 +556,7 @@ public class SkillQuery implements ISkillQuery {
                 skill.setCategory(rs.getString("s.category"));
                 skill.setTutor(rs.getString("s.tutor"));
                 skill.setNumberOfInterestedPeople(rs.getInt("s.interestedPeopleCount"));
+                skill.setMailSubscribers(retrieveAllUsersEnrolledForSubscriptionInACourse(conn,skill.getSkillId()));
                 courseList.add(skill);
             }
             rs.close();
@@ -651,7 +652,7 @@ public class SkillQuery implements ISkillQuery {
                 listOfSubscribedUsers.add(rs.getString("username"));
             }
             rs.close();
-            conn.close();
+            //conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -659,7 +660,7 @@ public class SkillQuery implements ISkillQuery {
     }
 
     public void DeEnrollSkill(Connection conn,int id,String username){
-        query = "delete from enrolledskills where skillId = ? and user_name = ?)";
+        query = "delete from enrolledskills where skillId = ? and user_name = ?";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);

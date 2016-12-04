@@ -1,5 +1,6 @@
 package com.showurskillz.controllers;
 
+import com.showurskillz.model.Post;
 import com.showurskillz.model.Skill;
 import com.showurskillz.repository.JdbcTestDBConnection;
 import com.showurskillz.repository.SkillQuery;
@@ -81,6 +82,21 @@ public class SkillControllerTest {
         int countAfter=skillAfter.getNumberOfInterestedPeople();
 
         assertEquals(countBefore+1,countAfter);
+    }
+
+    @Test
+    public void getPosts() throws Exception {
+        List<Post> posts = skillController.getPosts(1);
+        assertNotEquals(posts, null);
+
+    }
+
+    @Test
+    public void getAllEnrolledCourses() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        List<Skill> skill = skillController.getAllEnrolledCourses(mockHttpSession);
+        assertNotEquals(skill, null);
     }
 
 }

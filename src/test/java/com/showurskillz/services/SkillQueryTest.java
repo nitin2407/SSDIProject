@@ -1,5 +1,6 @@
 package com.showurskillz.services;
 
+import com.showurskillz.model.Post;
 import com.showurskillz.model.Skill;
 import com.showurskillz.repository.IConnection;
 import com.showurskillz.repository.JdbcTestDBConnection;
@@ -66,6 +67,15 @@ public class SkillQueryTest {
         skillQuery.increaseInterestedCount(dao.establishConnection(),1);
         int interestedCountAfter=skill.getNumberOfInterestedPeople();
         assertEquals(interestedCountBefore+1 , interestedCountAfter);
+    }
+
+    @Test
+    public void testGetDiscussionList() throws Exception {
+
+        SkillQuery skillQuery = new SkillQuery();
+        List<Post> posts = skillQuery.getDiscussionList(dao.establishConnection(),1);
+        assertNotEquals(posts, null);
+
     }
 
 

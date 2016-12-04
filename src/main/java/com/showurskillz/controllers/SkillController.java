@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by vipul on 11/3/2016.
+ * Created by nitin on 11/3/2016.
  */
 @RestController
 public class SkillController {

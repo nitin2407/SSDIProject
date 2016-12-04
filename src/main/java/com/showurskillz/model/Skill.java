@@ -20,6 +20,7 @@ public class Skill {
     private int numberOfInterestedPeople;
     private List<String> interestedUsers;
     private List<String> enrolledUsers;
+    private List<String> mailSubscribers;
 
     public int getSkillId() {
         return skillId;
@@ -91,5 +92,13 @@ public class Skill {
 
     public void setEnrolledUsers(List<String> enrolledUsers) {
         this.enrolledUsers = enrolledUsers;
+    }
+
+    public List<String> getMailSubscribers() {
+        return mailSubscribers;
+    }
+
+    public void setMailSubscribers(List<String> mailSubscribers) {
+        this.mailSubscribers = mailSubscribers;
     }
 }

@@ -307,13 +307,14 @@ app.controller('manageSkillsCntrl', function ($scope, $http, $window, urlFactory
 });
 
 
-app.controller('manageCtrl', function ($scope, $http, $window, $timeout, urlFactory, skillService, loginService) {
+app.controller('manageCtrl', function ($rootScope,$scope, $http, $window, $timeout, urlFactory, skillService, loginService) {
     $scope.name = "";
     loginService.userDetails().then(
         function (user) {
             $scope.user = user.data;
             if ($scope.user.username != null) {
                 $scope.f_name = $scope.user.fname;
+                $rootScope.username = $scope.user.username;
             }
             else {
                 swal({
@@ -417,27 +418,52 @@ app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlF
           };
 });
 
-app.controller('enrolledSkillsController', function ($scope, $http,$window,urlFactory) {
+app.controller('enrolledSkillsController', function ($rootScope,$scope, $http,$window,urlFactory,skillService) {
 
     var result = $http.get('/enrolledCoursesOfUser');
     result.success(function (data) {
         console.log(data);
         $scope.courses = data;
+        angular.forEach($scope.courses, function (value, index) {
+                value.isSubscribed = false;
+                if(value.mailSubscribers != null){
+                  for (i = 0; i < value.mailSubscribers.length; i++) {
+                      if (value.mailSubscribers[i] == $rootScope.username) {
+                          value.isSubscribed = true;
+                          break;
+                      }
+                  }
+                }
+              });
     });
 
-    $scope.subscribeForEmailNotification = function(skillId){
-        var result = $http.get('/subscribeForEmailNotification/'+skillId);
-        result.success(swal('subscribed successfully'));
+    $scope.subscribeForEmailNotification = function(skill){
+        var result = $http.get('/subscribeForEmailNotification/'+skill.skillId);
+        result.success(function(){
+          skill.isSubscribed = true;
+          swal('subscribed successfully')
+        });
     }
 
-    $scope.unsubscribeFromEmailNotification = function(skillId){
-        var result = $http.get('/unsubscribeFromEmailNotification/'+skillId);
-        result.success(swal('un-subscribed successfully'));
+    $scope.unsubscribeFromEmailNotification = function(skill){
+        var result = $http.get('/unsubscribeFromEmailNotification/'+skill.skillId);
+        result.success(function(){
+          skill.isSubscribed = false;
+          swal('un-subscribed successfully')
+        });
     }
 
     $scope.viewSkill = function (id) {
       $window.location.href = urlFactory.skillHomebyId(id);
     }
+
+    $scope.disEnrollSkill = function (id,index) {
+      skillService.deEnrollSkill(id).then(
+        function () {
+          $scope.courses.splice(index, 1);
+          swal("Removed enrolled for skill");
+        }) 
+    } 
 
 });
 
