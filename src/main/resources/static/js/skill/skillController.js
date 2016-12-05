@@ -191,6 +191,7 @@ app.controller('CourseControl',function($scope,$http, $window,$timeout,$location
                   $scope.skill_Description = $scope.skillDetails.skillDescription;
                   $scope.cate_gory = $scope.skillDetails.category;
                   $scope.timings = $scope.skillDetails.time;
+                  $scope.timings = skillService.formatTime($scope.timings);                 
                   $scope.tutor = $scope.skillDetails.tutor;
           },
           function (data, status) {
@@ -341,8 +342,7 @@ app.controller('manageCtrl', function ($rootScope,$scope, $http, $window, $timeo
 app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlFactory,skillService,loginService) {
 
 
-	//$scope.today = $filter('date')(new Date(), 'MM/dd/yy');
-  //alert($scope.today);
+	
 
   	loginService.userDetails().then(
           function (user) {

@@ -1,4 +1,4 @@
-app.service('skillService',function($http,$rootScope){	
+app.service('skillService',function($http,$rootScope,$filter){	
 
 
 	this.addSkill = function(dataObj){
@@ -59,6 +59,23 @@ app.service('skillService',function($http,$rootScope){
 
     this.deEnrollSkill = function(id){
         return $http.post('/deEnrollSkill/'+ id);
+    }
+
+    this.formatTime = function(timings){
+        if(timings != null){
+            for (i = 0; i < timings.length; i++) {
+                timings[i].toTime = new Date(timings[i].toTime);
+                //timings[i].toTime = $filter('date')(timings[i].toTime, 'h:mm a');
+                timings[i].fromTime = new Date(timings[i].fromTime);
+                //timings[i].toTime = Date.parse(timings[i].toTime);
+                //timings[i].fromTime = $filter('date')(timings[i].fromTime, 'h:mm a');
+                
+                //timings[i].fromTime = Date.parse(timings[i].fromTime);
+                //$scope.today = 
+  //alert($scope.today);
+            }
+        }
+        return timings;
     }
 
 	
