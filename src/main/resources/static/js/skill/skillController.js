@@ -5,20 +5,16 @@ app.controller('skillsController', function($mdDialog,$rootScope, $http, $scope,
     skillService.getSkills().then(
         function (skills) {
             angular.forEach(skills.data, function (value, index) {
-                value.isInterested = true;
-                value.isEnrolled = false;
-                for (i = 0; i < value.interestedUsers.length; i++) {
-                    if (value.interestedUsers[i] == $rootScope.username) {
-                        value.isInterested = false;
-                        break;
-                    }
+                value.isInterested = false;
+                //value.isEnrolled = false;
+                if(value.interestedUsers != null){
+                  for (i = 0; i < value.interestedUsers.length; i++) {
+                      if (value.interestedUsers[i] == $rootScope.username) {
+                          value.isInterested = true;
+                          break;
+                      }
+                  }
                 }
-                /*for (i = 0; i < value.enrolledUsers.length; i++) {
-                    if (value.enrolledUsers[i] == $rootScope.username) {
-                        value.isEnrolled = true;
-                        break;
-                    }
-                }*/
             });
             $rootScope.skills = skills.data;
         }

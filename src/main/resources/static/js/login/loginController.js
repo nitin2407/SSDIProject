@@ -163,11 +163,11 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
             $scope.clickInterest = function (skill) {
 
               
-                 if(skill.isInterested)
+                 if(!skill.isInterested)
                  {
                     skillService.increaseInterest(skill.skillId).then(
                       function () {
-                        skill.isInterested = false;
+                        skill.isInterested = true;
                         skill.numberOfInterestedPeople = skill.numberOfInterestedPeople + 1;
                       })
                  }
@@ -175,7 +175,7 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
                  {
                     skillService.decreaseInterest(skill.skillId).then(
                       function () {
-                        skill.isInterested = true;
+                        skill.isInterested = false;
                         if(skill.numberOfInterestedPeople>0){
                           skill.numberOfInterestedPeople = skill.numberOfInterestedPeople - 1;
                         }

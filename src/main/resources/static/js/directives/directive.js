@@ -26,12 +26,34 @@ app.directive('checkList', function($http,$rootScope) {
                 if(scope.list.length==0){
                     var result=$http.get('/skills');
                     result.success(function (data) {
+                    	angular.forEach(data, function (value, index) {
+                			value.isInterested = false;
+                			if(value.interestedUsers != null){
+	                			for (i = 0; i < value.interestedUsers.length; i++) {
+	                    			if (value.interestedUsers[i] == $rootScope.username) {
+	                        			value.isInterested = true;
+	                        			break;
+	                    			}
+	                			}
+	                		}
+            			});
                         $rootScope.skills = data;
                     });
                 }
                 else{
                     var result=$http.get('/skills/category/'+scope.list);
                     result.success(function (data) {
+                    	angular.forEach(data, function (value, index) {
+                			value.isInterested = false;
+                			if(value.interestedUsers != null){
+	                			for (i = 0; i < value.interestedUsers.length; i++) {
+	                    			if (value.interestedUsers[i] == $rootScope.username) {
+	                        			value.isInterested = true;
+	                        			break;
+	                    			}
+	                			}
+	                		}
+            			});
                         $rootScope.skills = data;
                     });
                 }
