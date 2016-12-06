@@ -145,8 +145,7 @@ public class SkillController {
     }
 
     @RequestMapping(path="/subscribeForEmailNotification/{skillId}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    void subscribeForEmailNotification(@PathVariable("skillId") int skillId,HttpSession userSession) {
+    public @ResponseBody void subscribeForEmailNotification(@PathVariable("skillId") int skillId,HttpSession userSession) {
          skillQuery.subscribeForEmailNotifications(dao.establishConnection(), skillId, (String) userSession.getAttribute("username"));
     }
 

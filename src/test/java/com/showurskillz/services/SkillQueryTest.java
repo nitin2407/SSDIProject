@@ -65,7 +65,7 @@ public class SkillQueryTest {
         Skill skill=skillQuery.getSkillById(dao.establishConnection(),1);
         int interestedCountBefore=skill.getNumberOfInterestedPeople();
         skillQuery.increaseInterestedCount(dao.establishConnection(),1);
-        int interestedCountAfter=skill.getNumberOfInterestedPeople();
+        int interestedCountAfter=skillQuery.getInterestedPeopleCount(1,dao.establishConnection());
         assertEquals(interestedCountBefore+1 , interestedCountAfter);
     }
 

@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
  * Created by vipul on 11/14/2016.
  */
 public class SkillControllerTest {
+
     SkillController skillController;
     MockHttpSession mockHttpSession;
     MockHttpServletRequest mockHttpServletRequest;
@@ -33,19 +34,6 @@ public class SkillControllerTest {
         mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
         mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletResponse = new MockHttpServletResponse();
-    }
-
-
-    @Test
-    public void getAllSkills() throws Exception {
-        List<Skill> skillList=skillController.getAllSkills();
-        assertNotEquals(skillList, null);
-    }
-
-    @Test
-    public void filterCategoryBySkills() throws Exception {
-       List<Skill>skillList= skillController.filterCategoryBySkills("study", mockHttpSession);
-        assertNotEquals(skillList, null);
     }
 
     @Test
@@ -97,6 +85,97 @@ public class SkillControllerTest {
         mockHttpServletRequest.setSession(mockHttpSession);
         List<Skill> skill = skillController.getAllEnrolledCourses(mockHttpSession);
         assertNotEquals(skill, null);
+    }
+
+    @Test
+    public void getAllSkills() throws Exception {
+        List<Skill> skillList=skillController.getAllSkills();
+        assertNotEquals(skillList, null);
+    }
+
+    @Test
+    public void filterCategoryBySkills() throws Exception {
+        List<Skill>skillList= skillController.filterCategoryBySkills("study", mockHttpSession);
+        assertNotEquals(skillList, null);
+    }
+
+    @Test
+    public void decreaseInterestedCount() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+
+        Skill skillBefore=skillController.sendSkill(1,mockHttpSession,mockHttpServletResponse);
+        int countBefore=skillBefore.getNumberOfInterestedPeople();
+
+        skillController.decreaseInterestedCount(1,mockHttpSession);
+
+        Skill skillAfter=skillController.sendSkill(1,mockHttpSession,mockHttpServletResponse);
+        int countAfter=skillAfter.getNumberOfInterestedPeople();
+
+        assertEquals(countBefore-1,countAfter);
+    }
+
+    @Test
+    public void checkSkillInterestById() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        skillController.increaseInterestedCount(1,mockHttpSession);
+        boolean response=skillController.checkSkillInterestById(1,mockHttpSession);
+        assertTrue(response);
+    }
+
+    @Test
+    public void postDiscussion() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        List<Post>postsBefore=skillController.getPosts(1);
+        skillController.postDiscussion("new reply",1,mockHttpSession);
+        List<Post>postsAfter=skillController.getPosts(1);
+        assertEquals(postsBefore.size()+1,postsAfter.size());
+    }
+
+    @Test
+    public void subscribeForEmailNotification() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        skillController.subscribeForEmailNotification(1,mockHttpSession);
+    }
+
+    @Test
+    public void unsubscribeFromEmailNotification() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        skillController.unsubscribeFromEmailNotification(1,mockHttpSession);
+    }
+
+    @Test
+    public void getAllInterestedCourses() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        List<Skill> allInterestedCourses=skillController.getAllInterestedCourses(mockHttpSession);
+        assertNotEquals(allInterestedCourses,0);
+    }
+
+    @Test
+    public void enrollSkill() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        skillController.enrollSkill(1,mockHttpSession);
+    }
+
+    @Test
+    public void deEnrollSkill() throws Exception {
+        mockHttpSession.setAttribute("username", "vshukla3@uncc.edu");
+        mockHttpServletRequest.setSession(mockHttpSession);
+        mockHttpServletResponse = new MockHttpServletResponse();
+        skillController.deEnrollSkill(1,mockHttpSession);
     }
 
 }
