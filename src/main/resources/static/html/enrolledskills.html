@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav btn-group">
                         <li class="nav-item dropdown" id="menuLogin">
-                            <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{f_name}}</button>
+                            <button type="text" class="btn btn-primary" style="text-transform: Capitalize;"> <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i> Welcome, {{f_name}}</button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
@@ -96,11 +96,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-10 col-sm-10 col-md-10">
-                                    <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-if='!course.isSubscribed' ng-click="subscribeForEmailNotification(course)">Subscribe</a>
-                                    <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-warn col-lg-push-2" ng-if='course.isSubscribed' ng-click="unsubscribeFromEmailNotification(course)">Unsubscribe</a>
-                                    <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-click="viewSkill(course.skillId)">Course Home</a>
-                                    <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-warn col-lg-push-2" ng-click="disEnrollSkill(course.skillId)">Dis-enroll</a>
+                                <div class="col-xs-10 col-sm-10 col-md-11">
+                                    <a class="btn btn-success col-md-push-2 col-xs-push-2 col-sm-push-2 col-lg-push-2" ng-if='!course.isSubscribed' ng-click="subscribeForEmailNotification(course)" style="margin-top: 2%">Subscribe</a>
+                                    <a class="btn col-md-push-2 col-sm-push-2 col-xs-push-2 btn-danger col-lg-push-2" ng-if='course.isSubscribed' ng-click="unsubscribeFromEmailNotification(course)" style="margin-top: 2%">Unsubscribe</a>
+                                    <a class="btn col-md-push-2 col-sm-push-2 col-xs-push-2 btn-primary col-lg-push-2" ng-click="viewSkill(course.skillId)" style="margin-top: 2%">Course Home</a>
+                                    <a class="btn col-md-push-2 col-sm-push-2 col-xs-push-2 btn-danger col-lg-push-2" ng-click="disEnrollSkill(course.skillId)" style="margin-top: 2%">Unenroll</a>
                                 </div>
                             </div>
                         </div>
