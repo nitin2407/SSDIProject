@@ -95,7 +95,7 @@ app.controller('homeCntrl',function($rootScope,$scope,$http, $window,$timeout,$m
                 toTime: new Date(1970, 0, 1, 14, 57, 0),
                 fromTime: new Date(1970, 0, 1, 14, 57, 0)
             }];
-            $scope.days = [{name: 'Monday'}, {name: 'Tuesday'}, {name: 'Wednesday'}, {name: 'Thurday'}, {name: 'Friday'}, {name: 'Saturday'}, {name: 'Sunday'}];
+            $scope.days = [{name: 'Monday'}, {name: 'Tuesday'}, {name: 'Wednesday'}, {name: 'Thursday'}, {name: 'Friday'}, {name: 'Saturday'}, {name: 'Sunday'}];
             $scope.description = "";
             $scope.addNewChoice = function () {
                 var newItemNo = $scope.choices.length + 1;

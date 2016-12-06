@@ -37,7 +37,7 @@
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav btn-group">
                         <li class="nav-item dropdown" id="menuLogin">
-                            <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">Welcome, {{f_name}}</button>
+                            <button type="text" class="btn btn-primary" style="text-transform: Capitalize;">  <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i> Welcome, {{f_name}}</button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
@@ -60,7 +60,7 @@
         </nav>
 </div>
 
-<div class="wrapper">
+<div class="wrapper" ng-cloak>
 <div class="navbar navbar-default navbar-fixed-left" id="manage" ng-cloak>
     <div>
         <a class="navbar-brand" href="#">COURSES</a>
@@ -98,9 +98,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10">
-                                <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-click="editSkill(skill.skillId)">Edit</a>
-                                <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-4" ng-click="deleteSkill(skill.skillId,$index)">Delete</a>
+                            <div class="col-xs-10 col-sm-10 col-md-11">
+                                <a class="btn btn-success col-md-push-2 col-sm-push-2 col-sm-push-2 col-lg-push-2" ng-click="editSkill(skill.skillId)" style="margin-top: 2%">Edit</a>
+                                <a class="btn col-md-push-2 col-sm-push-2 col-sm-push-2 btn-danger col-lg-push-4" ng-click="deleteSkill(skill.skillId,$index)" style="margin-top: 2%">Delete</a>
+                                <a class="btn col-md-push-2 col-sm-push-2 col-sm-push-2 btn-primary col-lg-push-2" ng-click="viewSkill(skill.skillId)" style="margin-top: 2%">Course Home</a>
                             </div>
                             </div>
                         </div>

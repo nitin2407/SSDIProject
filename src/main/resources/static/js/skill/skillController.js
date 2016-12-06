@@ -284,6 +284,10 @@ app.controller('manageSkillsCntrl', function ($scope, $http, $window, urlFactory
         $window.location.href = urlFactory.skillbyId(id);
     }
 
+    $scope.viewSkill = function (id) {
+      $window.location.href = urlFactory.skillHomebyId(id);
+    }
+
 
     $scope.deleteSkill = function (id, index) {
 
