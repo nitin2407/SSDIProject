@@ -21,7 +21,7 @@ import java.util.List;
  * Created by vipul on 11/3/2016.
  */
 @Repository
-public class SkillQuery implements ISkillQuery {
+public class SkillQuery  implements ISkillQuery {
 
     private List<Skill> skillList;
     private String query;

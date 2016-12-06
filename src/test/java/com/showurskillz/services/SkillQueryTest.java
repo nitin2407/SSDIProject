@@ -75,9 +75,38 @@ public class SkillQueryTest {
         SkillQuery skillQuery = new SkillQuery();
         List<Post> posts = skillQuery.getDiscussionList(dao.establishConnection(),1);
         assertNotEquals(posts, null);
-
     }
 
+    @Test
+    public void postDiscussion() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        skillQuery.postDiscussion(dao.establishConnection(),"new Reply",1,"vshukla3@uncc.edu");
+        List<Post> posts = skillQuery.getDiscussionList(dao.establishConnection(),1);
+        assertNotEquals(posts.size(),0);
+    }
 
+    @Test
+    public void retrieveAllEnrolledCourses() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        skillQuery.enrollSkill(dao.establishConnection(),1,"vshukla3@uncc.edu");
+        List<Skill> enrolledCourses=skillQuery.retrieveAllEnrolledCourses(dao.establishConnection(),"vshukla3@uncc.edu");
+        assertNotEquals(enrolledCourses.size(),0);
+    }
+
+    @Test
+    public void enrollSkill() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        skillQuery.enrollSkill(dao.establishConnection(),1,"vshukla3@uncc.edu");
+        List<Skill> enrolledCourses=skillQuery.retrieveAllEnrolledCourses(dao.establishConnection(),"vshukla3@uncc.edu");
+        assertNotEquals(enrolledCourses.size(),0);
+    }
+
+    @Test
+    public void retrieveAllUsersEnrolledForSubscriptionInACourse() throws Exception {
+        SkillQuery skillQuery = new SkillQuery();
+        skillQuery.subscribeForEmailNotifications(dao.establishConnection(),1,"vshukla3@uncc.edu");
+        List<String>listOfSubscribers=skillQuery.retrieveAllUsersEnrolledForSubscriptionInACourse(dao.establishConnection(),1);
+        assertNotEquals(listOfSubscribers,0);
+    }
 
 }
