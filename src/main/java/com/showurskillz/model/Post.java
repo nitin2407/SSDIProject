@@ -15,7 +15,7 @@ public class Post {
 
     private String data;
     private String username;
-    //private Date postDate;
+    private Date postDate;
 
     public String getData() {
         return data;
@@ -32,6 +32,15 @@ public class Post {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
+
 }
 
 

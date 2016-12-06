@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -515,6 +516,7 @@ public class SkillQuery implements ISkillQuery {
                 post = new Post();
                 post.setUsername(rs.getString("username"));
                 post.setData(rs.getString("post"));
+                post.setPostDate(rs.getTimestamp("date_time"));
                 discussionList.add(post);
             }
         } catch (SQLException ex) {
@@ -524,13 +526,14 @@ public class SkillQuery implements ISkillQuery {
     }
 
     public void postDiscussion(Connection conn, String reply, int id, String username) {
-        query = "Insert into coursediscussions VALUES (null,?,?,?)";
+        query = "Insert into coursediscussions VALUES (null,?,?,?,?)";
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
             pst.setInt(1, id);
             pst.setString(2, username);
             pst.setString(3, reply);
+            pst.setTimestamp(4, new Timestamp(Calendar.getInstance().getTimeInMillis()));
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

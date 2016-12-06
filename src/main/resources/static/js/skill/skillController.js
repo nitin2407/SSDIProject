@@ -405,7 +405,7 @@ app.controller('courseHomeCntrl', function ($scope, $http, $window,$timeout,urlF
 
         	$scope.reply_discussion = function() {
                 var newItemNo = $scope.posts.length+1;
-                $scope.posts.push({username: $scope.username ,data: $scope.reply});
+                $scope.posts.push({username: $scope.username ,data: $scope.reply,postDate: Date.now()});
                 skillService.postDiscussion($scope.reply,$scope.skill_ID);
                 $scope.reply = "";
             };
