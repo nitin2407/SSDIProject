@@ -125,6 +125,7 @@ public class SkillQuery  implements ISkillQuery {
                 skill.setCategory(rs.getString("category"));
                 skill.setTutor(rs.getString("tutor"));
                 skill.setNumberOfInterestedPeople(rs.getInt("interestedPeopleCount"));
+                skill.setInterestedUsers(getInterestedUsersList(conn, skill.getSkillId()));
                 skillList.add(skill);
             }
             rs.close();
